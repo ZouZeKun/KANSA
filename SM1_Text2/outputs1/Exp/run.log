@@ -1,0 +1,2720 @@
+----------------------+-------------------------------------------------------+
+|      Parameter       |                         Value                         |
++======================+=======================================================+
+| Chebyshevdegree      | 8                                                     |
++----------------------+-------------------------------------------------------+
+| Fourierdegree        | 6                                                     |
++----------------------+-------------------------------------------------------+
+| Batch size           | 96                                                    |
++----------------------+-------------------------------------------------------+
+| Cycle file           | D:/GraphormerForRobustness/dataset2/initial_cycle_mat |
+|                      | rix_dir.csv                                           |
++----------------------+-------------------------------------------------------+
+| Decay epoch          | 1                                                     |
++----------------------+-------------------------------------------------------+
+| Demand sensor name   | ["2", "16", "19", "22", "24"]                         |
++----------------------+-------------------------------------------------------+
+| Device               | cuda                                                  |
++----------------------+-------------------------------------------------------+
+| Edge adjacency file  | D:/GraphormerForRobustness/dataset/Apulia/edge_adjace |
+|                      | ncy_matrix.csv                                        |
++----------------------+-------------------------------------------------------+
+| Edge file            | D:/GraphormerForRobustness/dataset2/edge_index_dir.cs |
+|                      | v                                                     |
++----------------------+-------------------------------------------------------+
+| Exp name             | Exp                                                   |
++----------------------+-------------------------------------------------------+
+| Flow sensor name     | ["4", "7", "25", "28", "34"]                          |
++----------------------+-------------------------------------------------------+
+| Gamma                | 0.95                                                  |
++----------------------+-------------------------------------------------------+
+| Hidden dim           | 12                                                    |
++----------------------+-------------------------------------------------------+
+| Incidence file       | D:/GraphormerForRobustness/dataset2/initial_incidence |
+|                      | _matrix_dir.csv                                       |
++----------------------+-------------------------------------------------------+
+| L1 lambda            | 0.0                                                   |
++----------------------+-------------------------------------------------------+
+| L2 lambda            | 0.0                                                   |
++----------------------+-------------------------------------------------------+
+| Learning rate        | 2e-05                                                 |
++----------------------+-------------------------------------------------------+
+| Max epoch            | 50                                                    |
++----------------------+-------------------------------------------------------+
+| Node adjacency file  | D:/GraphormerForRobustness/dataset/Apulia/node_adjace |
+|                      | ncy_matrix.csv                                        |
++----------------------+-------------------------------------------------------+
+| Node file            | D:/GraphormerForRobustness/dataset/Apulia_2/node_feat |
+|                      | ures_Apulia2.csv                                      |
++----------------------+-------------------------------------------------------+
+| Num edges            | 34                                                    |
++----------------------+-------------------------------------------------------+
+| Num history          | 1                                                     |
++----------------------+-------------------------------------------------------+
+| Num nodes            | 24                                                    |
++----------------------+-------------------------------------------------------+
+| Num step             | 8640                                                  |
++----------------------+-------------------------------------------------------+
+| Patience             | 10                                                    |
++----------------------+-------------------------------------------------------+
+| Pressure sensor name | ["4", "13", "14", "23", "24"]                         |
++----------------------+-------------------------------------------------------+
+| Seed                 | 10                                                    |
++----------------------+-------------------------------------------------------+
+| Test ratio           | 0.3333333333333333                                    |
++----------------------+-------------------------------------------------------+
+| Train ratio          | 0.5                                                   |
++----------------------+-------------------------------------------------------+
+| Val ratio            | 0.16666666666666666                                   |
++----------------------+-------------------------------------------------------+
+| Water demand file    | D:/GraphormerForRobustness/dataset2/demand_patten_361 |
+|                      | 2/simulate_demand3.csv                                |
++----------------------+-------------------------------------------------------+
+| Water flow file      | D:/GraphormerForRobustness/dataset2/demand_patten_361 |
+|                      | 2/simulate_flow3.csv                                  |
++----------------------+-------------------------------------------------------+
+| Water pressure file  | D:/GraphormerForRobustness/dataset2/demand_patten_361 |
+|                      | 2/simulate_pressure3.csv                              |
++----------------------+-------------------------------------------------------+
+KANSA(
+  (flow_batch): Sequential(
+    (0): FourierKANLayer()
+    (1): FourierKANLayer()
+    (2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+  )
+  (pressure_batch): Sequential(
+    (0): FourierKANLayer()
+    (1): FourierKANLayer()
+    (2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+  )
+  (demand_batch): Sequential(
+    (0): FourierKANLayer()
+    (1): FourierKANLayer()
+    (2): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+  )
+  (flow_features): Sequential(
+    (0): ChebyshevKANLayer()
+    (1): ChebyshevKANLayer()
+    (2): LayerNorm((34,), eps=1e-05, elementwise_affine=True)
+  )
+  (pressure_features): Sequential(
+    (0): ChebyshevKANLayer()
+    (1): ChebyshevKANLayer()
+    (2): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+  )
+  (demand_features): Sequential(
+    (0): ChebyshevKANLayer()
+    (1): ChebyshevKANLayer()
+    (2): LayerNorm((23,), eps=1e-05, elementwise_affine=True)
+  )
+  (attention_pressure_batch): Attention(
+    (query_layer): Linear(in_features=96, out_features=96, bias=True)
+    (key_layer): Linear(in_features=96, out_features=96, bias=True)
+    (value_layer): Linear(in_features=96, out_features=96, bias=True)
+    (layer_norm): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+  )
+  (attention_flow_batch): Attention(
+    (query_layer): Linear(in_features=96, out_features=96, bias=True)
+    (key_layer): Linear(in_features=96, out_features=96, bias=True)
+    (value_layer): Linear(in_features=96, out_features=96, bias=True)
+    (layer_norm): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+  )
+  (attention_demand_batch): Attention(
+    (query_layer): Linear(in_features=96, out_features=96, bias=True)
+    (key_layer): Linear(in_features=96, out_features=96, bias=True)
+    (value_layer): Linear(in_features=96, out_features=96, bias=True)
+    (layer_norm): LayerNorm((96,), eps=1e-05, elementwise_affine=True)
+  )
+  (attention_pressure_features): Attention(
+    (query_layer): Linear(in_features=24, out_features=24, bias=True)
+    (key_layer): Linear(in_features=24, out_features=24, bias=True)
+    (value_layer): Linear(in_features=24, out_features=24, bias=True)
+    (layer_norm): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+  )
+  (attention_flow_features): Attention(
+    (query_layer): Linear(in_features=34, out_features=34, bias=True)
+    (key_layer): Linear(in_features=34, out_features=34, bias=True)
+    (value_layer): Linear(in_features=34, out_features=34, bias=True)
+    (layer_norm): LayerNorm((34,), eps=1e-05, elementwise_affine=True)
+  )
+  (attention_demand_features): Attention(
+    (query_layer): Linear(in_features=23, out_features=23, bias=True)
+    (key_layer): Linear(in_features=23, out_features=23, bias=True)
+    (value_layer): Linear(in_features=23, out_features=23, bias=True)
+    (layer_norm): LayerNorm((23,), eps=1e-05, elementwise_affine=True)
+  )
+  (pressure_1): Sequential(
+    (0): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (pressure_2): Sequential(
+    (0): LayerNorm((24,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (flow_1): Sequential(
+    (0): LayerNorm((34,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (flow_2): Sequential(
+    (0): LayerNorm((34,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (demand_1): Sequential(
+    (0): LayerNorm((23,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (demand_2): Sequential(
+    (0): LayerNorm((23,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (pressure_sum): Sequential(
+    (0): LayerNorm((12,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (flow_sum): Sequential(
+    (0): LayerNorm((12,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (demand_sum): Sequential(
+    (0): LayerNorm((12,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (graph): Sequential(
+    (0): LayerNorm((3,), eps=1e-05, elementwise_affine=True)
+    (1): ChebyshevKANLayer()
+    (2): ChebyshevKANLayer()
+  )
+  (flow_out): Sequential(
+    (0): ChebyshevKANLayer()
+    (1): ChebyshevKANLayer()
+    (2): Sigmoid()
+  )
+  (pressure_out): Sequential(
+    (0): ChebyshevKANLayer()
+    (1): ChebyshevKANLayer()
+    (2): Sigmoid()
+  )
+  (demand_out): Sequential(
+    (0): ChebyshevKANLayer()
+    (1): ChebyshevKANLayer()
+    (2): Sigmoid()
+  )
+)
+Model Parameter: 319707
+Using RMSprop
+Epoch #000, Conservation1: 219321.8637, Conservation2: 37884443.3502, Conservation3: 50439025.6250
+Epoch #000, Conservation1: 285.7248, Conservation2: 66.1339, Conservation3: 1069.8307
+Epoch #001, Conservation1: 240.6979, Conservation2: 39.0066, Conservation3: 536.3954
+Epoch #001, Conservation1: 129.4801, Conservation2: 29.1325, Conservation3: 311.8669
+Epoch #002, Conservation1: 115.4935, Conservation2: 25.8683, Conservation3: 176.8426
+Epoch #002, Conservation1: 100.1584, Conservation2: 19.2563, Conservation3: 173.8181
+Epoch #003, Conservation1: 77.8373, Conservation2: 20.7398, Conservation3: 108.8619
+Epoch #003, Conservation1: 68.9062, Conservation2: 12.6276, Conservation3: 88.2380
+Epoch #004, Conservation1: 60.6928, Conservation2: 17.2203, Conservation3: 78.1351
+Epoch #004, Conservation1: 55.4098, Conservation2: 11.9654, Conservation3: 73.5619
+Epoch #005, Conservation1: 52.0586, Conservation2: 14.7875, Conservation3: 60.9704
+Epoch #005, Conservation1: 53.3053, Conservation2: 9.7427, Conservation3: 50.2655
+Epoch #006, Conservation1: 40.7173, Conservation2: 12.7468, Conservation3: 50.0337
+Epoch #006, Conservation1: 36.8483, Conservation2: 10.3412, Conservation3: 54.8716
+Epoch #007, Conservation1: 26.6097, Conservation2: 10.9191, Conservation3: 41.0924
+Epoch #007, Conservation1: 30.1227, Conservation2: 21.1959, Conservation3: 50.9126
+Epoch #008, Conservation1: 19.4780, Conservation2: 9.6149, Conservation3: 33.6794
+Epoch #008, Conservation1: 12.6772, Conservation2: 17.6448, Conservation3: 40.9575
+Epoch #009, Conservation1: 15.4713, Conservation2: 8.4619, Conservation3: 28.3993
+Epoch #009, Conservation1: 15.2197, Conservation2: 6.7336, Conservation3: 18.9226
+Epoch #010, Conservation1: 12.8898, Conservation2: 7.5090, Conservation3: 24.3634
+Epoch #010, Conservation1: 11.9585, Conservation2: 11.9159, Conservation3: 38.4947
+Epoch #011, Conservation1: 10.9099, Conservation2: 6.7732, Conservation3: 21.1151
+Epoch #011, Conservation1: 7.6645, Conservation2: 6.6985, Conservation3: 29.7450
+Epoch #012, Conservation1: 9.4253, Conservation2: 6.0841, Conservation3: 18.5633
+Epoch #012, Conservation1: 11.5826, Conservation2: 12.1686, Conservation3: 33.4364
+Epoch #013, Conservation1: 8.2042, Conservation2: 5.4813, Conservation3: 16.5164
+Epoch #013, Conservation1: 8.8915, Conservation2: 10.2695, Conservation3: 16.4417
+Epoch #014, Conservation1: 7.2233, Conservation2: 4.9862, Conservation3: 14.6812
+Epoch #014, Conservation1: 6.6413, Conservation2: 4.8085, Conservation3: 11.8698
+Epoch #015, Conservation1: 6.4235, Conservation2: 4.5030, Conservation3: 13.1752
+Epoch #015, Conservation1: 7.8720, Conservation2: 3.9063, Conservation3: 15.6499
+Epoch #016, Conservation1: 5.7464, Conservation2: 4.0957, Conservation3: 11.8768
+Epoch #016, Conservation1: 7.7080, Conservation2: 11.2972, Conservation3: 19.7492
+Epoch #017, Conservation1: 5.1704, Conservation2: 3.7052, Conservation3: 10.7577
+Epoch #017, Conservation1: 5.3874, Conservation2: 9.8804, Conservation3: 11.9116
+Epoch #018, Conservation1: 4.6631, Conservation2: 3.3635, Conservation3: 9.8067
+Epoch #018, Conservation1: 3.5857, Conservation2: 4.4056, Conservation3: 14.4595
+Epoch #019, Conservation1: 4.2286, Conservation2: 3.0569, Conservation3: 8.9125
+Epoch #019, Conservation1: 4.6699, Conservation2: 2.1476, Conservation3: 12.5162
+Epoch #020, Conservation1: 3.8580, Conservation2: 2.8031, Conservation3: 8.1737
+Epoch #020, Conservation1: 4.2634, Conservation2: 7.5026, Conservation3: 10.2057
+Epoch #021, Conservation1: 3.5280, Conservation2: 2.5574, Conservation3: 7.4859
+Epoch #021, Conservation1: 3.4257, Conservation2: 1.7935, Conservation3: 8.1987
+Epoch #022, Conservation1: 3.2391, Conservation2: 2.3167, Conservation3: 6.8647
+Epoch #022, Conservation1: 3.6552, Conservation2: 3.2160, Conservation3: 9.6053
+Epoch #023, Conservation1: 2.9722, Conservation2: 2.1203, Conservation3: 6.3467
+Epoch #023, Conservation1: 2.7453, Conservation2: 1.8798, Conservation3: 7.2774
+Epoch #024, Conservation1: 2.7384, Conservation2: 1.9449, Conservation3: 5.8560
+Epoch #024, Conservation1: 2.8673, Conservation2: 3.1431, Conservation3: 7.7511
+Epoch #025, Conservation1: 2.5410, Conservation2: 1.7777, Conservation3: 5.4187
+Epoch #025, Conservation1: 3.7893, Conservation2: 0.9560, Conservation3: 8.8556
+Epoch #026, Conservation1: 2.3497, Conservation2: 1.6236, Conservation3: 5.0301
+Epoch #026, Conservation1: 2.0203, Conservation2: 2.6167, Conservation3: 5.9775
+Epoch #027, Conservation1: 2.1840, Conservation2: 1.4852, Conservation3: 4.6736
+Epoch #027, Conservation1: 2.2452, Conservation2: 1.2868, Conservation3: 6.1065
+Epoch #028, Conservation1: 2.0363, Conservation2: 1.3747, Conservation3: 4.3468
+Epoch #028, Conservation1: 2.1113, Conservation2: 1.1682, Conservation3: 4.1710
+Epoch #029, Conservation1: 1.8956, Conservation2: 1.2694, Conservation3: 4.0573
+Epoch #029, Conservation1: 1.9562, Conservation2: 2.0198, Conservation3: 6.2303
+Epoch #030, Conservation1: 1.7776, Conservation2: 1.1674, Conservation3: 3.8086
+Epoch #030, Conservation1: 1.7015, Conservation2: 1.9585, Conservation3: 5.6570
+Epoch #031, Conservation1: 1.6655, Conservation2: 1.0715, Conservation3: 3.5569
+Epoch #031, Conservation1: 2.0142, Conservation2: 1.0366, Conservation3: 5.1410
+Epoch #032, Conservation1: 1.5701, Conservation2: 0.9882, Conservation3: 3.3506
+Epoch #032, Conservation1: 1.7190, Conservation2: 1.2007, Conservation3: 5.0097
+Epoch #033, Conservation1: 1.4776, Conservation2: 0.9168, Conservation3: 3.1413
+Epoch #033, Conservation1: 2.0193, Conservation2: 1.4827, Conservation3: 5.0345
+Epoch #034, Conservation1: 1.3940, Conservation2: 0.8519, Conservation3: 2.9637
+Epoch #034, Conservation1: 1.7139, Conservation2: 1.4100, Conservation3: 5.4056
+Epoch #035, Conservation1: 1.3211, Conservation2: 0.7899, Conservation3: 2.8043
+Epoch #035, Conservation1: 1.3606, Conservation2: 0.8219, Conservation3: 3.8561
+Epoch #036, Conservation1: 1.2487, Conservation2: 0.7317, Conservation3: 2.6531
+Epoch #036, Conservation1: 1.9284, Conservation2: 0.4606, Conservation3: 4.1508
+Epoch #037, Conservation1: 1.1880, Conservation2: 0.6833, Conservation3: 2.5143
+Epoch #037, Conservation1: 1.5692, Conservation2: 0.9278, Conservation3: 3.5239
+Epoch #038, Conservation1: 1.1287, Conservation2: 0.6375, Conservation3: 2.3913
+Epoch #038, Conservation1: 1.1777, Conservation2: 0.5669, Conservation3: 3.5259
+Epoch #039, Conservation1: 1.0758, Conservation2: 0.5979, Conservation3: 2.2779
+Epoch #039, Conservation1: 1.7878, Conservation2: 0.8339, Conservation3: 3.9742
+Epoch #040, Conservation1: 1.0263, Conservation2: 0.5591, Conservation3: 2.1748
+Epoch #040, Conservation1: 1.4746, Conservation2: 0.6230, Conservation3: 3.7236
+Epoch #041, Conservation1: 0.9817, Conservation2: 0.5252, Conservation3: 2.0793
+Epoch #041, Conservation1: 1.0241, Conservation2: 1.6539, Conservation3: 3.9607
+Epoch #042, Conservation1: 0.9396, Conservation2: 0.4925, Conservation3: 1.9875
+Epoch #042, Conservation1: 1.1199, Conservation2: 0.5552, Conservation3: 2.9896
+Epoch #043, Conservation1: 0.9024, Conservation2: 0.4648, Conservation3: 1.9073
+Epoch #043, Conservation1: 1.2872, Conservation2: 0.4227, Conservation3: 3.0424
+Epoch #044, Conservation1: 0.8680, Conservation2: 0.4387, Conservation3: 1.8324
+Epoch #044, Conservation1: 1.1421, Conservation2: 0.7120, Conservation3: 3.1098
+Epoch #045, Conservation1: 0.8341, Conservation2: 0.4152, Conservation3: 1.7662
+Epoch #045, Conservation1: 0.9714, Conservation2: 0.5509, Conservation3: 2.9290
+Epoch #046, Conservation1: 0.8045, Conservation2: 0.3931, Conservation3: 1.6980
+Epoch #046, Conservation1: 0.8536, Conservation2: 0.6265, Conservation3: 2.6169
+Epoch #047, Conservation1: 0.7768, Conservation2: 0.3742, Conservation3: 1.6416
+Epoch #047, Conservation1: 1.0185, Conservation2: 0.3426, Conservation3: 2.6981
+Epoch #048, Conservation1: 0.7497, Conservation2: 0.3573, Conservation3: 1.5876
+Epoch #048, Conservation1: 0.8916, Conservation2: 0.2989, Conservation3: 2.4443
+Epoch #049, Conservation1: 0.7265, Conservation2: 0.3402, Conservation3: 1.5375
+Epoch #049, Conservation1: 0.9693, Conservation2: 0.3398, Conservation3: 2.7241
+The current best model is saved in: ******** outputs/Exp/model.pth *********
+Total time: 36692.5564s
+
+********** TEST START **********
+Reload Best Model
+The current best model is saved in: ******** outputs/Exp/model.pth *********
+Loss1: 2.4752, Loss2: 0.6148, Loss3: 10.4186
+Loss1: 2.4436, Loss2: 0.5702, Loss3: 9.7640
+Loss1: 2.3592, Loss2: 0.5515, Loss3: 8.5606
+Loss1: 1.9976, Loss2: 0.6079, Loss3: 8.2377
+Loss1: 2.0595, Loss2: 0.5565, Loss3: 8.1322
+Loss1: 1.8738, Loss2: 0.5948, Loss3: 7.0858
+Loss1: 1.9245, Loss2: 0.5604, Loss3: 6.9210
+Loss1: 1.7000, Loss2: 0.5643, Loss3: 6.6342
+Loss1: 1.5923, Loss2: 0.5704, Loss3: 6.1953
+Loss1: 1.6280, Loss2: 0.5692, Loss3: 5.8488
+Loss1: 1.5343, Loss2: 0.5400, Loss3: 5.7752
+Loss1: 1.6520, Loss2: 0.5251, Loss3: 5.5276
+Loss1: 1.4584, Loss2: 0.5468, Loss3: 5.3447
+Loss1: 1.4118, Loss2: 0.5352, Loss3: 5.1711
+Loss1: 1.4498, Loss2: 0.5464, Loss3: 4.7737
+Loss1: 1.3333, Loss2: 0.5287, Loss3: 4.8473
+Loss1: 1.5044, Loss2: 0.5070, Loss3: 4.5079
+Loss1: 1.4420, Loss2: 0.4821, Loss3: 4.5008
+Loss1: 1.3396, Loss2: 0.5313, Loss3: 4.2302
+Loss1: 1.2806, Loss2: 0.5122, Loss3: 4.1230
+Loss1: 1.2573, Loss2: 0.5053, Loss3: 3.9472
+Loss1: 1.2714, Loss2: 0.5097, Loss3: 3.8783
+Loss1: 1.3420, Loss2: 0.4647, Loss3: 3.9471
+Loss1: 1.3735, Loss2: 0.4775, Loss3: 3.6971
+Loss1: 1.3224, Loss2: 0.4616, Loss3: 3.6781
+Loss1: 1.1849, Loss2: 0.4886, Loss3: 3.5209
+Loss1: 1.2461, Loss2: 0.4563, Loss3: 3.6081
+Loss1: 1.2641, Loss2: 0.4566, Loss3: 3.4404
+Loss1: 1.2689, Loss2: 0.4614, Loss3: 3.4098
+Loss1: 1.2464, Loss2: 0.4517, Loss3: 3.3585
+Loss1: 1.1596, Loss2: 0.4928, Loss3: 3.1024
+Loss1: 1.2026, Loss2: 0.4457, Loss3: 3.1783
+Loss1: 1.0953, Loss2: 0.4925, Loss3: 3.1527
+Loss1: 1.0769, Loss2: 0.4817, Loss3: 3.1519
+Loss1: 1.0733, Loss2: 0.4483, Loss3: 2.6134
+Loss1: 1.0888, Loss2: 0.4657, Loss3: 2.5673
+Loss1: 1.0119, Loss2: 0.4190, Loss3: 2.5673
+Loss1: 0.9831, Loss2: 0.4123, Loss3: 2.5803
+Loss1: 0.9890, Loss2: 0.4012, Loss3: 2.5293
+Loss1: 1.0084, Loss2: 0.4080, Loss3: 2.4941
+Loss1: 0.9958, Loss2: 0.4054, Loss3: 2.4923
+Loss1: 1.2329, Loss2: 0.5518, Loss3: 3.1263
+Loss1: 1.3012, Loss2: 0.5271, Loss3: 3.3874
+Loss1: 1.3589, Loss2: 0.5651, Loss3: 3.3178
+Loss1: 1.2302, Loss2: 0.4976, Loss3: 3.1979
+Loss1: 1.2388, Loss2: 0.5588, Loss3: 3.1550
+Loss1: 1.2670, Loss2: 0.6237, Loss3: 3.3065
+Loss1: 1.3878, Loss2: 0.6904, Loss3: 3.3873
+Loss1: 1.4508, Loss2: 0.6803, Loss3: 3.4634
+Loss1: 1.4429, Loss2: 0.6639, Loss3: 3.5484
+Loss1: 1.5208, Loss2: 0.6558, Loss3: 3.3726
+Loss1: 1.4858, Loss2: 0.6550, Loss3: 3.4770
+Loss1: 1.5015, Loss2: 0.6754, Loss3: 3.3753
+Loss1: 1.4976, Loss2: 0.6485, Loss3: 3.4670
+Loss1: 1.6199, Loss2: 0.6685, Loss3: 3.6211
+Loss1: 1.5556, Loss2: 0.6642, Loss3: 3.4174
+Loss1: 1.5097, Loss2: 0.6538, Loss3: 3.4264
+Loss1: 1.5933, Loss2: 0.6977, Loss3: 3.8934
+Loss1: 1.5647, Loss2: 0.6394, Loss3: 3.6735
+Loss1: 1.6311, Loss2: 0.6830, Loss3: 3.7389
+Loss1: 1.5492, Loss2: 0.6470, Loss3: 3.6593
+Loss1: 1.5731, Loss2: 0.6530, Loss3: 3.6819
+Loss1: 1.5358, Loss2: 0.6207, Loss3: 3.5725
+Loss1: 1.5471, Loss2: 0.6467, Loss3: 3.5562
+Loss1: 1.5559, Loss2: 0.6151, Loss3: 3.5219
+Loss1: 1.5145, Loss2: 0.5950, Loss3: 3.4444
+Loss1: 1.5318, Loss2: 0.5961, Loss3: 3.4101
+Loss1: 1.5595, Loss2: 0.6245, Loss3: 3.4765
+Loss1: 1.4857, Loss2: 0.5887, Loss3: 3.3939
+Loss1: 1.4799, Loss2: 0.5678, Loss3: 3.3247
+Loss1: 1.5038, Loss2: 0.5834, Loss3: 3.3850
+Loss1: 1.6021, Loss2: 0.6340, Loss3: 3.9884
+Loss1: 1.5388, Loss2: 0.6164, Loss3: 3.9273
+Loss1: 1.5103, Loss2: 0.6059, Loss3: 3.8436
+Loss1: 1.5499, Loss2: 0.6110, Loss3: 3.8375
+Loss1: 1.4891, Loss2: 0.5859, Loss3: 3.7678
+Loss1: 1.5252, Loss2: 0.6246, Loss3: 3.9071
+Loss1: 1.5448, Loss2: 0.6317, Loss3: 3.8582
+Loss1: 1.6051, Loss2: 0.6269, Loss3: 3.9526
+Loss1: 1.5269, Loss2: 0.6054, Loss3: 3.8655
+Loss1: 1.5422, Loss2: 0.6761, Loss3: 3.9439
+Loss1: 1.6048, Loss2: 0.6905, Loss3: 3.9291
+Loss1: 1.5653, Loss2: 0.6456, Loss3: 3.8142
+Loss1: 1.5149, Loss2: 0.6614, Loss3: 3.6972
+Loss1: 1.5604, Loss2: 0.6669, Loss3: 3.6359
+Loss1: 1.6285, Loss2: 0.6790, Loss3: 3.8934
+Loss1: 1.6478, Loss2: 0.6638, Loss3: 3.7676
+Loss1: 1.6832, Loss2: 0.6698, Loss3: 3.8097
+Loss1: 1.7016, Loss2: 0.6789, Loss3: 3.6664
+Loss1: 1.6132, Loss2: 0.6534, Loss3: 3.6615
+Loss1: 1.6299, Loss2: 0.6403, Loss3: 3.5535
+Loss1: 1.6364, Loss2: 0.6107, Loss3: 3.4863
+Loss1: 1.5946, Loss2: 0.6290, Loss3: 3.4618
+Loss1: 1.5874, Loss2: 0.6306, Loss3: 3.5017
+Loss1: 1.6035, Loss2: 0.5825, Loss3: 3.3626
+Loss1: 1.5571, Loss2: 0.6093, Loss3: 3.4297
+Loss1: 1.5592, Loss2: 0.5893, Loss3: 3.3463
+Loss1: 1.5356, Loss2: 0.6036, Loss3: 3.3548
+Loss1: 1.5765, Loss2: 0.5724, Loss3: 3.2307
+Loss1: 1.4800, Loss2: 0.5525, Loss3: 3.1048
+Loss1: 1.4965, Loss2: 0.5548, Loss3: 3.0868
+Loss1: 1.4506, Loss2: 0.5569, Loss3: 3.3096
+Loss1: 1.5382, Loss2: 0.5417, Loss3: 3.1876
+Loss1: 1.4792, Loss2: 0.5609, Loss3: 3.2105
+Loss1: 1.4694, Loss2: 0.5610, Loss3: 3.1420
+Loss1: 1.5083, Loss2: 0.5632, Loss3: 3.1886
+Loss1: 1.5030, Loss2: 0.5480, Loss3: 3.1886
+Loss1: 1.5199, Loss2: 0.5817, Loss3: 3.2625
+Loss1: 1.5235, Loss2: 0.5741, Loss3: 3.3607
+Loss1: 1.5134, Loss2: 0.5553, Loss3: 3.3629
+Loss1: 1.4738, Loss2: 0.5482, Loss3: 3.3444
+Loss1: 1.4665, Loss2: 0.5545, Loss3: 3.3187
+Loss1: 1.5411, Loss2: 0.5528, Loss3: 3.2424
+Loss1: 1.4454, Loss2: 0.5367, Loss3: 3.2078
+Loss1: 1.4567, Loss2: 0.5530, Loss3: 3.2588
+Loss1: 1.4350, Loss2: 0.5491, Loss3: 3.1882
+Loss1: 1.4756, Loss2: 0.5420, Loss3: 3.2357
+Loss1: 1.4840, Loss2: 0.5588, Loss3: 3.2299
+Loss1: 1.4588, Loss2: 0.5521, Loss3: 3.1247
+Loss1: 1.4757, Loss2: 0.5436, Loss3: 3.0324
+Loss1: 1.3963, Loss2: 0.5330, Loss3: 3.0978
+Loss1: 1.4278, Loss2: 0.5489, Loss3: 3.0814
+Loss1: 1.4504, Loss2: 0.5358, Loss3: 2.9965
+Loss1: 1.4355, Loss2: 0.5170, Loss3: 2.9771
+Loss1: 1.4271, Loss2: 0.5331, Loss3: 2.8971
+Loss1: 1.4118, Loss2: 0.5197, Loss3: 2.8738
+Loss1: 1.4459, Loss2: 0.5076, Loss3: 2.8793
+Loss1: 1.4214, Loss2: 0.5104, Loss3: 2.8078
+Loss1: 1.4374, Loss2: 0.5088, Loss3: 2.8284
+Loss1: 1.4222, Loss2: 0.4906, Loss3: 2.7647
+Loss1: 1.3680, Loss2: 0.4796, Loss3: 2.7993
+Loss1: 1.3653, Loss2: 0.5068, Loss3: 2.7618
+Loss1: 1.3865, Loss2: 0.4902, Loss3: 2.7652
+Loss1: 1.3392, Loss2: 0.4982, Loss3: 2.7332
+Loss1: 1.3223, Loss2: 0.4902, Loss3: 2.7125
+Loss1: 1.3484, Loss2: 0.4739, Loss3: 2.7495
+Loss1: 1.3178, Loss2: 0.4862, Loss3: 2.7185
+Loss1: 1.2394, Loss2: 0.4691, Loss3: 2.6048
+Loss1: 1.1968, Loss2: 0.4697, Loss3: 2.4720
+Loss1: 1.2205, Loss2: 0.4660, Loss3: 2.3992
+Loss1: 1.1980, Loss2: 0.4799, Loss3: 2.3921
+Loss1: 1.1706, Loss2: 0.4523, Loss3: 2.4136
+Loss1: 1.1345, Loss2: 0.4384, Loss3: 2.3939
+Loss1: 1.1235, Loss2: 0.4709, Loss3: 2.3946
+Loss1: 1.1018, Loss2: 0.4533, Loss3: 2.2854
+Loss1: 1.0539, Loss2: 0.4521, Loss3: 2.2856
+Loss1: 1.2158, Loss2: 0.5007, Loss3: 2.3429
+Loss1: 1.2106, Loss2: 0.5148, Loss3: 2.4230
+Loss1: 1.2116, Loss2: 0.5119, Loss3: 2.3822
+Loss1: 1.1796, Loss2: 0.5066, Loss3: 2.3850
+Loss1: 1.1266, Loss2: 0.4779, Loss3: 2.1962
+Loss1: 1.1276, Loss2: 0.4675, Loss3: 2.1673
+Loss1: 1.1539, Loss2: 0.4876, Loss3: 2.2043
+Loss1: 1.1018, Loss2: 0.4610, Loss3: 2.1970
+Loss1: 1.1053, Loss2: 0.4836, Loss3: 2.1949
+Loss1: 1.1423, Loss2: 0.4730, Loss3: 2.2751
+Loss1: 1.1431, Loss2: 0.4616, Loss3: 2.2476
+Loss1: 1.1339, Loss2: 0.4535, Loss3: 2.2015
+Loss1: 1.1335, Loss2: 0.4647, Loss3: 2.2037
+Loss1: 1.1121, Loss2: 0.4677, Loss3: 2.2175
+Loss1: 1.0931, Loss2: 0.4496, Loss3: 2.1699
+Loss1: 1.0847, Loss2: 0.4509, Loss3: 2.1923
+Loss1: 1.1151, Loss2: 0.4414, Loss3: 2.1708
+Loss1: 1.1097, Loss2: 0.4443, Loss3: 2.1487
+Loss1: 1.0974, Loss2: 0.4392, Loss3: 2.1356
+Loss1: 1.0975, Loss2: 0.4510, Loss3: 2.1203
+Loss1: 1.0916, Loss2: 0.4351, Loss3: 2.0973
+Loss1: 1.0598, Loss2: 0.4180, Loss3: 1.9803
+Loss1: 1.0633, Loss2: 0.4080, Loss3: 2.0023
+Loss1: 1.0704, Loss2: 0.4152, Loss3: 1.9682
+Loss1: 1.0569, Loss2: 0.4102, Loss3: 1.9792
+Loss1: 1.0630, Loss2: 0.4149, Loss3: 2.0495
+Loss1: 1.0371, Loss2: 0.4054, Loss3: 1.9955
+Loss1: 1.0286, Loss2: 0.4073, Loss3: 1.9738
+Loss1: 0.9969, Loss2: 0.3974, Loss3: 1.9519
+Loss1: 1.0049, Loss2: 0.4046, Loss3: 1.9438
+Loss1: 0.9892, Loss2: 0.3888, Loss3: 1.9312
+Loss1: 0.9831, Loss2: 0.3859, Loss3: 1.8898
+Loss1: 0.9679, Loss2: 0.3855, Loss3: 1.9344
+Loss1: 1.0506, Loss2: 0.4053, Loss3: 2.0975
+Loss1: 1.0198, Loss2: 0.3841, Loss3: 1.9575
+Loss1: 1.0026, Loss2: 0.3970, Loss3: 1.9640
+Loss1: 0.9846, Loss2: 0.3819, Loss3: 1.9240
+Loss1: 0.9702, Loss2: 0.3790, Loss3: 1.9073
+Loss1: 0.9823, Loss2: 0.3829, Loss3: 1.9011
+Loss1: 0.9947, Loss2: 0.3990, Loss3: 1.9178
+Loss1: 0.9867, Loss2: 0.3964, Loss3: 1.9111
+Loss1: 0.9712, Loss2: 0.3997, Loss3: 1.9083
+Loss1: 0.9708, Loss2: 0.3922, Loss3: 1.9385
+Loss1: 0.9743, Loss2: 0.3965, Loss3: 1.9388
+Loss1: 0.9484, Loss2: 0.3939, Loss3: 1.8809
+Loss1: 1.0220, Loss2: 0.4954, Loss3: 2.3812
+Loss1: 1.0052, Loss2: 0.4974, Loss3: 2.3436
+Loss1: 1.0161, Loss2: 0.4915, Loss3: 2.2831
+Loss1: 1.0292, Loss2: 0.4905, Loss3: 2.3468
+Loss1: 1.0011, Loss2: 0.4841, Loss3: 2.3324
+Loss1: 1.0180, Loss2: 0.4863, Loss3: 2.3354
+Loss1: 1.0849, Loss2: 0.4863, Loss3: 2.3210
+Loss1: 1.0827, Loss2: 0.4843, Loss3: 2.3176
+Loss1: 1.0430, Loss2: 0.4680, Loss3: 2.2872
+Loss1: 1.0709, Loss2: 0.4757, Loss3: 2.2648
+Loss1: 1.0632, Loss2: 0.4649, Loss3: 2.2472
+Loss1: 1.2646, Loss2: 0.5457, Loss3: 2.4206
+Loss1: 1.2692, Loss2: 0.5257, Loss3: 2.3869
+Loss1: 1.1698, Loss2: 0.4889, Loss3: 2.1934
+Loss1: 1.2291, Loss2: 0.5217, Loss3: 2.1839
+Loss1: 1.2012, Loss2: 0.5087, Loss3: 2.2127
+Loss1: 1.1935, Loss2: 0.5036, Loss3: 2.1596
+Loss1: 1.1683, Loss2: 0.4886, Loss3: 2.1479
+Loss1: 1.2326, Loss2: 0.4986, Loss3: 2.1510
+Loss1: 1.2354, Loss2: 0.4873, Loss3: 2.1550
+Loss1: 1.2071, Loss2: 0.4817, Loss3: 2.1173
+Loss1: 1.2183, Loss2: 0.4856, Loss3: 2.1189
+Loss1: 1.1599, Loss2: 0.4454, Loss3: 2.0364
+Loss1: 1.2228, Loss2: 0.4746, Loss3: 2.1452
+Loss1: 1.2182, Loss2: 0.4715, Loss3: 2.1475
+Loss1: 1.1922, Loss2: 0.4458, Loss3: 2.0999
+Loss1: 1.2236, Loss2: 0.4653, Loss3: 2.1166
+Loss1: 1.1763, Loss2: 0.4410, Loss3: 2.0970
+Loss1: 1.1954, Loss2: 0.4566, Loss3: 2.1002
+Loss1: 1.1748, Loss2: 0.4419, Loss3: 2.0427
+Loss1: 1.2092, Loss2: 0.4606, Loss3: 2.0437
+Loss1: 1.1781, Loss2: 0.4559, Loss3: 2.0564
+Loss1: 1.1622, Loss2: 0.4477, Loss3: 2.0172
+Loss1: 1.1385, Loss2: 0.4296, Loss3: 1.9855
+Loss1: 1.1695, Loss2: 0.4580, Loss3: 2.0191
+Loss1: 1.1411, Loss2: 0.4463, Loss3: 1.9923
+Loss1: 1.1207, Loss2: 0.4304, Loss3: 1.9653
+Loss1: 1.0785, Loss2: 0.4068, Loss3: 1.9436
+Loss1: 1.0996, Loss2: 0.4306, Loss3: 1.9872
+Loss1: 1.1114, Loss2: 0.4282, Loss3: 1.9669
+Loss1: 1.0854, Loss2: 0.4141, Loss3: 1.9389
+Loss1: 1.0899, Loss2: 0.4131, Loss3: 1.9426
+Loss1: 1.0718, Loss2: 0.4013, Loss3: 1.9130
+Loss1: 1.0711, Loss2: 0.4059, Loss3: 1.9202
+Loss1: 1.0703, Loss2: 0.3974, Loss3: 1.9530
+Loss1: 1.1019, Loss2: 0.4174, Loss3: 1.9617
+Loss1: 1.0873, Loss2: 0.4167, Loss3: 1.9740
+Loss1: 1.0626, Loss2: 0.3928, Loss3: 1.9085
+Loss1: 1.0415, Loss2: 0.3823, Loss3: 1.9262
+Loss1: 1.0406, Loss2: 0.3856, Loss3: 1.8836
+Loss1: 1.0455, Loss2: 0.3772, Loss3: 1.8751
+Loss1: 0.9046, Loss2: 0.3608, Loss3: 1.8603
+Loss1: 0.8827, Loss2: 0.3549, Loss3: 1.8171
+Loss1: 0.8763, Loss2: 0.3519, Loss3: 1.8031
+Loss1: 0.8500, Loss2: 0.3331, Loss3: 1.7372
+Loss1: 0.8799, Loss2: 0.3510, Loss3: 1.7777
+Loss1: 0.8645, Loss2: 0.3452, Loss3: 1.7488
+Loss1: 0.8299, Loss2: 0.3181, Loss3: 1.6553
+Loss1: 0.8158, Loss2: 0.3180, Loss3: 1.7003
+Loss1: 0.8391, Loss2: 0.3302, Loss3: 1.6467
+Loss1: 0.8004, Loss2: 0.3057, Loss3: 1.6228
+Loss1: 0.7920, Loss2: 0.3067, Loss3: 1.5879
+Loss1: 0.8272, Loss2: 0.3199, Loss3: 1.6364
+Loss1: 0.7772, Loss2: 0.3058, Loss3: 1.6218
+Loss1: 0.8052, Loss2: 0.3113, Loss3: 1.6061
+Loss1: 0.8390, Loss2: 0.3317, Loss3: 1.7056
+Loss1: 0.8219, Loss2: 0.3177, Loss3: 1.7058
+Loss1: 0.8250, Loss2: 0.3270, Loss3: 1.7262
+Loss1: 0.8017, Loss2: 0.3122, Loss3: 1.6982
+Loss1: 0.8305, Loss2: 0.3228, Loss3: 1.7003
+Loss1: 0.7999, Loss2: 0.3098, Loss3: 1.6842
+Loss1: 0.8195, Loss2: 0.3196, Loss3: 1.6767
+Loss1: 0.7958, Loss2: 0.3030, Loss3: 1.6604
+Loss1: 0.7925, Loss2: 0.3040, Loss3: 1.6631
+Loss1: 0.8233, Loss2: 0.3193, Loss3: 1.6810
+Loss1: 0.8007, Loss2: 0.3102, Loss3: 1.6647
+Loss1: 0.8093, Loss2: 0.3228, Loss3: 1.6545
+Loss1: 0.8145, Loss2: 0.3371, Loss3: 1.6482
+Loss1: 0.8195, Loss2: 0.3423, Loss3: 1.6847
+Loss1: 0.8064, Loss2: 0.3403, Loss3: 1.6797
+Loss1: 0.8106, Loss2: 0.3384, Loss3: 1.6570
+Loss1: 0.8436, Loss2: 0.3888, Loss3: 1.8594
+Loss1: 0.8294, Loss2: 0.3731, Loss3: 1.7960
+Loss1: 0.8226, Loss2: 0.3720, Loss3: 1.7906
+Loss1: 0.8100, Loss2: 0.3731, Loss3: 1.6841
+Loss1: 0.8026, Loss2: 0.3716, Loss3: 1.7034
+Loss1: 0.8187, Loss2: 0.3689, Loss3: 1.6632
+Loss1: 0.7972, Loss2: 0.3602, Loss3: 1.6486
+Loss1: 0.7976, Loss2: 0.3602, Loss3: 1.6690
+Loss1: 0.8170, Loss2: 0.3672, Loss3: 1.6628
+Loss1: 0.7995, Loss2: 0.3664, Loss3: 1.6741
+Loss1: 0.7955, Loss2: 0.3641, Loss3: 1.6437
+Loss1: 0.7881, Loss2: 0.3580, Loss3: 1.6221
+Loss1: 0.7703, Loss2: 0.3455, Loss3: 1.5883
+Loss1: 0.7838, Loss2: 0.3601, Loss3: 1.6344
+Loss1: 0.7889, Loss2: 0.3667, Loss3: 1.7182
+Loss1: 0.7611, Loss2: 0.3395, Loss3: 1.4611
+Loss1: 0.7315, Loss2: 0.3143, Loss3: 1.4498
+Loss1: 0.7433, Loss2: 0.3274, Loss3: 1.4686
+Loss1: 0.7334, Loss2: 0.3174, Loss3: 1.4404
+Loss1: 0.7467, Loss2: 0.3190, Loss3: 1.4545
+Loss1: 0.7553, Loss2: 0.3282, Loss3: 1.4441
+Loss1: 0.7008, Loss2: 0.3077, Loss3: 1.3497
+Loss1: 0.7066, Loss2: 0.3188, Loss3: 1.4043
+Loss1: 0.7160, Loss2: 0.3166, Loss3: 1.3678
+Loss1: 0.7046, Loss2: 0.3106, Loss3: 1.3710
+Loss1: 0.7026, Loss2: 0.3166, Loss3: 1.3589
+Loss1: 0.6263, Loss2: 0.2919, Loss3: 1.2830
+Loss1: 0.6284, Loss2: 0.2962, Loss3: 1.2719
+Loss1: 0.6230, Loss2: 0.2890, Loss3: 1.2555
+Loss1: 0.6185, Loss2: 0.2878, Loss3: 1.2811
+Loss1: 0.6144, Loss2: 0.2771, Loss3: 1.2407
+Loss1: 0.6072, Loss2: 0.2744, Loss3: 1.2428
+Loss1: 0.6136, Loss2: 0.2810, Loss3: 1.2452
+Loss1: 0.5744, Loss2: 0.2729, Loss3: 1.1999
+Loss1: 0.5932, Loss2: 0.2770, Loss3: 1.2211
+Loss1: 0.5840, Loss2: 0.2726, Loss3: 1.1886
+Loss1: 0.5591, Loss2: 0.2746, Loss3: 1.1841
+Loss1: 0.5736, Loss2: 0.2712, Loss3: 1.1469
+Loss1: 0.5569, Loss2: 0.2687, Loss3: 1.1059
+Loss1: 0.5515, Loss2: 0.2685, Loss3: 1.1278
+Loss1: 0.5592, Loss2: 0.2684, Loss3: 1.1202
+Loss1: 0.5435, Loss2: 0.2600, Loss3: 1.1101
+Loss1: 0.5328, Loss2: 0.2607, Loss3: 1.0942
+Loss1: 0.5321, Loss2: 0.2631, Loss3: 1.1046
+Loss1: 0.5488, Loss2: 0.2561, Loss3: 1.0991
+Loss1: 0.5439, Loss2: 0.2610, Loss3: 1.1199
+Loss1: 0.5553, Loss2: 0.2560, Loss3: 1.1066
+Loss1: 0.5464, Loss2: 0.2549, Loss3: 1.1122
+Loss1: 0.8218, Loss2: 0.2954, Loss3: 1.3337
+Loss1: 0.8025, Loss2: 0.2801, Loss3: 1.3046
+Loss1: 0.8046, Loss2: 0.2948, Loss3: 1.3335
+Loss1: 0.8125, Loss2: 0.2881, Loss3: 1.3069
+Loss1: 0.7964, Loss2: 0.2789, Loss3: 1.2769
+Loss1: 0.7812, Loss2: 0.2788, Loss3: 1.2577
+Loss1: 0.7800, Loss2: 0.2790, Loss3: 1.2913
+Loss1: 0.7798, Loss2: 0.2779, Loss3: 1.2818
+Loss1: 0.7605, Loss2: 0.2689, Loss3: 1.2364
+Loss1: 0.7563, Loss2: 0.2844, Loss3: 1.2774
+Loss1: 0.7457, Loss2: 0.2814, Loss3: 1.2579
+Loss1: 0.7361, Loss2: 0.2762, Loss3: 1.2360
+Loss1: 0.7410, Loss2: 0.2763, Loss3: 1.2371
+Loss1: 0.7375, Loss2: 0.2676, Loss3: 1.2093
+Loss1: 0.7639, Loss2: 0.2749, Loss3: 1.2939
+Loss1: 0.7915, Loss2: 0.2881, Loss3: 1.2983
+Loss1: 0.7620, Loss2: 0.2879, Loss3: 1.3216
+Loss1: 0.7809, Loss2: 0.2828, Loss3: 1.2763
+Loss1: 0.7603, Loss2: 0.2814, Loss3: 1.2991
+Loss1: 0.7642, Loss2: 0.2797, Loss3: 1.2734
+Loss1: 0.7686, Loss2: 0.2772, Loss3: 1.2738
+Loss1: 0.7478, Loss2: 0.2804, Loss3: 1.2807
+Loss1: 0.7806, Loss2: 0.2949, Loss3: 1.4133
+Loss1: 0.7837, Loss2: 0.2943, Loss3: 1.3875
+Loss1: 0.8259, Loss2: 0.3012, Loss3: 1.3961
+Loss1: 0.8307, Loss2: 0.3062, Loss3: 1.4099
+Loss1: 0.8059, Loss2: 0.2989, Loss3: 1.3817
+Loss1: 0.8279, Loss2: 0.3084, Loss3: 1.4086
+Loss1: 0.8159, Loss2: 0.3083, Loss3: 1.3935
+Loss1: 0.8179, Loss2: 0.3062, Loss3: 1.3939
+Loss1: 0.7800, Loss2: 0.3083, Loss3: 1.3670
+Loss1: 0.8048, Loss2: 0.3038, Loss3: 1.3508
+Loss1: 0.7684, Loss2: 0.2986, Loss3: 1.2855
+Loss1: 0.7654, Loss2: 0.2955, Loss3: 1.2720
+Loss1: 0.7580, Loss2: 0.2885, Loss3: 1.2324
+Loss1: 0.7397, Loss2: 0.2903, Loss3: 1.2387
+Loss1: 0.7419, Loss2: 0.2872, Loss3: 1.2527
+Loss1: 0.7463, Loss2: 0.2920, Loss3: 1.2576
+Loss1: 0.7358, Loss2: 0.2822, Loss3: 1.2061
+Loss1: 0.7505, Loss2: 0.2936, Loss3: 1.2665
+Loss1: 0.7181, Loss2: 0.2861, Loss3: 1.2213
+Loss1: 0.7317, Loss2: 0.2835, Loss3: 1.2596
+Loss1: 0.7261, Loss2: 0.2859, Loss3: 1.2580
+Loss1: 0.7230, Loss2: 0.2881, Loss3: 1.2952
+Loss1: 0.7136, Loss2: 0.2719, Loss3: 1.2573
+Loss1: 0.7537, Loss2: 0.2865, Loss3: 1.3862
+Loss1: 0.7366, Loss2: 0.2904, Loss3: 1.3565
+Loss1: 0.7433, Loss2: 0.2850, Loss3: 1.3749
+Loss1: 0.7441, Loss2: 0.2723, Loss3: 1.3206
+Loss1: 0.7305, Loss2: 0.2674, Loss3: 1.3043
+Loss1: 0.7125, Loss2: 0.2724, Loss3: 1.3158
+Loss1: 0.7408, Loss2: 0.2664, Loss3: 1.3470
+Loss1: 0.7387, Loss2: 0.2623, Loss3: 1.3395
+Loss1: 0.7132, Loss2: 0.2639, Loss3: 1.3408
+Loss1: 0.7026, Loss2: 0.2601, Loss3: 1.3296
+Loss1: 0.7033, Loss2: 0.2713, Loss3: 1.3315
+Loss1: 0.7007, Loss2: 0.2671, Loss3: 1.3165
+Loss1: 0.6861, Loss2: 0.2631, Loss3: 1.3329
+Loss1: 0.7122, Loss2: 0.2652, Loss3: 1.3242
+Loss1: 0.7028, Loss2: 0.2545, Loss3: 1.3157
+Loss1: 0.6735, Loss2: 0.2641, Loss3: 1.2761
+Loss1: 0.7228, Loss2: 0.2730, Loss3: 1.3041
+Loss1: 0.7137, Loss2: 0.2722, Loss3: 1.2331
+Loss1: 0.7013, Loss2: 0.2601, Loss3: 1.2508
+Loss1: 0.6995, Loss2: 0.2630, Loss3: 1.2060
+Loss1: 0.6952, Loss2: 0.2608, Loss3: 1.2046
+Loss1: 0.6882, Loss2: 0.2607, Loss3: 1.1937
+Loss1: 0.6837, Loss2: 0.2660, Loss3: 1.1623
+Loss1: 0.6819, Loss2: 0.2579, Loss3: 1.1568
+Loss1: 0.6720, Loss2: 0.2551, Loss3: 1.1902
+Loss1: 0.6787, Loss2: 0.2610, Loss3: 1.1503
+Loss1: 0.6563, Loss2: 0.2544, Loss3: 1.1606
+Loss1: 0.6920, Loss2: 0.2579, Loss3: 1.1689
+Loss1: 0.6679, Loss2: 0.2596, Loss3: 1.1503
+Loss1: 0.6753, Loss2: 0.2583, Loss3: 1.1408
+Loss1: 0.6707, Loss2: 0.2526, Loss3: 1.1483
+Loss1: 0.6602, Loss2: 0.2550, Loss3: 1.1403
+Loss1: 0.6794, Loss2: 0.2528, Loss3: 1.1324
+Loss1: 0.6572, Loss2: 0.2530, Loss3: 1.1269
+Loss1: 0.6664, Loss2: 0.2458, Loss3: 1.0981
+Loss1: 0.6625, Loss2: 0.2472, Loss3: 1.0962
+Loss1: 0.6560, Loss2: 0.2472, Loss3: 1.0689
+Loss1: 0.6620, Loss2: 0.2461, Loss3: 1.0830
+Loss1: 0.6566, Loss2: 0.2437, Loss3: 1.0716
+Loss1: 0.6743, Loss2: 0.2398, Loss3: 1.0588
+Loss1: 0.6509, Loss2: 0.2408, Loss3: 1.0625
+Loss1: 0.6711, Loss2: 0.2395, Loss3: 1.0480
+Loss1: 0.6662, Loss2: 0.2384, Loss3: 1.0641
+Loss1: 0.6556, Loss2: 0.2407, Loss3: 1.0383
+Loss1: 0.6596, Loss2: 0.2386, Loss3: 1.0386
+Loss1: 0.6494, Loss2: 0.2360, Loss3: 1.0342
+Loss1: 0.6610, Loss2: 0.2411, Loss3: 1.0460
+Loss1: 0.6547, Loss2: 0.2425, Loss3: 1.0190
+Loss1: 0.6529, Loss2: 0.2345, Loss3: 1.0070
+Loss1: 0.6397, Loss2: 0.2346, Loss3: 1.0049
+Loss1: 0.6257, Loss2: 0.2345, Loss3: 0.9742
+Loss1: 0.5836, Loss2: 0.2316, Loss3: 1.1350
+Loss1: 0.5763, Loss2: 0.2274, Loss3: 1.1147
+Loss1: 0.5768, Loss2: 0.2235, Loss3: 1.1312
+Loss1: 0.5791, Loss2: 0.2232, Loss3: 1.1161
+Loss1: 0.5751, Loss2: 0.2357, Loss3: 1.2513
+Loss1: 0.5737, Loss2: 0.2384, Loss3: 1.2232
+Loss1: 0.5838, Loss2: 0.2281, Loss3: 1.1750
+Loss1: 0.5851, Loss2: 0.2332, Loss3: 1.2213
+Loss1: 0.5860, Loss2: 0.2288, Loss3: 1.2202
+Loss1: 0.5743, Loss2: 0.2226, Loss3: 1.2160
+Loss1: 0.5880, Loss2: 0.2318, Loss3: 1.1680
+Loss1: 0.5785, Loss2: 0.2332, Loss3: 1.1743
+Loss1: 0.6283, Loss2: 0.2389, Loss3: 1.1833
+Loss1: 0.6364, Loss2: 0.2381, Loss3: 1.2805
+Loss1: 0.6124, Loss2: 0.2369, Loss3: 1.3028
+Loss1: 0.6200, Loss2: 0.2304, Loss3: 1.2173
+Loss1: 0.6249, Loss2: 0.2400, Loss3: 1.2622
+Loss1: 0.6336, Loss2: 0.2310, Loss3: 1.2616
+Loss1: 0.6360, Loss2: 0.2291, Loss3: 1.2464
+Loss1: 0.6378, Loss2: 0.2357, Loss3: 1.2674
+Loss1: 0.6425, Loss2: 0.2288, Loss3: 1.2272
+Loss1: 0.7742, Loss2: 0.2489, Loss3: 1.3384
+Loss1: 0.7643, Loss2: 0.2502, Loss3: 1.2936
+Loss1: 0.7197, Loss2: 0.2423, Loss3: 1.3326
+Loss1: 0.7354, Loss2: 0.2521, Loss3: 1.3059
+Loss1: 0.7226, Loss2: 0.2509, Loss3: 1.3367
+Loss1: 0.7244, Loss2: 0.2546, Loss3: 1.3203
+Loss1: 0.7131, Loss2: 0.2429, Loss3: 1.3460
+Loss1: 0.7043, Loss2: 0.2408, Loss3: 1.3239
+Loss1: 0.7125, Loss2: 0.2451, Loss3: 1.3356
+Loss1: 0.7015, Loss2: 0.2444, Loss3: 1.3208
+Loss1: 0.7239, Loss2: 0.2417, Loss3: 1.3450
+Loss1: 0.6968, Loss2: 0.2387, Loss3: 1.3392
+Loss1: 0.7114, Loss2: 0.2369, Loss3: 1.3063
+Loss1: 0.6982, Loss2: 0.2340, Loss3: 1.3136
+Loss1: 0.6865, Loss2: 0.2294, Loss3: 1.2685
+Loss1: 0.7693, Loss2: 0.2450, Loss3: 1.3136
+Loss1: 0.7504, Loss2: 0.2423, Loss3: 1.3077
+Loss1: 0.7457, Loss2: 0.2455, Loss3: 1.3568
+Loss1: 0.7374, Loss2: 0.2388, Loss3: 1.3402
+Loss1: 0.7530, Loss2: 0.2353, Loss3: 1.2761
+Loss1: 0.7292, Loss2: 0.2383, Loss3: 1.3208
+Loss1: 0.7159, Loss2: 0.2334, Loss3: 1.2503
+Loss1: 0.7117, Loss2: 0.2372, Loss3: 1.2683
+Loss1: 0.7104, Loss2: 0.2364, Loss3: 1.2458
+Loss1: 0.6787, Loss2: 0.2234, Loss3: 1.1913
+Loss1: 0.6902, Loss2: 0.2196, Loss3: 1.1596
+Loss1: 0.6756, Loss2: 0.2184, Loss3: 1.1629
+Loss1: 0.6916, Loss2: 0.2378, Loss3: 1.1921
+Loss1: 0.6933, Loss2: 0.2373, Loss3: 1.1620
+Loss1: 0.6871, Loss2: 0.2402, Loss3: 1.1669
+Loss1: 0.6585, Loss2: 0.2320, Loss3: 1.1364
+Loss1: 0.6768, Loss2: 0.2418, Loss3: 1.1946
+Loss1: 0.6818, Loss2: 0.2399, Loss3: 1.1829
+Loss1: 0.6746, Loss2: 0.2371, Loss3: 1.1847
+Loss1: 0.6674, Loss2: 0.2386, Loss3: 1.1720
+Loss1: 0.7168, Loss2: 0.2474, Loss3: 1.1788
+Loss1: 0.6820, Loss2: 0.2478, Loss3: 1.1971
+Loss1: 0.6967, Loss2: 0.2475, Loss3: 1.2221
+Loss1: 0.7241, Loss2: 0.2611, Loss3: 1.2163
+Loss1: 0.7144, Loss2: 0.2459, Loss3: 1.1780
+Loss1: 0.6743, Loss2: 0.2470, Loss3: 1.1619
+Loss1: 0.6774, Loss2: 0.2492, Loss3: 1.1988
+Loss1: 0.6691, Loss2: 0.2374, Loss3: 1.1649
+Loss1: 0.6561, Loss2: 0.2364, Loss3: 1.1495
+Loss1: 0.6596, Loss2: 0.2351, Loss3: 1.1379
+Loss1: 0.6562, Loss2: 0.2339, Loss3: 1.1522
+Loss1: 0.9246, Loss2: 0.2355, Loss3: 1.5680
+Loss1: 0.9192, Loss2: 0.2388, Loss3: 1.5676
+Loss1: 0.9237, Loss2: 0.2422, Loss3: 1.5503
+Loss1: 0.9000, Loss2: 0.2402, Loss3: 1.5305
+Loss1: 0.8880, Loss2: 0.2316, Loss3: 1.5136
+Loss1: 0.8678, Loss2: 0.2369, Loss3: 1.5271
+Loss1: 0.8603, Loss2: 0.2370, Loss3: 1.5356
+Loss1: 0.8774, Loss2: 0.2362, Loss3: 1.5068
+Loss1: 0.8559, Loss2: 0.2361, Loss3: 1.4887
+Loss1: 0.8427, Loss2: 0.2329, Loss3: 1.4846
+Loss1: 0.8499, Loss2: 0.2394, Loss3: 1.4705
+Loss1: 0.8345, Loss2: 0.2323, Loss3: 1.4693
+Loss1: 0.8320, Loss2: 0.2348, Loss3: 1.4750
+Loss1: 0.8262, Loss2: 0.2357, Loss3: 1.4809
+Loss1: 0.8810, Loss2: 0.2377, Loss3: 1.4295
+Loss1: 0.8320, Loss2: 0.2315, Loss3: 1.5056
+Loss1: 0.8733, Loss2: 0.2321, Loss3: 1.4551
+Loss1: 0.8857, Loss2: 0.2346, Loss3: 1.5147
+Loss1: 0.8592, Loss2: 0.2265, Loss3: 1.4818
+Loss1: 0.8621, Loss2: 0.2307, Loss3: 1.4918
+Loss1: 0.8787, Loss2: 0.2232, Loss3: 1.4823
+Loss1: 0.8705, Loss2: 0.2280, Loss3: 1.4633
+Loss1: 0.8612, Loss2: 0.2318, Loss3: 1.4688
+Loss1: 0.8666, Loss2: 0.2278, Loss3: 1.4391
+Loss1: 0.8483, Loss2: 0.2284, Loss3: 1.4641
+Loss1: 0.8297, Loss2: 0.2186, Loss3: 1.4349
+Loss1: 0.8544, Loss2: 0.2211, Loss3: 1.4109
+Loss1: 0.8418, Loss2: 0.2263, Loss3: 1.4340
+Loss1: 0.8377, Loss2: 0.2278, Loss3: 1.4032
+Loss1: 0.8190, Loss2: 0.2232, Loss3: 1.3625
+Loss1: 0.8528, Loss2: 0.2305, Loss3: 1.3549
+Loss1: 0.8329, Loss2: 0.2353, Loss3: 1.3686
+Loss1: 0.8400, Loss2: 0.2355, Loss3: 1.3527
+Loss1: 0.8301, Loss2: 0.2414, Loss3: 1.3505
+Loss1: 0.8314, Loss2: 0.2294, Loss3: 1.3558
+Loss1: 0.8079, Loss2: 0.2391, Loss3: 1.3702
+Loss1: 0.7967, Loss2: 0.2377, Loss3: 1.3300
+Loss1: 0.8060, Loss2: 0.2382, Loss3: 1.3761
+Loss1: 0.8036, Loss2: 0.2559, Loss3: 1.3972
+Loss1: 0.8061, Loss2: 0.2477, Loss3: 1.3853
+Loss1: 0.7932, Loss2: 0.2465, Loss3: 1.3803
+Loss1: 0.7799, Loss2: 0.2582, Loss3: 1.3901
+Loss1: 0.7863, Loss2: 0.2637, Loss3: 1.3608
+Loss1: 0.7979, Loss2: 0.2595, Loss3: 1.3545
+Loss1: 0.7620, Loss2: 0.2503, Loss3: 1.3456
+Loss1: 0.7411, Loss2: 0.2480, Loss3: 1.3255
+Loss1: 0.7436, Loss2: 0.2396, Loss3: 1.2825
+Loss1: 0.8006, Loss2: 0.2611, Loss3: 1.3901
+Loss1: 0.7797, Loss2: 0.2439, Loss3: 1.3975
+Loss1: 0.7793, Loss2: 0.2541, Loss3: 1.3818
+Loss1: 0.7612, Loss2: 0.2513, Loss3: 1.3793
+Loss1: 0.7406, Loss2: 0.2532, Loss3: 1.3968
+Loss1: 0.7887, Loss2: 0.2585, Loss3: 1.3997
+Loss1: 0.7194, Loss2: 0.2423, Loss3: 1.3902
+Loss1: 0.7342, Loss2: 0.2359, Loss3: 1.3315
+Loss1: 0.7284, Loss2: 0.2359, Loss3: 1.3209
+Loss1: 0.7108, Loss2: 0.2403, Loss3: 1.3162
+Loss1: 0.7285, Loss2: 0.2414, Loss3: 1.3016
+Loss1: 0.6991, Loss2: 0.2349, Loss3: 1.2858
+Loss1: 0.6990, Loss2: 0.2336, Loss3: 1.2785
+Loss1: 0.6868, Loss2: 0.2291, Loss3: 1.2694
+Loss1: 0.7257, Loss2: 0.2228, Loss3: 1.2302
+Loss1: 0.6982, Loss2: 0.2243, Loss3: 1.2297
+Loss1: 0.6898, Loss2: 0.2313, Loss3: 1.2667
+Loss1: 0.7269, Loss2: 0.2264, Loss3: 1.2367
+Loss1: 0.6691, Loss2: 0.2267, Loss3: 1.2224
+Loss1: 0.7008, Loss2: 0.2287, Loss3: 1.2448
+Loss1: 0.6623, Loss2: 0.2291, Loss3: 1.2370
+Loss1: 0.6977, Loss2: 0.2430, Loss3: 1.2840
+Loss1: 0.6642, Loss2: 0.2407, Loss3: 1.2555
+Loss1: 0.6671, Loss2: 0.2425, Loss3: 1.2832
+Loss1: 0.6753, Loss2: 0.2501, Loss3: 1.2677
+Loss1: 0.6918, Loss2: 0.2589, Loss3: 1.3026
+Loss1: 0.6630, Loss2: 0.2496, Loss3: 1.3426
+Loss1: 0.6537, Loss2: 0.2513, Loss3: 1.3245
+Loss1: 0.6580, Loss2: 0.2438, Loss3: 1.3208
+Loss1: 0.6972, Loss2: 0.2696, Loss3: 1.3999
+Loss1: 0.6618, Loss2: 0.2578, Loss3: 1.3880
+Loss1: 0.6473, Loss2: 0.2454, Loss3: 1.3687
+Loss1: 0.6672, Loss2: 0.2459, Loss3: 1.3669
+Loss1: 0.7468, Loss2: 0.2596, Loss3: 1.3783
+Loss1: 0.7565, Loss2: 0.2575, Loss3: 1.3590
+Loss1: 0.7485, Loss2: 0.2561, Loss3: 1.3615
+Loss1: 0.7445, Loss2: 0.2563, Loss3: 1.3669
+Loss1: 0.7275, Loss2: 0.2547, Loss3: 1.3602
+Loss1: 0.7033, Loss2: 0.2477, Loss3: 1.3753
+Loss1: 0.7277, Loss2: 0.2486, Loss3: 1.3661
+Loss1: 0.6880, Loss2: 0.2418, Loss3: 1.3472
+Loss1: 0.6768, Loss2: 0.2537, Loss3: 1.3618
+Loss1: 0.7159, Loss2: 0.2567, Loss3: 1.3523
+Loss1: 0.7118, Loss2: 0.2583, Loss3: 1.3637
+Loss1: 0.7129, Loss2: 0.2556, Loss3: 1.3204
+Loss1: 0.6987, Loss2: 0.2527, Loss3: 1.3517
+Loss1: 0.7237, Loss2: 0.2527, Loss3: 1.3263
+Loss1: 0.6940, Loss2: 0.2428, Loss3: 1.3077
+Loss1: 0.6856, Loss2: 0.2496, Loss3: 1.3034
+Loss1: 0.6133, Loss2: 0.2299, Loss3: 1.0860
+Loss1: 0.6274, Loss2: 0.2327, Loss3: 1.0651
+Loss1: 0.6014, Loss2: 0.2256, Loss3: 1.0646
+Loss1: 0.6115, Loss2: 0.2330, Loss3: 1.0852
+Loss1: 0.6326, Loss2: 0.2350, Loss3: 1.0837
+Loss1: 0.6079, Loss2: 0.2357, Loss3: 1.0981
+Loss1: 0.6627, Loss2: 0.2395, Loss3: 1.1256
+Loss1: 0.6924, Loss2: 0.2412, Loss3: 1.1772
+Loss1: 0.6818, Loss2: 0.2448, Loss3: 1.1525
+Loss1: 0.6972, Loss2: 0.2355, Loss3: 1.1367
+Loss1: 0.6674, Loss2: 0.2360, Loss3: 1.1427
+Loss1: 0.6810, Loss2: 0.2320, Loss3: 1.1307
+Loss1: 0.6644, Loss2: 0.2288, Loss3: 1.1081
+Loss1: 0.6602, Loss2: 0.2273, Loss3: 1.0978
+Loss1: 0.6302, Loss2: 0.2292, Loss3: 1.0820
+Loss1: 0.6329, Loss2: 0.2271, Loss3: 1.0577
+Loss1: 0.6179, Loss2: 0.2256, Loss3: 1.0600
+Loss1: 0.5842, Loss2: 0.2231, Loss3: 1.0279
+Loss1: 0.6099, Loss2: 0.2124, Loss3: 0.9897
+Loss1: 0.5943, Loss2: 0.2199, Loss3: 0.9858
+Loss1: 0.5873, Loss2: 0.2184, Loss3: 0.9781
+Loss1: 0.5742, Loss2: 0.2207, Loss3: 0.9799
+Loss1: 0.5713, Loss2: 0.2191, Loss3: 0.9829
+Loss1: 0.5624, Loss2: 0.2103, Loss3: 0.9843
+Loss1: 0.5579, Loss2: 0.2128, Loss3: 0.9703
+Loss1: 0.6199, Loss2: 0.2197, Loss3: 0.9848
+Loss1: 0.6009, Loss2: 0.2230, Loss3: 1.0036
+Loss1: 0.6060, Loss2: 0.2177, Loss3: 1.0092
+Loss1: 0.6067, Loss2: 0.2274, Loss3: 1.0330
+Loss1: 0.7515, Loss2: 0.2336, Loss3: 1.2997
+Loss1: 0.7502, Loss2: 0.2310, Loss3: 1.2570
+Loss1: 0.7327, Loss2: 0.2454, Loss3: 1.2508
+Loss1: 0.7413, Loss2: 0.2289, Loss3: 1.2129
+Loss1: 0.7328, Loss2: 0.2368, Loss3: 1.2161
+Loss1: 0.7243, Loss2: 0.2378, Loss3: 1.1950
+Loss1: 0.7278, Loss2: 0.2383, Loss3: 1.2451
+Loss1: 0.9087, Loss2: 0.3210, Loss3: 1.3970
+Loss1: 0.9086, Loss2: 0.3174, Loss3: 1.4239
+Loss1: 0.8735, Loss2: 0.3058, Loss3: 1.3607
+Loss1: 0.9566, Loss2: 0.3142, Loss3: 1.4369
+Loss1: 0.9537, Loss2: 0.3216, Loss3: 1.4221
+Loss1: 1.0591, Loss2: 0.3335, Loss3: 1.4531
+Loss1: 1.0312, Loss2: 0.3270, Loss3: 1.4840
+Loss1: 1.0349, Loss2: 0.3290, Loss3: 1.4661
+Loss1: 1.0370, Loss2: 0.3340, Loss3: 1.5142
+Loss1: 1.0418, Loss2: 0.3444, Loss3: 1.5511
+Loss1: 1.0371, Loss2: 0.3309, Loss3: 1.4978
+Loss1: 0.9497, Loss2: 0.3141, Loss3: 1.4576
+Loss1: 0.9634, Loss2: 0.3133, Loss3: 1.4122
+Loss1: 1.0153, Loss2: 0.3376, Loss3: 1.5554
+Loss1: 0.9921, Loss2: 0.3288, Loss3: 1.4854
+Loss1: 1.1195, Loss2: 0.4302, Loss3: 1.8274
+Loss1: 1.0810, Loss2: 0.4117, Loss3: 1.8061
+Loss1: 1.0304, Loss2: 0.4034, Loss3: 1.9278
+Loss1: 1.0677, Loss2: 0.4129, Loss3: 1.7848
+Loss1: 1.0566, Loss2: 0.4082, Loss3: 1.7695
+Loss1: 1.0679, Loss2: 0.4062, Loss3: 1.7496
+Loss1: 1.0503, Loss2: 0.4066, Loss3: 1.7852
+Loss1: 1.0309, Loss2: 0.3969, Loss3: 1.7084
+Loss1: 1.0309, Loss2: 0.4033, Loss3: 1.7358
+Loss1: 1.0643, Loss2: 0.4185, Loss3: 1.7853
+Loss1: 1.0679, Loss2: 0.4327, Loss3: 1.8626
+Loss1: 0.9991, Loss2: 0.3931, Loss3: 1.8266
+Loss1: 1.0528, Loss2: 0.4166, Loss3: 1.7520
+Loss1: 1.0492, Loss2: 0.4073, Loss3: 1.7521
+Loss1: 0.9729, Loss2: 0.3949, Loss3: 1.8348
+Loss1: 1.0160, Loss2: 0.3951, Loss3: 1.6859
+Loss1: 0.9672, Loss2: 0.3717, Loss3: 1.7576
+Loss1: 0.9803, Loss2: 0.3782, Loss3: 1.6514
+Loss1: 0.9306, Loss2: 0.3594, Loss3: 1.7346
+Loss1: 0.9924, Loss2: 0.3772, Loss3: 1.6099
+Loss1: 1.0299, Loss2: 0.4360, Loss3: 1.8295
+Loss1: 1.0231, Loss2: 0.4444, Loss3: 1.8579
+Loss1: 0.9918, Loss2: 0.4101, Loss3: 1.9013
+Loss1: 1.0349, Loss2: 0.4375, Loss3: 1.7816
+Loss1: 1.0355, Loss2: 0.4413, Loss3: 1.7748
+Loss1: 1.0019, Loss2: 0.4191, Loss3: 1.6644
+Loss1: 1.0129, Loss2: 0.4127, Loss3: 1.7626
+Loss1: 1.0441, Loss2: 0.4320, Loss3: 1.6822
+Loss1: 1.0276, Loss2: 0.4284, Loss3: 1.6834
+Loss1: 0.9671, Loss2: 0.3982, Loss3: 1.7039
+Loss1: 0.9389, Loss2: 0.3973, Loss3: 1.6753
+Loss1: 0.9334, Loss2: 0.3771, Loss3: 1.7089
+Loss1: 0.9260, Loss2: 0.3852, Loss3: 1.7085
+Loss1: 0.9310, Loss2: 0.3904, Loss3: 1.6631
+Loss1: 0.9615, Loss2: 0.3914, Loss3: 1.6495
+Loss1: 0.9409, Loss2: 0.3934, Loss3: 1.6203
+Loss1: 0.9126, Loss2: 0.3597, Loss3: 1.6720
+Loss1: 0.9229, Loss2: 0.3839, Loss3: 1.6174
+Loss1: 0.9250, Loss2: 0.3719, Loss3: 1.6396
+Loss1: 0.9249, Loss2: 0.3902, Loss3: 1.6429
+Loss1: 0.9191, Loss2: 0.3864, Loss3: 1.6457
+Loss1: 0.9245, Loss2: 0.3825, Loss3: 1.6395
+Loss1: 0.8873, Loss2: 0.3661, Loss3: 1.6221
+Loss1: 0.8865, Loss2: 0.3621, Loss3: 1.6712
+Loss1: 0.9117, Loss2: 0.3747, Loss3: 1.6011
+Loss1: 0.9121, Loss2: 0.3703, Loss3: 1.5650
+Loss1: 0.8480, Loss2: 0.3382, Loss3: 1.6473
+Loss1: 0.8651, Loss2: 0.3490, Loss3: 1.5829
+Loss1: 0.8966, Loss2: 0.3645, Loss3: 1.5400
+Loss1: 0.8337, Loss2: 0.3316, Loss3: 1.5797
+Loss1: 0.8626, Loss2: 0.3266, Loss3: 1.5513
+Loss1: 0.8391, Loss2: 0.3313, Loss3: 1.4871
+Loss1: 0.7747, Loss2: 0.3143, Loss3: 1.4886
+Loss1: 0.8033, Loss2: 0.3297, Loss3: 1.4259
+Loss1: 0.8098, Loss2: 0.3406, Loss3: 1.4139
+Loss1: 0.7854, Loss2: 0.3245, Loss3: 1.4626
+Loss1: 0.8008, Loss2: 0.3221, Loss3: 1.4356
+Loss1: 0.7912, Loss2: 0.3167, Loss3: 1.4254
+Loss1: 0.8044, Loss2: 0.3254, Loss3: 1.3614
+Loss1: 0.7764, Loss2: 0.3177, Loss3: 1.4131
+Loss1: 0.8092, Loss2: 0.3309, Loss3: 1.3823
+Loss1: 0.8040, Loss2: 0.3098, Loss3: 1.3980
+Loss1: 0.8073, Loss2: 0.3150, Loss3: 1.4115
+Loss1: 0.8240, Loss2: 0.3158, Loss3: 1.3596
+Loss1: 0.8031, Loss2: 0.3130, Loss3: 1.3743
+Loss1: 0.8199, Loss2: 0.3269, Loss3: 1.3704
+Loss1: 0.7848, Loss2: 0.2998, Loss3: 1.4248
+Loss1: 0.8049, Loss2: 0.3119, Loss3: 1.3986
+Loss1: 0.8118, Loss2: 0.3106, Loss3: 1.3617
+Loss1: 0.7950, Loss2: 0.3053, Loss3: 1.3647
+Loss1: 0.7758, Loss2: 0.2972, Loss3: 1.3306
+Loss1: 0.7522, Loss2: 0.2954, Loss3: 1.3424
+Loss1: 0.7739, Loss2: 0.2996, Loss3: 1.3530
+Loss1: 0.7663, Loss2: 0.2999, Loss3: 1.3086
+Loss1: 0.7113, Loss2: 0.2966, Loss3: 1.2628
+Loss1: 0.7241, Loss2: 0.2868, Loss3: 1.2972
+Loss1: 0.7140, Loss2: 0.2857, Loss3: 1.3427
+Loss1: 0.6976, Loss2: 0.2718, Loss3: 1.3355
+Loss1: 0.7267, Loss2: 0.2875, Loss3: 1.2653
+Loss1: 0.7176, Loss2: 0.2772, Loss3: 1.2882
+Loss1: 0.7176, Loss2: 0.2855, Loss3: 1.2750
+Loss1: 0.7414, Loss2: 0.2805, Loss3: 1.3241
+Loss1: 0.7279, Loss2: 0.2632, Loss3: 1.3716
+Loss1: 0.7016, Loss2: 0.2657, Loss3: 1.3185
+Loss1: 0.7058, Loss2: 0.2579, Loss3: 1.2756
+Loss1: 0.7217, Loss2: 0.2758, Loss3: 1.2654
+Loss1: 0.6595, Loss2: 0.2534, Loss3: 1.2604
+Loss1: 0.6852, Loss2: 0.2653, Loss3: 1.2796
+Loss1: 0.6552, Loss2: 0.2564, Loss3: 1.2785
+Loss1: 0.7094, Loss2: 0.3110, Loss3: 1.4394
+Loss1: 0.7092, Loss2: 0.3160, Loss3: 1.4293
+Loss1: 0.6700, Loss2: 0.2833, Loss3: 1.3733
+Loss1: 0.6884, Loss2: 0.3140, Loss3: 1.4199
+Loss1: 0.7223, Loss2: 0.3263, Loss3: 1.4873
+Loss1: 0.7049, Loss2: 0.3190, Loss3: 1.4370
+Loss1: 0.6854, Loss2: 0.3088, Loss3: 1.4650
+Loss1: 0.6582, Loss2: 0.2941, Loss3: 1.3894
+Loss1: 0.6464, Loss2: 0.2939, Loss3: 1.4457
+Loss1: 0.6681, Loss2: 0.3039, Loss3: 1.3681
+Loss1: 0.6575, Loss2: 0.3059, Loss3: 1.4404
+Loss1: 0.6465, Loss2: 0.2943, Loss3: 1.3402
+Loss1: 0.6549, Loss2: 0.3000, Loss3: 1.3871
+Loss1: 0.6632, Loss2: 0.2895, Loss3: 1.4192
+Loss1: 0.6377, Loss2: 0.2807, Loss3: 1.4359
+Loss1: 0.6483, Loss2: 0.2798, Loss3: 1.4751
+Loss1: 0.6298, Loss2: 0.2736, Loss3: 1.3174
+Loss1: 0.6339, Loss2: 0.2970, Loss3: 1.4707
+Loss1: 0.6179, Loss2: 0.2824, Loss3: 1.4413
+Loss1: 0.6223, Loss2: 0.2849, Loss3: 1.4119
+Loss1: 0.6356, Loss2: 0.2850, Loss3: 1.4716
+Loss1: 0.6175, Loss2: 0.2948, Loss3: 1.4281
+Loss1: 0.5961, Loss2: 0.2718, Loss3: 1.4156
+Loss1: 0.6192, Loss2: 0.2894, Loss3: 1.4344
+Loss1: 0.6203, Loss2: 0.2854, Loss3: 1.4016
+Loss1: 0.6126, Loss2: 0.2877, Loss3: 1.3957
+Loss1: 0.6030, Loss2: 0.2758, Loss3: 1.3657
+Loss1: 0.5718, Loss2: 0.2307, Loss3: 1.1860
+Loss1: 0.5581, Loss2: 0.2211, Loss3: 1.1888
+Loss1: 0.5416, Loss2: 0.2168, Loss3: 1.1393
+Loss1: 0.5527, Loss2: 0.2138, Loss3: 1.2187
+Loss1: 0.5603, Loss2: 0.2197, Loss3: 1.2082
+Loss1: 0.5635, Loss2: 0.2274, Loss3: 1.2179
+Loss1: 0.5281, Loss2: 0.2097, Loss3: 1.2092
+Loss1: 0.5425, Loss2: 0.2212, Loss3: 1.2770
+Loss1: 0.5292, Loss2: 0.2126, Loss3: 1.2797
+Loss1: 0.5193, Loss2: 0.2069, Loss3: 1.1951
+Loss1: 0.5259, Loss2: 0.2152, Loss3: 1.2226
+Loss1: 0.5214, Loss2: 0.2135, Loss3: 1.2418
+Loss1: 0.5083, Loss2: 0.2099, Loss3: 1.1971
+Loss1: 0.5200, Loss2: 0.2143, Loss3: 1.2211
+Loss1: 0.5144, Loss2: 0.2150, Loss3: 1.2273
+Loss1: 0.5102, Loss2: 0.2137, Loss3: 1.2158
+Loss1: 0.5056, Loss2: 0.1997, Loss3: 1.1445
+Loss1: 0.5051, Loss2: 0.2084, Loss3: 1.1912
+Loss1: 0.5079, Loss2: 0.2153, Loss3: 1.2002
+Loss1: 0.4906, Loss2: 0.1960, Loss3: 1.1029
+Loss1: 0.4801, Loss2: 0.1990, Loss3: 1.1390
+Loss1: 0.5026, Loss2: 0.2033, Loss3: 1.1667
+Loss1: 0.4832, Loss2: 0.2005, Loss3: 1.1225
+Loss1: 0.4783, Loss2: 0.1956, Loss3: 1.1116
+Loss1: 0.5172, Loss2: 0.2080, Loss3: 1.1843
+Loss1: 0.5062, Loss2: 0.2062, Loss3: 1.1310
+Loss1: 0.5258, Loss2: 0.2097, Loss3: 1.1851
+Loss1: 0.5206, Loss2: 0.2116, Loss3: 1.1537
+Loss1: 0.5140, Loss2: 0.2113, Loss3: 1.1353
+Loss1: 0.5726, Loss2: 0.2290, Loss3: 1.3655
+Loss1: 0.6278, Loss2: 0.2776, Loss3: 1.4478
+Loss1: 0.6360, Loss2: 0.2789, Loss3: 1.4753
+Loss1: 0.6298, Loss2: 0.2705, Loss3: 1.4489
+Loss1: 0.6273, Loss2: 0.2721, Loss3: 1.4434
+Loss1: 0.6259, Loss2: 0.2698, Loss3: 1.4434
+Loss1: 0.6313, Loss2: 0.2731, Loss3: 1.4372
+Loss1: 0.6247, Loss2: 0.2630, Loss3: 1.4456
+Loss1: 0.6341, Loss2: 0.2658, Loss3: 1.4369
+Loss1: 0.6280, Loss2: 0.2659, Loss3: 1.4473
+Loss1: 0.6192, Loss2: 0.2554, Loss3: 1.4268
+Loss1: 0.6222, Loss2: 0.2647, Loss3: 1.4434
+Loss1: 0.6036, Loss2: 0.2592, Loss3: 1.4428
+Loss1: 0.6038, Loss2: 0.2625, Loss3: 1.4153
+Loss1: 0.6167, Loss2: 0.2584, Loss3: 1.4197
+Loss1: 0.6246, Loss2: 0.2558, Loss3: 1.3984
+Loss1: 0.6125, Loss2: 0.2521, Loss3: 1.3879
+Loss1: 0.6270, Loss2: 0.2561, Loss3: 1.4128
+Loss1: 0.6104, Loss2: 0.2565, Loss3: 1.3895
+Loss1: 0.6096, Loss2: 0.2499, Loss3: 1.3837
+Loss1: 0.6083, Loss2: 0.2452, Loss3: 1.3387
+Loss1: 0.6083, Loss2: 0.2490, Loss3: 1.3530
+Loss1: 0.6209, Loss2: 0.2487, Loss3: 1.3802
+Loss1: 0.6051, Loss2: 0.2388, Loss3: 1.3432
+Loss1: 0.6079, Loss2: 0.2462, Loss3: 1.3587
+Loss1: 0.5904, Loss2: 0.2368, Loss3: 1.3416
+Loss1: 0.5832, Loss2: 0.2380, Loss3: 1.2951
+Loss1: 0.5719, Loss2: 0.2323, Loss3: 1.3077
+Loss1: 0.5742, Loss2: 0.2367, Loss3: 1.2888
+Loss1: 0.5853, Loss2: 0.2370, Loss3: 1.2986
+Loss1: 0.5752, Loss2: 0.2427, Loss3: 1.3126
+Loss1: 0.5826, Loss2: 0.2379, Loss3: 1.2965
+Loss1: 0.5533, Loss2: 0.2269, Loss3: 1.2992
+Loss1: 0.5460, Loss2: 0.2372, Loss3: 1.2611
+Loss1: 0.5717, Loss2: 0.2476, Loss3: 1.2828
+Loss1: 0.5888, Loss2: 0.2454, Loss3: 1.2833
+Loss1: 0.7372, Loss2: 0.3420, Loss3: 1.5299
+Loss1: 0.7445, Loss2: 0.3298, Loss3: 1.5178
+Loss1: 0.7739, Loss2: 0.3558, Loss3: 1.4755
+Loss1: 0.7438, Loss2: 0.3314, Loss3: 1.5535
+Loss1: 0.7096, Loss2: 0.3200, Loss3: 1.4965
+Loss1: 0.7529, Loss2: 0.3405, Loss3: 1.6309
+Loss1: 0.7626, Loss2: 0.3379, Loss3: 1.6285
+Loss1: 0.7542, Loss2: 0.3231, Loss3: 1.6062
+Loss1: 0.7207, Loss2: 0.3049, Loss3: 1.5440
+Loss1: 0.7104, Loss2: 0.3036, Loss3: 1.5334
+Loss1: 0.7109, Loss2: 0.3099, Loss3: 1.5293
+Loss1: 0.7167, Loss2: 0.3130, Loss3: 1.5188
+Loss1: 0.6833, Loss2: 0.2959, Loss3: 1.4917
+Loss1: 0.7034, Loss2: 0.3082, Loss3: 1.5486
+Loss1: 0.7036, Loss2: 0.3181, Loss3: 1.5101
+Loss1: 0.6799, Loss2: 0.3032, Loss3: 1.5163
+Loss1: 0.6784, Loss2: 0.3089, Loss3: 1.4949
+Loss1: 0.6872, Loss2: 0.3082, Loss3: 1.5001
+Loss1: 0.7005, Loss2: 0.3230, Loss3: 1.5088
+Loss1: 0.6818, Loss2: 0.3062, Loss3: 1.4920
+Loss1: 0.6880, Loss2: 0.3057, Loss3: 1.5040
+Loss1: 0.6674, Loss2: 0.2971, Loss3: 1.4559
+Loss1: 0.6885, Loss2: 0.3053, Loss3: 1.4571
+Loss1: 0.6635, Loss2: 0.2880, Loss3: 1.4552
+Loss1: 0.6633, Loss2: 0.2852, Loss3: 1.4298
+Loss1: 0.6684, Loss2: 0.2955, Loss3: 1.4481
+Loss1: 0.6766, Loss2: 0.2960, Loss3: 1.4614
+Loss1: 0.6497, Loss2: 0.2799, Loss3: 1.4172
+Loss1: 0.6511, Loss2: 0.2845, Loss3: 1.4274
+Loss1: 0.6685, Loss2: 0.2930, Loss3: 1.4302
+Loss1: 0.6502, Loss2: 0.2861, Loss3: 1.3983
+Loss1: 0.6498, Loss2: 0.2826, Loss3: 1.3847
+Loss1: 0.6668, Loss2: 0.2909, Loss3: 1.3804
+Loss1: 0.6446, Loss2: 0.2814, Loss3: 1.3488
+Loss1: 0.6287, Loss2: 0.2673, Loss3: 1.3480
+Loss1: 0.6221, Loss2: 0.2592, Loss3: 1.3037
+Loss1: 0.6251, Loss2: 0.2637, Loss3: 1.3169
+Loss1: 0.5950, Loss2: 0.2485, Loss3: 1.2964
+Loss1: 0.5961, Loss2: 0.2477, Loss3: 1.2978
+Loss1: 0.5998, Loss2: 0.2506, Loss3: 1.2732
+Loss1: 0.6018, Loss2: 0.2540, Loss3: 1.2929
+Loss1: 0.5895, Loss2: 0.2446, Loss3: 1.2685
+Loss1: 0.5949, Loss2: 0.2494, Loss3: 1.2731
+Loss1: 0.6284, Loss2: 0.2480, Loss3: 1.3262
+Loss1: 0.6069, Loss2: 0.2474, Loss3: 1.3383
+Loss1: 0.6080, Loss2: 0.2506, Loss3: 1.3493
+Loss1: 0.6235, Loss2: 0.2516, Loss3: 1.3327
+Loss1: 0.6149, Loss2: 0.2527, Loss3: 1.3164
+Loss1: 0.6113, Loss2: 0.2472, Loss3: 1.3350
+Loss1: 0.6191, Loss2: 0.2548, Loss3: 1.3261
+Loss1: 0.6111, Loss2: 0.2556, Loss3: 1.3115
+Loss1: 0.6078, Loss2: 0.2422, Loss3: 1.3081
+Loss1: 0.6146, Loss2: 0.2515, Loss3: 1.2877
+Loss1: 0.6392, Loss2: 0.2583, Loss3: 1.3307
+Loss1: 0.6367, Loss2: 0.2600, Loss3: 1.3568
+Loss1: 0.6178, Loss2: 0.2544, Loss3: 1.2889
+Loss1: 0.6054, Loss2: 0.2490, Loss3: 1.2961
+Loss1: 0.5918, Loss2: 0.2504, Loss3: 1.2911
+Loss1: 0.6075, Loss2: 0.2574, Loss3: 1.2876
+Loss1: 0.5999, Loss2: 0.2579, Loss3: 1.2976
+Loss1: 0.5707, Loss2: 0.2361, Loss3: 1.1476
+Loss1: 0.5388, Loss2: 0.2409, Loss3: 1.0721
+Loss1: 0.5160, Loss2: 0.2279, Loss3: 1.0263
+Loss1: 0.5238, Loss2: 0.2205, Loss3: 1.0294
+Loss1: 0.5572, Loss2: 0.2589, Loss3: 1.0753
+Loss1: 0.5658, Loss2: 0.2643, Loss3: 1.0894
+Loss1: 0.6507, Loss2: 0.2707, Loss3: 1.2878
+Loss1: 0.6505, Loss2: 0.2685, Loss3: 1.2661
+Loss1: 0.6430, Loss2: 0.2654, Loss3: 1.2179
+Loss1: 0.6407, Loss2: 0.2649, Loss3: 1.2408
+Loss1: 0.6386, Loss2: 0.2689, Loss3: 1.2349
+Loss1: 0.6377, Loss2: 0.2625, Loss3: 1.2102
+Loss1: 0.6381, Loss2: 0.2636, Loss3: 1.1939
+Loss1: 0.6250, Loss2: 0.2619, Loss3: 1.2067
+Loss1: 0.6242, Loss2: 0.2572, Loss3: 1.1881
+Loss1: 0.6207, Loss2: 0.2608, Loss3: 1.2098
+Loss1: 0.6189, Loss2: 0.2561, Loss3: 1.2010
+Loss1: 0.6173, Loss2: 0.2630, Loss3: 1.1616
+Loss1: 0.5972, Loss2: 0.2527, Loss3: 1.1804
+Loss1: 0.6056, Loss2: 0.2595, Loss3: 1.1695
+Loss1: 0.6117, Loss2: 0.2514, Loss3: 1.1571
+Loss1: 0.5878, Loss2: 0.2479, Loss3: 1.1705
+Loss1: 0.5997, Loss2: 0.2539, Loss3: 1.1571
+Loss1: 0.5952, Loss2: 0.2520, Loss3: 1.1430
+Loss1: 0.6202, Loss2: 0.2574, Loss3: 1.1322
+Loss1: 0.6089, Loss2: 0.2511, Loss3: 1.1163
+Loss1: 0.6101, Loss2: 0.2549, Loss3: 1.1303
+Loss1: 0.6332, Loss2: 0.2699, Loss3: 1.1802
+Loss1: 0.6378, Loss2: 0.2743, Loss3: 1.2140
+Loss1: 0.6318, Loss2: 0.2711, Loss3: 1.2271
+Loss1: 0.6315, Loss2: 0.2686, Loss3: 1.2043
+Loss1: 0.6265, Loss2: 0.2690, Loss3: 1.1798
+Loss1: 0.6296, Loss2: 0.2650, Loss3: 1.1884
+Loss1: 0.6251, Loss2: 0.2592, Loss3: 1.1967
+Loss1: 0.6311, Loss2: 0.2626, Loss3: 1.1964
+Loss1: 0.6243, Loss2: 0.2584, Loss3: 1.1822
+Loss1: 0.5720, Loss2: 0.2489, Loss3: 1.1519
+Loss1: 0.5680, Loss2: 0.2554, Loss3: 1.1406
+Loss1: 0.5665, Loss2: 0.2432, Loss3: 1.1423
+Loss1: 0.5550, Loss2: 0.2447, Loss3: 1.1207
+Loss1: 0.5553, Loss2: 0.2481, Loss3: 1.1146
+Loss1: 0.5249, Loss2: 0.2200, Loss3: 1.0547
+Loss1: 0.5276, Loss2: 0.2299, Loss3: 1.0275
+Loss1: 0.5128, Loss2: 0.2245, Loss3: 1.0338
+Loss1: 0.5210, Loss2: 0.2220, Loss3: 1.0482
+Loss1: 0.5140, Loss2: 0.2195, Loss3: 1.0187
+Loss1: 0.5151, Loss2: 0.2218, Loss3: 1.0328
+Loss1: 0.5861, Loss2: 0.2272, Loss3: 1.0333
+Loss1: 0.5869, Loss2: 0.2195, Loss3: 1.0339
+Loss1: 0.5637, Loss2: 0.2188, Loss3: 1.0100
+Loss1: 0.5716, Loss2: 0.2204, Loss3: 1.0360
+Loss1: 0.5682, Loss2: 0.2200, Loss3: 1.0209
+Loss1: 0.5622, Loss2: 0.2219, Loss3: 1.0030
+Loss1: 0.5641, Loss2: 0.2098, Loss3: 0.9976
+Loss1: 0.5507, Loss2: 0.2174, Loss3: 0.9940
+Loss1: 0.5628, Loss2: 0.2156, Loss3: 0.9815
+Loss1: 0.5432, Loss2: 0.2115, Loss3: 0.9930
+Loss1: 0.6335, Loss2: 0.2867, Loss3: 1.2463
+Loss1: 0.6389, Loss2: 0.2923, Loss3: 1.2508
+Loss1: 0.6287, Loss2: 0.3004, Loss3: 1.2806
+Loss1: 0.6213, Loss2: 0.2855, Loss3: 1.2690
+Loss1: 0.6326, Loss2: 0.3008, Loss3: 1.2262
+Loss1: 0.6310, Loss2: 0.3001, Loss3: 1.2359
+Loss1: 0.6161, Loss2: 0.2925, Loss3: 1.2229
+Loss1: 0.6238, Loss2: 0.2963, Loss3: 1.2217
+Loss1: 0.6156, Loss2: 0.3000, Loss3: 1.2091
+Loss1: 0.6194, Loss2: 0.2971, Loss3: 1.2267
+Loss1: 0.6168, Loss2: 0.2982, Loss3: 1.2029
+Loss1: 0.6223, Loss2: 0.3020, Loss3: 1.2131
+Loss1: 0.6187, Loss2: 0.2994, Loss3: 1.1967
+Loss1: 0.6428, Loss2: 0.3051, Loss3: 1.2951
+Loss1: 0.6418, Loss2: 0.3140, Loss3: 1.2890
+Loss1: 0.6388, Loss2: 0.3091, Loss3: 1.3079
+Loss1: 0.6390, Loss2: 0.3065, Loss3: 1.2897
+Loss1: 0.6427, Loss2: 0.3012, Loss3: 1.3303
+Loss1: 0.6492, Loss2: 0.3177, Loss3: 1.3688
+Loss1: 0.6230, Loss2: 0.2983, Loss3: 1.3348
+Loss1: 0.6286, Loss2: 0.2991, Loss3: 1.3114
+Loss1: 0.6225, Loss2: 0.3009, Loss3: 1.3199
+Loss1: 0.6031, Loss2: 0.3051, Loss3: 1.2956
+Loss1: 0.5983, Loss2: 0.2915, Loss3: 1.2703
+Loss1: 0.6076, Loss2: 0.2988, Loss3: 1.2581
+Loss1: 0.6001, Loss2: 0.2881, Loss3: 1.2487
+Loss1: 0.5836, Loss2: 0.2963, Loss3: 1.2404
+Loss1: 0.5874, Loss2: 0.2835, Loss3: 1.2371
+Loss1: 0.5796, Loss2: 0.2826, Loss3: 1.2119
+Loss1: 0.5975, Loss2: 0.2958, Loss3: 1.2920
+Loss1: 0.5920, Loss2: 0.3013, Loss3: 1.3023
+Loss1: 0.5830, Loss2: 0.2916, Loss3: 1.2745
+Loss1: 0.5860, Loss2: 0.2913, Loss3: 1.2633
+Loss1: 0.5712, Loss2: 0.2878, Loss3: 1.2271
+Loss1: 0.5697, Loss2: 0.2795, Loss3: 1.2189
+Loss1: 0.5664, Loss2: 0.2780, Loss3: 1.1908
+Loss1: 0.5712, Loss2: 0.2794, Loss3: 1.2044
+Loss1: 0.5813, Loss2: 0.2785, Loss3: 1.1937
+Loss1: 0.5752, Loss2: 0.2748, Loss3: 1.1796
+Loss1: 0.5601, Loss2: 0.2760, Loss3: 1.1571
+Loss1: 0.5616, Loss2: 0.2693, Loss3: 1.1684
+Loss1: 0.5605, Loss2: 0.2673, Loss3: 1.1593
+Loss1: 0.5576, Loss2: 0.2720, Loss3: 1.1593
+Loss1: 0.5321, Loss2: 0.2645, Loss3: 1.1525
+Loss1: 0.5280, Loss2: 0.2498, Loss3: 1.1126
+Loss1: 0.4675, Loss2: 0.2376, Loss3: 0.9757
+Loss1: 0.4688, Loss2: 0.2389, Loss3: 0.9932
+Loss1: 0.4712, Loss2: 0.2350, Loss3: 0.9990
+Loss1: 0.4846, Loss2: 0.2334, Loss3: 0.9673
+Loss1: 0.4722, Loss2: 0.2361, Loss3: 0.9642
+Loss1: 0.4712, Loss2: 0.2338, Loss3: 0.9744
+Loss1: 0.4654, Loss2: 0.2266, Loss3: 0.9533
+Loss1: 0.4636, Loss2: 0.2288, Loss3: 0.9601
+Loss1: 0.4647, Loss2: 0.2200, Loss3: 0.9403
+Loss1: 0.4543, Loss2: 0.2162, Loss3: 0.9345
+Loss1: 0.4503, Loss2: 0.2280, Loss3: 0.9313
+Loss1: 0.4522, Loss2: 0.2152, Loss3: 0.9320
+Loss1: 0.4587, Loss2: 0.2221, Loss3: 0.9459
+Loss1: 0.4526, Loss2: 0.2180, Loss3: 0.9391
+Loss1: 0.4431, Loss2: 0.2234, Loss3: 0.9403
+Loss1: 0.4523, Loss2: 0.2255, Loss3: 0.9323
+Loss1: 0.4379, Loss2: 0.2263, Loss3: 0.9381
+Loss1: 0.4461, Loss2: 0.2343, Loss3: 0.9363
+Loss1: 0.4356, Loss2: 0.2302, Loss3: 0.9263
+Loss1: 0.4370, Loss2: 0.2345, Loss3: 0.9388
+Loss1: 0.4341, Loss2: 0.2293, Loss3: 0.9295
+Loss1: 0.4053, Loss2: 0.2122, Loss3: 0.8610
+Loss1: 0.3964, Loss2: 0.2035, Loss3: 0.8267
+Loss1: 0.3988, Loss2: 0.2074, Loss3: 0.8399
+Loss1: 0.4178, Loss2: 0.2176, Loss3: 0.8539
+Loss1: 0.4131, Loss2: 0.2147, Loss3: 0.8640
+Loss1: 0.3928, Loss2: 0.2176, Loss3: 0.8559
+Loss1: 0.4089, Loss2: 0.2132, Loss3: 0.8708
+Loss1: 0.3959, Loss2: 0.2110, Loss3: 0.8684
+Loss1: 0.5223, Loss2: 0.2428, Loss3: 1.0979
+Loss1: 0.5451, Loss2: 0.2519, Loss3: 1.1285
+Loss1: 0.5586, Loss2: 0.3115, Loss3: 1.2220
+Loss1: 0.5553, Loss2: 0.3120, Loss3: 1.1878
+Loss1: 0.5660, Loss2: 0.2970, Loss3: 1.1745
+Loss1: 0.5665, Loss2: 0.2986, Loss3: 1.1643
+Loss1: 0.6853, Loss2: 0.4126, Loss3: 1.3037
+Loss1: 0.6741, Loss2: 0.3963, Loss3: 1.2938
+Loss1: 0.6501, Loss2: 0.3795, Loss3: 1.2937
+Loss1: 0.6545, Loss2: 0.3953, Loss3: 1.2828
+Loss1: 0.6555, Loss2: 0.3869, Loss3: 1.2841
+Loss1: 0.6782, Loss2: 0.3845, Loss3: 1.4188
+Loss1: 0.6519, Loss2: 0.3851, Loss3: 1.4612
+Loss1: 0.6658, Loss2: 0.3890, Loss3: 1.4313
+Loss1: 0.6446, Loss2: 0.3839, Loss3: 1.4526
+Loss1: 0.6483, Loss2: 0.3849, Loss3: 1.4064
+Loss1: 0.6643, Loss2: 0.3699, Loss3: 1.4438
+Loss1: 0.6262, Loss2: 0.3600, Loss3: 1.4279
+Loss1: 0.6463, Loss2: 0.3657, Loss3: 1.4216
+Loss1: 0.6381, Loss2: 0.3644, Loss3: 1.3937
+Loss1: 0.6138, Loss2: 0.3414, Loss3: 1.3549
+Loss1: 0.6358, Loss2: 0.3547, Loss3: 1.3358
+Loss1: 0.5789, Loss2: 0.3060, Loss3: 1.2467
+Loss1: 0.5871, Loss2: 0.3137, Loss3: 1.2212
+Loss1: 0.5640, Loss2: 0.2948, Loss3: 1.1971
+Loss1: 0.5785, Loss2: 0.3158, Loss3: 1.1874
+Loss1: 0.5653, Loss2: 0.3009, Loss3: 1.1875
+Loss1: 0.5594, Loss2: 0.3043, Loss3: 1.1621
+Loss1: 0.5626, Loss2: 0.2915, Loss3: 1.2353
+Loss1: 0.5793, Loss2: 0.3075, Loss3: 1.3187
+Loss1: 0.5751, Loss2: 0.3054, Loss3: 1.2690
+Loss1: 0.5850, Loss2: 0.3076, Loss3: 1.3158
+Loss1: 0.5738, Loss2: 0.2892, Loss3: 1.3318
+Loss1: 0.5824, Loss2: 0.3077, Loss3: 1.3088
+Loss1: 0.6952, Loss2: 0.3108, Loss3: 1.4584
+Loss1: 0.6663, Loss2: 0.2886, Loss3: 1.3922
+Loss1: 0.6486, Loss2: 0.2881, Loss3: 1.3815
+Loss1: 0.6376, Loss2: 0.2838, Loss3: 1.3732
+Loss1: 0.6367, Loss2: 0.2828, Loss3: 1.3495
+Loss1: 0.6260, Loss2: 0.2824, Loss3: 1.3258
+Loss1: 0.6294, Loss2: 0.2885, Loss3: 1.3038
+Loss1: 0.6227, Loss2: 0.2869, Loss3: 1.2904
+Loss1: 0.6154, Loss2: 0.2746, Loss3: 1.2730
+Loss1: 0.6227, Loss2: 0.2855, Loss3: 1.2747
+Loss1: 0.6130, Loss2: 0.2865, Loss3: 1.2563
+Loss1: 0.6072, Loss2: 0.2827, Loss3: 1.2443
+Loss1: 0.6089, Loss2: 0.2754, Loss3: 1.2461
+Loss1: 0.5915, Loss2: 0.2770, Loss3: 1.2342
+Loss1: 0.5921, Loss2: 0.2761, Loss3: 1.2294
+Loss1: 0.5714, Loss2: 0.2533, Loss3: 1.2248
+Loss1: 0.5641, Loss2: 0.2686, Loss3: 1.1897
+Loss1: 0.5564, Loss2: 0.2518, Loss3: 1.1295
+Loss1: 0.5354, Loss2: 0.2336, Loss3: 1.1252
+Loss1: 0.5294, Loss2: 0.2394, Loss3: 1.1119
+Loss1: 0.5452, Loss2: 0.2469, Loss3: 1.0821
+Loss1: 0.5237, Loss2: 0.2307, Loss3: 1.0894
+Loss1: 0.5214, Loss2: 0.2297, Loss3: 1.0733
+Loss1: 0.5404, Loss2: 0.2407, Loss3: 1.0597
+Loss1: 0.5241, Loss2: 0.2330, Loss3: 1.0475
+Loss1: 0.5286, Loss2: 0.2376, Loss3: 1.0324
+Loss1: 0.5267, Loss2: 0.2381, Loss3: 1.0356
+Loss1: 0.5177, Loss2: 0.2219, Loss3: 1.0271
+Loss1: 0.5213, Loss2: 0.2316, Loss3: 1.0347
+Loss1: 0.5138, Loss2: 0.2222, Loss3: 0.9960
+Loss1: 0.5124, Loss2: 0.2296, Loss3: 1.0112
+Loss1: 0.4976, Loss2: 0.2198, Loss3: 0.9935
+Loss1: 0.5155, Loss2: 0.2268, Loss3: 0.9953
+Loss1: 0.4901, Loss2: 0.2172, Loss3: 0.9802
+Loss1: 0.4912, Loss2: 0.2156, Loss3: 0.9783
+Loss1: 0.4930, Loss2: 0.2273, Loss3: 0.9646
+Loss1: 0.4815, Loss2: 0.2141, Loss3: 0.9643
+Loss1: 0.4936, Loss2: 0.2214, Loss3: 0.9509
+Loss1: 0.4752, Loss2: 0.2131, Loss3: 0.9323
+Loss1: 0.4901, Loss2: 0.2231, Loss3: 0.9316
+Loss1: 0.4712, Loss2: 0.2184, Loss3: 0.9080
+Loss1: 0.4725, Loss2: 0.2181, Loss3: 0.8954
+Loss1: 0.6071, Loss2: 0.2119, Loss3: 0.9644
+Loss1: 0.5834, Loss2: 0.2003, Loss3: 0.9469
+Loss1: 0.5840, Loss2: 0.2116, Loss3: 0.9087
+Loss1: 0.5622, Loss2: 0.2080, Loss3: 0.9079
+Loss1: 0.5538, Loss2: 0.2052, Loss3: 0.9037
+Loss1: 0.5529, Loss2: 0.2031, Loss3: 0.9039
+Loss1: 0.5340, Loss2: 0.1881, Loss3: 0.9112
+Loss1: 0.5296, Loss2: 0.1909, Loss3: 0.9069
+Loss1: 0.5262, Loss2: 0.1990, Loss3: 0.9429
+Loss1: 0.5244, Loss2: 0.2006, Loss3: 0.9188
+Loss1: 0.5108, Loss2: 0.1958, Loss3: 0.9247
+Loss1: 0.5095, Loss2: 0.2023, Loss3: 0.9246
+Loss1: 0.5967, Loss2: 0.2580, Loss3: 1.5647
+Loss1: 0.5828, Loss2: 0.2560, Loss3: 1.4745
+Loss1: 0.5899, Loss2: 0.2499, Loss3: 1.4527
+Loss1: 0.6031, Loss2: 0.2636, Loss3: 1.4225
+Loss1: 0.5860, Loss2: 0.2521, Loss3: 1.3450
+Loss1: 0.5744, Loss2: 0.2486, Loss3: 1.2747
+Loss1: 0.5814, Loss2: 0.2579, Loss3: 1.3157
+Loss1: 0.5608, Loss2: 0.2537, Loss3: 1.2756
+Loss1: 0.5982, Loss2: 0.2453, Loss3: 1.2982
+Loss1: 0.6074, Loss2: 0.3024, Loss3: 1.5316
+Loss1: 0.6011, Loss2: 0.2848, Loss3: 1.4007
+Loss1: 0.5865, Loss2: 0.2687, Loss3: 1.3934
+Loss1: 0.5699, Loss2: 0.2622, Loss3: 1.3138
+Loss1: 0.5643, Loss2: 0.2542, Loss3: 1.2744
+Loss1: 0.5112, Loss2: 0.2187, Loss3: 1.1565
+Loss1: 0.5039, Loss2: 0.2147, Loss3: 1.1307
+Loss1: 0.5138, Loss2: 0.2270, Loss3: 1.1210
+Loss1: 0.5048, Loss2: 0.2227, Loss3: 1.0784
+Loss1: 0.5636, Loss2: 0.2297, Loss3: 1.1489
+Loss1: 0.6043, Loss2: 0.2280, Loss3: 1.1549
+Loss1: 0.6120, Loss2: 0.2362, Loss3: 1.1750
+Loss1: 0.5811, Loss2: 0.2341, Loss3: 1.1335
+Loss1: 0.5963, Loss2: 0.2292, Loss3: 1.1158
+Loss1: 0.5801, Loss2: 0.2212, Loss3: 1.0992
+Loss1: 0.5804, Loss2: 0.2264, Loss3: 1.0619
+Loss1: 0.5877, Loss2: 0.2170, Loss3: 1.0384
+Loss1: 0.5928, Loss2: 0.2267, Loss3: 1.0751
+Loss1: 0.5902, Loss2: 0.2254, Loss3: 1.0670
+Loss1: 0.5827, Loss2: 0.2312, Loss3: 1.0589
+Loss1: 0.5956, Loss2: 0.2310, Loss3: 1.0664
+Loss1: 0.5951, Loss2: 0.2287, Loss3: 1.1041
+Loss1: 0.5841, Loss2: 0.2248, Loss3: 1.0819
+Loss1: 0.5784, Loss2: 0.2236, Loss3: 1.0888
+Loss1: 0.5817, Loss2: 0.2248, Loss3: 1.1116
+Loss1: 0.5914, Loss2: 0.2259, Loss3: 1.1086
+Loss1: 0.5784, Loss2: 0.2229, Loss3: 1.0830
+Loss1: 0.5762, Loss2: 0.2262, Loss3: 1.0454
+Loss1: 0.5693, Loss2: 0.2172, Loss3: 1.0270
+Loss1: 0.5619, Loss2: 0.2108, Loss3: 1.0026
+Loss1: 0.5516, Loss2: 0.2066, Loss3: 0.9975
+Loss1: 0.5662, Loss2: 0.2077, Loss3: 0.9908
+Loss1: 0.5534, Loss2: 0.2027, Loss3: 0.9864
+Loss1: 0.5304, Loss2: 0.2000, Loss3: 0.9440
+Loss1: 0.5375, Loss2: 0.2077, Loss3: 0.9693
+Loss1: 0.5403, Loss2: 0.2032, Loss3: 0.9762
+Loss1: 0.5355, Loss2: 0.2012, Loss3: 0.9567
+Loss1: 0.5202, Loss2: 0.1980, Loss3: 0.9438
+Loss1: 0.5357, Loss2: 0.2039, Loss3: 0.9606
+Loss1: 0.5337, Loss2: 0.1990, Loss3: 0.9469
+Loss1: 0.5387, Loss2: 0.2011, Loss3: 0.9607
+Loss1: 0.5291, Loss2: 0.1946, Loss3: 0.9450
+Loss1: 0.5366, Loss2: 0.1982, Loss3: 0.9378
+Loss1: 0.5144, Loss2: 0.1889, Loss3: 0.9247
+Loss1: 0.5124, Loss2: 0.1921, Loss3: 0.9150
+Loss1: 0.5371, Loss2: 0.2124, Loss3: 0.9587
+Loss1: 0.5224, Loss2: 0.2027, Loss3: 0.9539
+Loss1: 0.5191, Loss2: 0.1992, Loss3: 0.9526
+Loss1: 0.5179, Loss2: 0.2093, Loss3: 0.9308
+Loss1: 0.5180, Loss2: 0.2014, Loss3: 0.9322
+Loss1: 0.5435, Loss2: 0.2182, Loss3: 0.9838
+Loss1: 0.5434, Loss2: 0.2154, Loss3: 0.9746
+Loss1: 0.5385, Loss2: 0.2199, Loss3: 0.9675
+Loss1: 0.5213, Loss2: 0.2143, Loss3: 0.9583
+Loss1: 0.5346, Loss2: 0.2159, Loss3: 0.9653
+Loss1: 0.5228, Loss2: 0.2135, Loss3: 0.9455
+Loss1: 0.5237, Loss2: 0.2110, Loss3: 0.9726
+Loss1: 0.5113, Loss2: 0.2105, Loss3: 0.9264
+Loss1: 0.5070, Loss2: 0.2119, Loss3: 0.9369
+Loss1: 0.5057, Loss2: 0.2083, Loss3: 0.9282
+Loss1: 0.4977, Loss2: 0.2104, Loss3: 0.9265
+Loss1: 0.5068, Loss2: 0.2066, Loss3: 0.9302
+Loss1: 0.4906, Loss2: 0.2061, Loss3: 0.9002
+Loss1: 0.4899, Loss2: 0.2044, Loss3: 0.9249
+Loss1: 0.4943, Loss2: 0.2088, Loss3: 0.9023
+Loss1: 0.4868, Loss2: 0.2065, Loss3: 0.9104
+Loss1: 0.4826, Loss2: 0.2066, Loss3: 0.8962
+Loss1: 0.4899, Loss2: 0.2013, Loss3: 0.9029
+Loss1: 0.4880, Loss2: 0.2059, Loss3: 0.9019
+Loss1: 0.4784, Loss2: 0.2017, Loss3: 0.8845
+Loss1: 0.4810, Loss2: 0.2031, Loss3: 0.9000
+Loss1: 0.4856, Loss2: 0.1951, Loss3: 0.8964
+Loss1: 0.4707, Loss2: 0.2028, Loss3: 0.8744
+Loss1: 0.4806, Loss2: 0.2040, Loss3: 0.8872
+Loss1: 0.4729, Loss2: 0.1966, Loss3: 0.9005
+Loss1: 0.4601, Loss2: 0.1976, Loss3: 0.8743
+Loss1: 0.4541, Loss2: 0.1897, Loss3: 0.8886
+Loss1: 0.4520, Loss2: 0.1929, Loss3: 0.8627
+Loss1: 0.4505, Loss2: 0.1926, Loss3: 0.8637
+Loss1: 0.4479, Loss2: 0.1999, Loss3: 0.8524
+Loss1: 0.4473, Loss2: 0.1972, Loss3: 0.8503
+Loss1: 0.4411, Loss2: 0.1907, Loss3: 0.8602
+Loss1: 0.4400, Loss2: 0.1917, Loss3: 0.8261
+Loss1: 0.4374, Loss2: 0.1941, Loss3: 0.8287
+Loss1: 0.4928, Loss2: 0.2149, Loss3: 1.0074
+Loss1: 0.5237, Loss2: 0.2217, Loss3: 1.0111
+Loss1: 0.5419, Loss2: 0.2298, Loss3: 1.0564
+Loss1: 0.5309, Loss2: 0.2258, Loss3: 1.0720
+Loss1: 0.5154, Loss2: 0.2162, Loss3: 1.0867
+Loss1: 0.5415, Loss2: 0.2763, Loss3: 1.2635
+Loss1: 0.5237, Loss2: 0.2738, Loss3: 1.2810
+Loss1: 0.5192, Loss2: 0.2628, Loss3: 1.2985
+Loss1: 0.5122, Loss2: 0.2697, Loss3: 1.2941
+Loss1: 0.5034, Loss2: 0.2736, Loss3: 1.2713
+Loss1: 0.4963, Loss2: 0.2625, Loss3: 1.2697
+Loss1: 0.4689, Loss2: 0.2728, Loss3: 1.2916
+Loss1: 0.4665, Loss2: 0.2662, Loss3: 1.2521
+Loss1: 0.4755, Loss2: 0.2648, Loss3: 1.2500
+Loss1: 0.4782, Loss2: 0.2776, Loss3: 1.2581
+Loss1: 0.4759, Loss2: 0.2816, Loss3: 1.2328
+Loss1: 0.4716, Loss2: 0.2768, Loss3: 1.2673
+Loss1: 0.4758, Loss2: 0.2758, Loss3: 1.2309
+Loss1: 0.5152, Loss2: 0.3222, Loss3: 1.2919
+Loss1: 0.4968, Loss2: 0.3036, Loss3: 1.2441
+Loss1: 0.4957, Loss2: 0.3002, Loss3: 1.2518
+Loss1: 0.4987, Loss2: 0.3018, Loss3: 1.2470
+Loss1: 0.4801, Loss2: 0.3007, Loss3: 1.2758
+Loss1: 0.4773, Loss2: 0.2897, Loss3: 1.2481
+Loss1: 0.4944, Loss2: 0.2940, Loss3: 1.2646
+Loss1: 0.4917, Loss2: 0.2956, Loss3: 1.2582
+Loss1: 0.4860, Loss2: 0.2991, Loss3: 1.4008
+Loss1: 0.4942, Loss2: 0.3134, Loss3: 1.4258
+Loss1: 0.4961, Loss2: 0.3202, Loss3: 1.4310
+Loss1: 0.4870, Loss2: 0.3066, Loss3: 1.4500
+Loss1: 0.4804, Loss2: 0.3168, Loss3: 1.4787
+Loss1: 0.5044, Loss2: 0.3188, Loss3: 1.4937
+Loss1: 0.4998, Loss2: 0.3201, Loss3: 1.4616
+Loss1: 0.5030, Loss2: 0.3186, Loss3: 1.4883
+Loss1: 0.4983, Loss2: 0.3105, Loss3: 1.4519
+Loss1: 0.5002, Loss2: 0.3089, Loss3: 1.4324
+Loss1: 0.4876, Loss2: 0.3093, Loss3: 1.4179
+Loss1: 0.4803, Loss2: 0.3037, Loss3: 1.4096
+Loss1: 0.5239, Loss2: 0.3266, Loss3: 1.4784
+Loss1: 0.5258, Loss2: 0.3369, Loss3: 1.4530
+Loss1: 0.5164, Loss2: 0.3347, Loss3: 1.4384
+Loss1: 0.5153, Loss2: 0.3230, Loss3: 1.4706
+Loss1: 0.5174, Loss2: 0.3344, Loss3: 1.4383
+Loss1: 0.5031, Loss2: 0.3262, Loss3: 1.4719
+Loss1: 0.5044, Loss2: 0.3255, Loss3: 1.4237
+Loss1: 0.5014, Loss2: 0.3137, Loss3: 1.4214
+Loss1: 0.4964, Loss2: 0.3219, Loss3: 1.3973
+Loss1: 0.4845, Loss2: 0.3175, Loss3: 1.3931
+Loss1: 0.4868, Loss2: 0.3072, Loss3: 1.3523
+Loss1: 0.4839, Loss2: 0.3008, Loss3: 1.4009
+Loss1: 0.4710, Loss2: 0.3093, Loss3: 1.3609
+Loss1: 0.4759, Loss2: 0.3001, Loss3: 1.3281
+Loss1: 0.4677, Loss2: 0.2940, Loss3: 1.3165
+Loss1: 0.4655, Loss2: 0.2944, Loss3: 1.3272
+Loss1: 0.4762, Loss2: 0.2947, Loss3: 1.3205
+Loss1: 0.4725, Loss2: 0.2978, Loss3: 1.3260
+Loss1: 0.4805, Loss2: 0.2883, Loss3: 1.3357
+Loss1: 0.4675, Loss2: 0.2757, Loss3: 1.3010
+Loss1: 0.4801, Loss2: 0.2774, Loss3: 1.2718
+Loss1: 0.4671, Loss2: 0.2730, Loss3: 1.2911
+Loss1: 0.4625, Loss2: 0.2664, Loss3: 1.2491
+Loss1: 0.4625, Loss2: 0.2776, Loss3: 1.2531
+Loss1: 0.4370, Loss2: 0.2517, Loss3: 1.2045
+Loss1: 0.4393, Loss2: 0.2523, Loss3: 1.2087
+Loss1: 0.4567, Loss2: 0.2615, Loss3: 1.2686
+Loss1: 0.4610, Loss2: 0.2617, Loss3: 1.2311
+Loss1: 0.4495, Loss2: 0.2583, Loss3: 1.2547
+Loss1: 0.4534, Loss2: 0.2534, Loss3: 1.2172
+Loss1: 0.4559, Loss2: 0.2565, Loss3: 1.2142
+Loss1: 0.4589, Loss2: 0.2583, Loss3: 1.2072
+Loss1: 0.4553, Loss2: 0.2551, Loss3: 1.2129
+Loss1: 0.4518, Loss2: 0.2551, Loss3: 1.2046
+Loss1: 0.4575, Loss2: 0.2609, Loss3: 1.1934
+Loss1: 0.4513, Loss2: 0.2555, Loss3: 1.1998
+Loss1: 0.4549, Loss2: 0.2474, Loss3: 1.1989
+Loss1: 0.4494, Loss2: 0.2560, Loss3: 1.1728
+Loss1: 0.4321, Loss2: 0.2468, Loss3: 1.1872
+Loss1: 0.4446, Loss2: 0.2478, Loss3: 1.1787
+Loss1: 0.4462, Loss2: 0.2485, Loss3: 1.1642
+Loss1: 0.4477, Loss2: 0.2443, Loss3: 1.1653
+Loss1: 0.4357, Loss2: 0.2453, Loss3: 1.1535
+Loss1: 0.4421, Loss2: 0.2400, Loss3: 1.1293
+Loss1: 0.4325, Loss2: 0.2421, Loss3: 1.1733
+Loss1: 0.4354, Loss2: 0.2461, Loss3: 1.1447
+Loss1: 0.4304, Loss2: 0.2389, Loss3: 1.1578
+Loss1: 0.4457, Loss2: 0.2458, Loss3: 1.1263
+Loss1: 0.4438, Loss2: 0.2397, Loss3: 1.1452
+Loss1: 0.4439, Loss2: 0.2424, Loss3: 1.1173
+Loss1: 0.4455, Loss2: 0.2372, Loss3: 1.1343
+Loss1: 0.4386, Loss2: 0.2378, Loss3: 1.1200
+Loss1: 0.4492, Loss2: 0.2373, Loss3: 1.1066
+Loss1: 0.4373, Loss2: 0.2342, Loss3: 1.1032
+Loss1: 0.4410, Loss2: 0.2360, Loss3: 1.0809
+Loss1: 0.4552, Loss2: 0.2360, Loss3: 1.0956
+Loss1: 0.4438, Loss2: 0.2421, Loss3: 1.0910
+Loss1: 0.4616, Loss2: 0.2414, Loss3: 1.0897
+Loss1: 0.4303, Loss2: 0.2216, Loss3: 0.9763
+Loss1: 0.4419, Loss2: 0.2237, Loss3: 0.9650
+Loss1: 0.4107, Loss2: 0.2198, Loss3: 0.9824
+Loss1: 0.4170, Loss2: 0.2202, Loss3: 0.9795
+Loss1: 0.4080, Loss2: 0.2193, Loss3: 0.9601
+Loss1: 0.4041, Loss2: 0.1820, Loss3: 0.8379
+Loss1: 0.4181, Loss2: 0.1978, Loss3: 0.9053
+Loss1: 0.4126, Loss2: 0.1955, Loss3: 0.8967
+Loss1: 0.4017, Loss2: 0.1846, Loss3: 0.8797
+Loss1: 0.4033, Loss2: 0.1911, Loss3: 0.8604
+Loss1: 0.4218, Loss2: 0.1979, Loss3: 0.8791
+Loss1: 0.4125, Loss2: 0.1935, Loss3: 0.9004
+Loss1: 0.4210, Loss2: 0.2011, Loss3: 0.9074
+Loss1: 0.4490, Loss2: 0.2023, Loss3: 0.9310
+Loss1: 0.4326, Loss2: 0.2032, Loss3: 0.9639
+Loss1: 0.4645, Loss2: 0.2062, Loss3: 0.9619
+Loss1: 0.4300, Loss2: 0.2108, Loss3: 0.9560
+Loss1: 0.4593, Loss2: 0.2042, Loss3: 0.9974
+Loss1: 0.4490, Loss2: 0.2015, Loss3: 1.0507
+Loss1: 0.4861, Loss2: 0.2404, Loss3: 1.0767
+Loss1: 0.4892, Loss2: 0.2449, Loss3: 1.1081
+Loss1: 0.4926, Loss2: 0.2542, Loss3: 1.0655
+Loss1: 0.4685, Loss2: 0.2318, Loss3: 1.0520
+Loss1: 0.4802, Loss2: 0.2427, Loss3: 1.0496
+Loss1: 0.4908, Loss2: 0.2367, Loss3: 1.0284
+Loss1: 0.5010, Loss2: 0.2437, Loss3: 1.0139
+Loss1: 0.5019, Loss2: 0.2602, Loss3: 1.1819
+Loss1: 0.6160, Loss2: 0.3003, Loss3: 1.2965
+Loss1: 0.5947, Loss2: 0.2913, Loss3: 1.2124
+Loss1: 0.5762, Loss2: 0.3085, Loss3: 1.2110
+Loss1: 0.5847, Loss2: 0.2926, Loss3: 1.1607
+Loss1: 0.5939, Loss2: 0.2807, Loss3: 1.1440
+Loss1: 0.5641, Loss2: 0.2714, Loss3: 1.1350
+Loss1: 0.5425, Loss2: 0.2670, Loss3: 1.0783
+Loss1: 0.5482, Loss2: 0.2646, Loss3: 1.0915
+Loss1: 0.5564, Loss2: 0.2728, Loss3: 1.0687
+Loss1: 0.5562, Loss2: 0.2620, Loss3: 1.1017
+Loss1: 0.5398, Loss2: 0.2635, Loss3: 1.0359
+Loss1: 0.5093, Loss2: 0.2665, Loss3: 1.0178
+Loss1: 0.5492, Loss2: 0.2512, Loss3: 1.0267
+Loss1: 0.5303, Loss2: 0.2455, Loss3: 1.0004
+Loss1: 0.5020, Loss2: 0.2664, Loss3: 1.0026
+Loss1: 0.5484, Loss2: 0.2426, Loss3: 0.9695
+Loss1: 0.5225, Loss2: 0.2652, Loss3: 1.0177
+Loss1: 0.5468, Loss2: 0.2507, Loss3: 0.9928
+Loss1: 0.5223, Loss2: 0.2682, Loss3: 0.9940
+Loss1: 0.5454, Loss2: 0.2472, Loss3: 0.9965
+Loss1: 0.5207, Loss2: 0.2436, Loss3: 1.0022
+Loss1: 0.5270, Loss2: 0.2495, Loss3: 0.9722
+Loss1: 0.5095, Loss2: 0.2641, Loss3: 0.9824
+Loss1: 0.5053, Loss2: 0.2447, Loss3: 0.9664
+Loss1: 0.5240, Loss2: 0.2474, Loss3: 0.9809
+Loss1: 0.5150, Loss2: 0.2453, Loss3: 0.9769
+Loss1: 0.4894, Loss2: 0.2491, Loss3: 0.9780
+Loss1: 0.5349, Loss2: 0.2404, Loss3: 0.9844
+Loss1: 0.5166, Loss2: 0.2397, Loss3: 0.9539
+Loss1: 0.5157, Loss2: 0.2472, Loss3: 0.9628
+Loss1: 0.4864, Loss2: 0.2383, Loss3: 0.9384
+Loss1: 0.4925, Loss2: 0.2375, Loss3: 0.9196
+Loss1: 0.4865, Loss2: 0.2357, Loss3: 0.9082
+Loss1: 0.4906, Loss2: 0.2439, Loss3: 0.9270
+Loss1: 0.4936, Loss2: 0.2241, Loss3: 0.9121
+Loss1: 0.4968, Loss2: 0.2287, Loss3: 0.9001
+Loss1: 0.4892, Loss2: 0.2352, Loss3: 0.9062
+Loss1: 0.4863, Loss2: 0.2231, Loss3: 0.8911
+Loss1: 0.5039, Loss2: 0.2200, Loss3: 0.8693
+Loss1: 0.4859, Loss2: 0.2324, Loss3: 0.8761
+Loss1: 0.4845, Loss2: 0.2249, Loss3: 0.8888
+Loss1: 0.5011, Loss2: 0.2280, Loss3: 0.8765
+Loss1: 0.4777, Loss2: 0.2229, Loss3: 0.8665
+Loss1: 0.4837, Loss2: 0.2308, Loss3: 0.8664
+Loss1: 0.4718, Loss2: 0.2199, Loss3: 0.8581
+Loss1: 0.4962, Loss2: 0.2110, Loss3: 0.8571
+Loss1: 0.4507, Loss2: 0.2180, Loss3: 0.8345
+Loss1: 0.4629, Loss2: 0.2205, Loss3: 0.8510
+Loss1: 0.4876, Loss2: 0.2112, Loss3: 0.8263
+Loss1: 0.4457, Loss2: 0.2218, Loss3: 0.8268
+Loss1: 0.4525, Loss2: 0.2148, Loss3: 0.8276
+Loss1: 0.4485, Loss2: 0.2072, Loss3: 0.7884
+Loss1: 0.4299, Loss2: 0.2075, Loss3: 0.7999
+Loss1: 0.4408, Loss2: 0.2064, Loss3: 0.7804
+Loss1: 0.4435, Loss2: 0.2085, Loss3: 0.7817
+Loss1: 0.4269, Loss2: 0.2092, Loss3: 0.7888
+Loss1: 0.4338, Loss2: 0.2034, Loss3: 0.7664
+Loss1: 0.4340, Loss2: 0.2082, Loss3: 0.7872
+Loss1: 0.4282, Loss2: 0.2035, Loss3: 0.7402
+Loss1: 0.4156, Loss2: 0.1984, Loss3: 0.7583
+Loss1: 0.4305, Loss2: 0.1995, Loss3: 0.7456
+Loss1: 0.3974, Loss2: 0.2026, Loss3: 0.7359
+Loss1: 0.4078, Loss2: 0.1991, Loss3: 0.7498
+Loss1: 0.4213, Loss2: 0.1962, Loss3: 0.7273
+Loss1: 0.3946, Loss2: 0.2014, Loss3: 0.7352
+Loss1: 0.4037, Loss2: 0.1925, Loss3: 0.7308
+Loss1: 0.3819, Loss2: 0.1965, Loss3: 0.7377
+Loss1: 0.3933, Loss2: 0.1901, Loss3: 0.7242
+Loss1: 0.3927, Loss2: 0.1920, Loss3: 0.7237
+Loss1: 0.4137, Loss2: 0.2188, Loss3: 0.7555
+Loss1: 0.4098, Loss2: 0.2088, Loss3: 0.7454
+Loss1: 0.4423, Loss2: 0.2451, Loss3: 0.9506
+Loss1: 0.4851, Loss2: 0.2412, Loss3: 0.9962
+Loss1: 0.4850, Loss2: 0.2376, Loss3: 0.9652
+Loss1: 0.4888, Loss2: 0.2420, Loss3: 0.9600
+Loss1: 0.4866, Loss2: 0.2464, Loss3: 0.9651
+Loss1: 0.4573, Loss2: 0.2461, Loss3: 0.9483
+Loss1: 0.4831, Loss2: 0.2413, Loss3: 0.9905
+Loss1: 0.5716, Loss2: 0.2526, Loss3: 1.1540
+Loss1: 0.5574, Loss2: 0.2438, Loss3: 1.1226
+Loss1: 0.5690, Loss2: 0.2543, Loss3: 1.1932
+Loss1: 0.5573, Loss2: 0.2323, Loss3: 1.0815
+Loss1: 0.5734, Loss2: 0.2362, Loss3: 1.0754
+Loss1: 0.5514, Loss2: 0.2276, Loss3: 1.0226
+Loss1: 0.5607, Loss2: 0.2285, Loss3: 1.1400
+Loss1: 0.5632, Loss2: 0.2295, Loss3: 1.0859
+Loss1: 0.5700, Loss2: 0.2327, Loss3: 1.0348
+Loss1: 0.6108, Loss2: 0.2315, Loss3: 1.1479
+Loss1: 0.5874, Loss2: 0.2205, Loss3: 1.1180
+Loss1: 0.5935, Loss2: 0.2150, Loss3: 1.1629
+Loss1: 0.5697, Loss2: 0.2040, Loss3: 1.0287
+Loss1: 0.5516, Loss2: 0.2012, Loss3: 1.0335
+Loss1: 0.5676, Loss2: 0.1999, Loss3: 1.0947
+Loss1: 0.5878, Loss2: 0.2075, Loss3: 1.1846
+Loss1: 0.6738, Loss2: 0.2312, Loss3: 1.2662
+Loss1: 0.6458, Loss2: 0.2185, Loss3: 1.1293
+Loss1: 0.6349, Loss2: 0.2146, Loss3: 1.2062
+Loss1: 0.5968, Loss2: 0.2083, Loss3: 1.0572
+Loss1: 0.6114, Loss2: 0.2022, Loss3: 1.0229
+Loss1: 0.5802, Loss2: 0.1984, Loss3: 1.0086
+Loss1: 0.6038, Loss2: 0.2127, Loss3: 1.0651
+Loss1: 0.5807, Loss2: 0.2059, Loss3: 0.9803
+Loss1: 0.5809, Loss2: 0.2044, Loss3: 0.9501
+Loss1: 0.5660, Loss2: 0.1991, Loss3: 0.9571
+Loss1: 0.5786, Loss2: 0.2025, Loss3: 1.0113
+Loss1: 0.5632, Loss2: 0.2001, Loss3: 0.9529
+Loss1: 0.5502, Loss2: 0.1941, Loss3: 0.8804
+Loss1: 0.5459, Loss2: 0.2055, Loss3: 0.9737
+Loss1: 0.5538, Loss2: 0.2041, Loss3: 0.9580
+Loss1: 0.5596, Loss2: 0.2116, Loss3: 0.9683
+Loss1: 0.5788, Loss2: 0.2095, Loss3: 0.9544
+Loss1: 0.5807, Loss2: 0.2279, Loss3: 1.0218
+Loss1: 0.5752, Loss2: 0.2186, Loss3: 0.9639
+Loss1: 0.5762, Loss2: 0.2125, Loss3: 0.8985
+Loss1: 0.5704, Loss2: 0.2150, Loss3: 0.9293
+Loss1: 0.5743, Loss2: 0.2155, Loss3: 0.9217
+Loss1: 0.5705, Loss2: 0.2153, Loss3: 0.9207
+Loss1: 0.5618, Loss2: 0.2106, Loss3: 0.9076
+Loss1: 0.5512, Loss2: 0.2095, Loss3: 0.9098
+Loss1: 0.5779, Loss2: 0.2744, Loss3: 1.0044
+Loss1: 0.5847, Loss2: 0.2613, Loss3: 0.9842
+Loss1: 0.5994, Loss2: 0.2555, Loss3: 1.0006
+Loss1: 0.5589, Loss2: 0.2596, Loss3: 0.9566
+Loss1: 0.5567, Loss2: 0.2517, Loss3: 0.9622
+Loss1: 0.5553, Loss2: 0.2473, Loss3: 0.9962
+Loss1: 0.5824, Loss2: 0.2707, Loss3: 1.0692
+Loss1: 0.5727, Loss2: 0.2646, Loss3: 1.0378
+Loss1: 0.5819, Loss2: 0.2616, Loss3: 0.9971
+Loss1: 0.5622, Loss2: 0.2567, Loss3: 0.9957
+Loss1: 0.5680, Loss2: 0.2594, Loss3: 1.0046
+Loss1: 0.6019, Loss2: 0.2560, Loss3: 1.0143
+Loss1: 0.5750, Loss2: 0.2574, Loss3: 0.9734
+Loss1: 0.5583, Loss2: 0.2541, Loss3: 0.9547
+Loss1: 0.5850, Loss2: 0.2487, Loss3: 0.9648
+Loss1: 0.5579, Loss2: 0.2477, Loss3: 0.9267
+Loss1: 0.5630, Loss2: 0.2419, Loss3: 0.9651
+Loss1: 0.5449, Loss2: 0.2491, Loss3: 0.9493
+Loss1: 0.5702, Loss2: 0.2396, Loss3: 0.9532
+Loss1: 0.5344, Loss2: 0.2411, Loss3: 0.9159
+Loss1: 0.5432, Loss2: 0.2383, Loss3: 0.9423
+Loss1: 0.5375, Loss2: 0.2365, Loss3: 0.9505
+Loss1: 0.5705, Loss2: 0.2317, Loss3: 0.9226
+Loss1: 0.5412, Loss2: 0.2344, Loss3: 0.9433
+Loss1: 0.5487, Loss2: 0.2367, Loss3: 0.9333
+Loss1: 0.5560, Loss2: 0.2395, Loss3: 0.9845
+Loss1: 0.5714, Loss2: 0.2367, Loss3: 0.9762
+Loss1: 0.5604, Loss2: 0.2435, Loss3: 0.9845
+Loss1: 0.5444, Loss2: 0.2382, Loss3: 0.9706
+Loss1: 0.5780, Loss2: 0.2344, Loss3: 0.9781
+Loss1: 0.5676, Loss2: 0.2343, Loss3: 0.9876
+Loss1: 0.5553, Loss2: 0.2376, Loss3: 0.9778
+Loss1: 0.5584, Loss2: 0.2301, Loss3: 0.9588
+Loss1: 0.5442, Loss2: 0.2324, Loss3: 0.9670
+Loss1: 0.5336, Loss2: 0.2290, Loss3: 0.9501
+Loss1: 0.5301, Loss2: 0.2294, Loss3: 0.9560
+Loss1: 0.5426, Loss2: 0.2265, Loss3: 0.9420
+Loss1: 0.5323, Loss2: 0.2274, Loss3: 0.9188
+Loss1: 0.5188, Loss2: 0.2308, Loss3: 0.9435
+Loss1: 0.5353, Loss2: 0.2268, Loss3: 0.9097
+Loss1: 0.5197, Loss2: 0.2274, Loss3: 0.9255
+Loss1: 0.5231, Loss2: 0.2222, Loss3: 0.8944
+Loss1: 0.5237, Loss2: 0.2212, Loss3: 0.9022
+Loss1: 0.5286, Loss2: 0.2239, Loss3: 0.8914
+Loss1: 0.5142, Loss2: 0.2208, Loss3: 0.8709
+Loss1: 0.5088, Loss2: 0.2179, Loss3: 0.9092
+Loss1: 0.5144, Loss2: 0.2049, Loss3: 0.8858
+Loss1: 0.5086, Loss2: 0.2097, Loss3: 0.8634
+Loss1: 0.4770, Loss2: 0.2129, Loss3: 0.8453
+Loss1: 0.4639, Loss2: 0.2184, Loss3: 0.8415
+Loss1: 0.4626, Loss2: 0.2168, Loss3: 0.8797
+Loss1: 0.4485, Loss2: 0.2161, Loss3: 0.8494
+Loss1: 0.4468, Loss2: 0.2126, Loss3: 0.8454
+Loss1: 0.4343, Loss2: 0.2149, Loss3: 0.8367
+Loss1: 0.4188, Loss2: 0.2121, Loss3: 0.8165
+Loss1: 0.4114, Loss2: 0.2034, Loss3: 0.8164
+Loss1: 0.3948, Loss2: 0.2128, Loss3: 0.8331
+Loss1: 0.4095, Loss2: 0.2110, Loss3: 0.8426
+Loss1: 0.3974, Loss2: 0.2193, Loss3: 0.8555
+Loss1: 0.4032, Loss2: 0.2144, Loss3: 0.8135
+Loss1: 0.3905, Loss2: 0.2145, Loss3: 0.8432
+Loss1: 0.3890, Loss2: 0.2069, Loss3: 0.8201
+Loss1: 0.3961, Loss2: 0.2086, Loss3: 0.8351
+Loss1: 0.3727, Loss2: 0.2070, Loss3: 0.8266
+Loss1: 0.3713, Loss2: 0.2072, Loss3: 0.7983
+Loss1: 0.3534, Loss2: 0.2032, Loss3: 0.8036
+Loss1: 0.3722, Loss2: 0.2007, Loss3: 0.7827
+Loss1: 0.3558, Loss2: 0.2003, Loss3: 0.7797
+Loss1: 0.3643, Loss2: 0.2050, Loss3: 0.7770
+Loss1: 0.3672, Loss2: 0.2055, Loss3: 0.7729
+Loss1: 0.3520, Loss2: 0.1920, Loss3: 0.7384
+Loss1: 0.3472, Loss2: 0.1862, Loss3: 0.7251
+Loss1: 0.3362, Loss2: 0.1869, Loss3: 0.7443
+Loss1: 0.3392, Loss2: 0.1839, Loss3: 0.7359
+Loss1: 0.3379, Loss2: 0.1892, Loss3: 0.7473
+Loss1: 0.3395, Loss2: 0.1895, Loss3: 0.7362
+Loss1: 0.3569, Loss2: 0.1929, Loss3: 0.7644
+Loss1: 0.3495, Loss2: 0.1884, Loss3: 0.7474
+Loss1: 0.3447, Loss2: 0.1901, Loss3: 0.7599
+Loss1: 0.3495, Loss2: 0.1907, Loss3: 0.7633
+Loss1: 0.3530, Loss2: 0.1884, Loss3: 0.7526
+Loss1: 0.3548, Loss2: 0.1915, Loss3: 0.7762
+Loss1: 0.3668, Loss2: 0.1908, Loss3: 0.7744
+Loss1: 0.3703, Loss2: 0.1901, Loss3: 0.7836
+Loss1: 0.3640, Loss2: 0.1875, Loss3: 0.7659
+Loss1: 0.3511, Loss2: 0.1857, Loss3: 0.7810
+Loss1: 0.3489, Loss2: 0.1868, Loss3: 0.7771
+Loss1: 0.3397, Loss2: 0.1805, Loss3: 0.7485
+Loss1: 0.3241, Loss2: 0.1839, Loss3: 0.7641
+Loss1: 0.3826, Loss2: 0.2922, Loss3: 0.9000
+Loss1: 0.4862, Loss2: 0.3328, Loss3: 1.1919
+Loss1: 0.4796, Loss2: 0.3249, Loss3: 1.1671
+Loss1: 0.4795, Loss2: 0.3249, Loss3: 1.1581
+Loss1: 0.4754, Loss2: 0.3278, Loss3: 1.1684
+Loss1: 0.4798, Loss2: 0.3253, Loss3: 1.1688
+Loss1: 0.4778, Loss2: 0.3227, Loss3: 1.1808
+Loss1: 0.4779, Loss2: 0.3274, Loss3: 1.1568
+Loss1: 0.4731, Loss2: 0.3238, Loss3: 1.1595
+Loss1: 0.4822, Loss2: 0.3286, Loss3: 1.1661
+Loss1: 0.4747, Loss2: 0.3276, Loss3: 1.1509
+Loss1: 0.4725, Loss2: 0.3202, Loss3: 1.1663
+Loss1: 0.4770, Loss2: 0.3234, Loss3: 1.1483
+Loss1: 0.4567, Loss2: 0.3074, Loss3: 1.0626
+Loss1: 0.4472, Loss2: 0.2955, Loss3: 1.0620
+Loss1: 0.4526, Loss2: 0.3039, Loss3: 1.0478
+Loss1: 0.4442, Loss2: 0.2947, Loss3: 1.0661
+Loss1: 0.4692, Loss2: 0.3065, Loss3: 1.0742
+Loss1: 0.4529, Loss2: 0.2972, Loss3: 1.0914
+Loss1: 0.4562, Loss2: 0.3020, Loss3: 1.0715
+Loss1: 0.4519, Loss2: 0.3031, Loss3: 1.0794
+Loss1: 0.4475, Loss2: 0.2993, Loss3: 1.0627
+Loss1: 0.4461, Loss2: 0.2884, Loss3: 1.0635
+Loss1: 0.4437, Loss2: 0.2908, Loss3: 1.0444
+Loss1: 0.4446, Loss2: 0.2875, Loss3: 1.0377
+Loss1: 0.4482, Loss2: 0.2900, Loss3: 1.0396
+Loss1: 0.4286, Loss2: 0.2772, Loss3: 1.0462
+Loss1: 0.4502, Loss2: 0.2858, Loss3: 1.0527
+Loss1: 0.4390, Loss2: 0.2832, Loss3: 1.0425
+Loss1: 0.4353, Loss2: 0.2773, Loss3: 1.0457
+Loss1: 0.4308, Loss2: 0.2765, Loss3: 1.0490
+Loss1: 0.4304, Loss2: 0.2734, Loss3: 1.0407
+Loss1: 0.4231, Loss2: 0.2727, Loss3: 1.0187
+Loss1: 0.4170, Loss2: 0.2716, Loss3: 1.0052
+Loss1: 0.4169, Loss2: 0.2795, Loss3: 0.9919
+Loss1: 0.4197, Loss2: 0.2834, Loss3: 1.0045
+Loss1: 0.4242, Loss2: 0.2769, Loss3: 1.0065
+Loss1: 0.4311, Loss2: 0.2856, Loss3: 1.0099
+Loss1: 0.4359, Loss2: 0.2859, Loss3: 1.0307
+Loss1: 0.4375, Loss2: 0.2815, Loss3: 1.0088
+Loss1: 0.4394, Loss2: 0.2857, Loss3: 1.0149
+Loss1: 0.4376, Loss2: 0.2815, Loss3: 1.0050
+Loss1: 0.4326, Loss2: 0.2806, Loss3: 1.0119
+Loss1: 0.4972, Loss2: 0.2869, Loss3: 1.0840
+Loss1: 0.4862, Loss2: 0.2884, Loss3: 1.0673
+Loss1: 0.5057, Loss2: 0.2929, Loss3: 1.0776
+Loss1: 0.4811, Loss2: 0.2830, Loss3: 1.0807
+Loss1: 0.4821, Loss2: 0.2807, Loss3: 1.0825
+Loss1: 0.4829, Loss2: 0.2867, Loss3: 1.0662
+Loss1: 0.4796, Loss2: 0.2808, Loss3: 1.0782
+Loss1: 0.4760, Loss2: 0.2757, Loss3: 1.0572
+Loss1: 0.4770, Loss2: 0.2840, Loss3: 1.0428
+Loss1: 0.4732, Loss2: 0.2769, Loss3: 1.0685
+Loss1: 0.4808, Loss2: 0.2842, Loss3: 1.0373
+Loss1: 0.4863, Loss2: 0.2865, Loss3: 1.0353
+Loss1: 0.4711, Loss2: 0.2712, Loss3: 1.0371
+Loss1: 0.4803, Loss2: 0.2695, Loss3: 1.0090
+Loss1: 0.4785, Loss2: 0.2640, Loss3: 1.0064
+Loss1: 0.4784, Loss2: 0.2709, Loss3: 1.0128
+Loss1: 0.4741, Loss2: 0.2667, Loss3: 1.0307
+Loss1: 0.4704, Loss2: 0.2687, Loss3: 1.0032
+Loss1: 0.4723, Loss2: 0.2651, Loss3: 1.0147
+Loss1: 0.4593, Loss2: 0.2648, Loss3: 1.0120
+Loss1: 0.4613, Loss2: 0.2648, Loss3: 0.9927
+Loss1: 0.4862, Loss2: 0.2769, Loss3: 1.3889
+Loss1: 0.4873, Loss2: 0.2794, Loss3: 1.3574
+Loss1: 0.4722, Loss2: 0.2704, Loss3: 1.3612
+Loss1: 0.4754, Loss2: 0.2759, Loss3: 1.3314
+Loss1: 0.4782, Loss2: 0.2791, Loss3: 1.3290
+Loss1: 0.4743, Loss2: 0.2721, Loss3: 1.3163
+Loss1: 0.4879, Loss2: 0.2790, Loss3: 1.3379
+Loss1: 0.4913, Loss2: 0.2818, Loss3: 1.3826
+Loss1: 0.5136, Loss2: 0.2839, Loss3: 1.3867
+Loss1: 0.5063, Loss2: 0.2892, Loss3: 1.4034
+Loss1: 0.5203, Loss2: 0.3029, Loss3: 1.4690
+Loss1: 0.5162, Loss2: 0.3034, Loss3: 1.4622
+Loss1: 0.5006, Loss2: 0.2978, Loss3: 1.4770
+Loss1: 0.5014, Loss2: 0.2953, Loss3: 1.4739
+Loss1: 0.4942, Loss2: 0.3013, Loss3: 1.4532
+Loss1: 0.5021, Loss2: 0.3048, Loss3: 1.4477
+Loss1: 0.4922, Loss2: 0.2999, Loss3: 1.4409
+Loss1: 0.5088, Loss2: 0.3009, Loss3: 1.4514
+Loss1: 0.5091, Loss2: 0.3098, Loss3: 1.5903
+Loss1: 0.4991, Loss2: 0.3025, Loss3: 1.5630
+Loss1: 0.5020, Loss2: 0.2975, Loss3: 1.5434
+Loss1: 0.4992, Loss2: 0.3059, Loss3: 1.5378
+Loss1: 0.4997, Loss2: 0.2983, Loss3: 1.5290
+Loss1: 0.4798, Loss2: 0.2920, Loss3: 1.5258
+Loss1: 0.5433, Loss2: 0.3603, Loss3: 1.6252
+Loss1: 0.5374, Loss2: 0.3541, Loss3: 1.6319
+Loss1: 0.5525, Loss2: 0.3619, Loss3: 1.6313
+Loss1: 0.5374, Loss2: 0.3519, Loss3: 1.6299
+Loss1: 0.5373, Loss2: 0.3580, Loss3: 1.5995
+Loss1: 0.5340, Loss2: 0.3541, Loss3: 1.5911
+Loss1: 0.5250, Loss2: 0.3527, Loss3: 1.5767
+Loss1: 0.5278, Loss2: 0.3448, Loss3: 1.5566
+Loss1: 0.4796, Loss2: 0.2777, Loss3: 1.4216
+Loss1: 0.4373, Loss2: 0.2462, Loss3: 1.2190
+Loss1: 0.4546, Loss2: 0.2468, Loss3: 1.2486
+Loss1: 0.4528, Loss2: 0.2475, Loss3: 1.2367
+Loss1: 0.4506, Loss2: 0.2456, Loss3: 1.2281
+Loss1: 0.4515, Loss2: 0.2461, Loss3: 1.2323
+Loss1: 0.4566, Loss2: 0.2443, Loss3: 1.2420
+Loss1: 0.4389, Loss2: 0.2441, Loss3: 1.2283
+Loss1: 0.4418, Loss2: 0.2388, Loss3: 1.2456
+Loss1: 0.4274, Loss2: 0.2385, Loss3: 1.2219
+Loss1: 0.4253, Loss2: 0.2335, Loss3: 1.2066
+Loss1: 0.4233, Loss2: 0.2349, Loss3: 1.2084
+Loss1: 0.4175, Loss2: 0.2306, Loss3: 1.1966
+Loss1: 0.4201, Loss2: 0.2309, Loss3: 1.1944
+Loss1: 0.4199, Loss2: 0.2308, Loss3: 1.2029
+Loss1: 0.4465, Loss2: 0.2336, Loss3: 1.1938
+Loss1: 0.4366, Loss2: 0.2321, Loss3: 1.1906
+Loss1: 0.4244, Loss2: 0.2233, Loss3: 1.1550
+Loss1: 0.4247, Loss2: 0.2212, Loss3: 1.1534
+Loss1: 0.4264, Loss2: 0.2231, Loss3: 1.1490
+Loss1: 0.4262, Loss2: 0.2209, Loss3: 1.1385
+Loss1: 0.4224, Loss2: 0.2185, Loss3: 1.1310
+Loss1: 0.4258, Loss2: 0.2250, Loss3: 1.1435
+Loss1: 0.4243, Loss2: 0.2214, Loss3: 1.1261
+Loss1: 0.4221, Loss2: 0.2161, Loss3: 1.1138
+Loss1: 0.4092, Loss2: 0.2195, Loss3: 1.1213
+Loss1: 0.4159, Loss2: 0.2166, Loss3: 1.1009
+Loss1: 0.4445, Loss2: 0.2303, Loss3: 1.1800
+Loss1: 0.4489, Loss2: 0.2301, Loss3: 1.1778
+Loss1: 0.4574, Loss2: 0.2262, Loss3: 1.1473
+Loss1: 0.4426, Loss2: 0.2274, Loss3: 1.1568
+Loss1: 0.4472, Loss2: 0.2257, Loss3: 1.1322
+Loss1: 0.4432, Loss2: 0.2201, Loss3: 1.1327
+Loss1: 0.4473, Loss2: 0.2196, Loss3: 1.1289
+Loss1: 0.4469, Loss2: 0.2188, Loss3: 1.1163
+Loss1: 0.4594, Loss2: 0.2291, Loss3: 1.1095
+Loss1: 0.4435, Loss2: 0.2208, Loss3: 1.1072
+Loss1: 0.4248, Loss2: 0.2140, Loss3: 1.0838
+Loss1: 0.4365, Loss2: 0.2112, Loss3: 1.0829
+Loss1: 0.4158, Loss2: 0.2105, Loss3: 1.0889
+Loss1: 0.4132, Loss2: 0.2103, Loss3: 1.0604
+Loss1: 0.4117, Loss2: 0.2088, Loss3: 1.0748
+Loss1: 0.4080, Loss2: 0.2068, Loss3: 1.0556
+Loss1: 0.3836, Loss2: 0.2035, Loss3: 1.0140
+Loss1: 0.3768, Loss2: 0.2010, Loss3: 1.0057
+Loss1: 0.3790, Loss2: 0.1981, Loss3: 1.0025
+Loss1: 0.3706, Loss2: 0.1955, Loss3: 0.9814
+Loss1: 0.3681, Loss2: 0.1986, Loss3: 0.9897
+Loss1: 0.3651, Loss2: 0.1947, Loss3: 0.9860
+Loss1: 0.3758, Loss2: 0.1910, Loss3: 0.9714
+Loss1: 0.3671, Loss2: 0.1934, Loss3: 0.9686
+Loss1: 0.3704, Loss2: 0.1906, Loss3: 1.0153
+Loss1: 0.3617, Loss2: 0.1953, Loss3: 1.0227
+Loss1: 0.3664, Loss2: 0.1846, Loss3: 1.0128
+Loss1: 0.3555, Loss2: 0.1891, Loss3: 1.0212
+Loss1: 0.3501, Loss2: 0.1905, Loss3: 1.0093
+Loss1: 0.3571, Loss2: 0.1850, Loss3: 0.9827
+Loss1: 0.3502, Loss2: 0.1798, Loss3: 0.9798
+Loss1: 0.3464, Loss2: 0.1792, Loss3: 0.9710
+Loss1: 0.3444, Loss2: 0.1804, Loss3: 0.9658
+Loss1: 0.3433, Loss2: 0.1761, Loss3: 0.9570
+Loss1: 0.3372, Loss2: 0.1734, Loss3: 0.9500
+Loss1: 0.3393, Loss2: 0.1753, Loss3: 0.9431
+Loss1: 0.3579, Loss2: 0.1786, Loss3: 1.0055
+Loss1: 0.3364, Loss2: 0.1778, Loss3: 0.8743
+Loss1: 0.3458, Loss2: 0.1807, Loss3: 0.8698
+Loss1: 0.3349, Loss2: 0.1793, Loss3: 0.8586
+Loss1: 0.3464, Loss2: 0.1841, Loss3: 0.8664
+Loss1: 0.3511, Loss2: 0.1806, Loss3: 0.8794
+Loss1: 0.3498, Loss2: 0.1859, Loss3: 0.8648
+Loss1: 0.3395, Loss2: 0.1826, Loss3: 0.8644
+Loss1: 0.3310, Loss2: 0.1689, Loss3: 0.8219
+Loss1: 0.3325, Loss2: 0.1811, Loss3: 0.8536
+Loss1: 0.3347, Loss2: 0.1786, Loss3: 0.8276
+Loss1: 0.3244, Loss2: 0.1643, Loss3: 0.7715
+Loss1: 0.3182, Loss2: 0.1609, Loss3: 0.7498
+Loss1: 0.3188, Loss2: 0.1593, Loss3: 0.7362
+Loss1: 0.3334, Loss2: 0.1620, Loss3: 0.7749
+Loss1: 0.3243, Loss2: 0.1571, Loss3: 0.7533
+Loss1: 0.3341, Loss2: 0.1631, Loss3: 0.7929
+Loss1: 0.3223, Loss2: 0.1574, Loss3: 0.7740
+Loss1: 0.3226, Loss2: 0.1526, Loss3: 0.7532
+Loss1: 0.3057, Loss2: 0.1310, Loss3: 0.6579
+Loss1: 0.3040, Loss2: 0.1366, Loss3: 0.6836
+Loss1: 0.3166, Loss2: 0.1339, Loss3: 0.6689
+Loss1: 0.3067, Loss2: 0.1353, Loss3: 0.6827
+Loss1: 0.3151, Loss2: 0.1590, Loss3: 0.7013
+Loss1: 0.3158, Loss2: 0.1528, Loss3: 0.6947
+Loss1: 0.2943, Loss2: 0.1476, Loss3: 0.6690
+Loss1: 0.3033, Loss2: 0.1507, Loss3: 0.6785
+Loss1: 0.3009, Loss2: 0.1461, Loss3: 0.6536
+Loss1: 0.2969, Loss2: 0.1479, Loss3: 0.6463
+Loss1: 0.2976, Loss2: 0.1462, Loss3: 0.6619
+Loss1: 0.3024, Loss2: 0.1479, Loss3: 0.6579
+Loss1: 0.3050, Loss2: 0.1489, Loss3: 0.6699
+Loss1: 0.3058, Loss2: 0.1517, Loss3: 0.6658
+Loss1: 0.3094, Loss2: 0.1542, Loss3: 0.6767
+Loss1: 0.3079, Loss2: 0.1487, Loss3: 0.6603
+Loss1: 0.3000, Loss2: 0.1515, Loss3: 0.6975
+Loss1: 0.3025, Loss2: 0.1497, Loss3: 0.7005
+Loss1: 0.2926, Loss2: 0.1521, Loss3: 0.6868
+Loss1: 0.2911, Loss2: 0.1486, Loss3: 0.6810
+Loss1: 0.2894, Loss2: 0.1509, Loss3: 0.6557
+Loss1: 0.2832, Loss2: 0.1501, Loss3: 0.6462
+Loss1: 0.2938, Loss2: 0.1488, Loss3: 0.6560
+Loss1: 0.3065, Loss2: 0.1641, Loss3: 0.6649
+Loss1: 0.3157, Loss2: 0.1633, Loss3: 0.6732
+Loss1: 0.3060, Loss2: 0.1646, Loss3: 0.6608
+Loss1: 0.3037, Loss2: 0.1596, Loss3: 0.6504
+Loss1: 0.3138, Loss2: 0.1634, Loss3: 0.6737
+Loss1: 0.3147, Loss2: 0.1673, Loss3: 0.6851
+Loss1: 0.3130, Loss2: 0.1639, Loss3: 0.6815
+Loss1: 0.3001, Loss2: 0.1620, Loss3: 0.6692
+Loss1: 0.2949, Loss2: 0.1652, Loss3: 0.6651
+Loss1: 0.2983, Loss2: 0.1633, Loss3: 0.6544
+Loss1: 0.2943, Loss2: 0.1617, Loss3: 0.6547
+Loss1: 0.2914, Loss2: 0.1663, Loss3: 0.6488
+Loss1: 0.2973, Loss2: 0.1624, Loss3: 0.6532
+Loss1: 0.2933, Loss2: 0.1578, Loss3: 0.6522
+Loss1: 0.2854, Loss2: 0.1580, Loss3: 0.6495
+Loss1: 0.2953, Loss2: 0.1618, Loss3: 0.6645
+Loss1: 0.2898, Loss2: 0.1621, Loss3: 0.6589
+Loss1: 0.2912, Loss2: 0.1581, Loss3: 0.6548
+Loss1: 0.2657, Loss2: 0.1556, Loss3: 0.5996
+Loss1: 0.2657, Loss2: 0.1526, Loss3: 0.5760
+Loss1: 0.2648, Loss2: 0.1561, Loss3: 0.5885
+Loss1: 0.2592, Loss2: 0.1509, Loss3: 0.5735
+Loss1: 0.2538, Loss2: 0.1555, Loss3: 0.5765
+Loss1: 0.2851, Loss2: 0.1528, Loss3: 0.6079
+Loss1: 0.2788, Loss2: 0.1507, Loss3: 0.6009
+Loss1: 0.2859, Loss2: 0.1517, Loss3: 0.6132
+Loss1: 0.2783, Loss2: 0.1486, Loss3: 0.5804
+Loss1: 0.2758, Loss2: 0.1428, Loss3: 0.5859
+Loss1: 0.2691, Loss2: 0.1411, Loss3: 0.5849
+Loss1: 0.2704, Loss2: 0.1424, Loss3: 0.5731
+Loss1: 0.2710, Loss2: 0.1432, Loss3: 0.5770
+Loss1: 0.2866, Loss2: 0.1423, Loss3: 0.5716
+Loss1: 0.2846, Loss2: 0.1416, Loss3: 0.5762
+Loss1: 0.2895, Loss2: 0.1405, Loss3: 0.5596
+Loss1: 0.2880, Loss2: 0.1374, Loss3: 0.5722
+Loss1: 0.4221, Loss2: 0.1435, Loss3: 0.6989
+Loss1: 0.4104, Loss2: 0.1466, Loss3: 0.6864
+Loss1: 0.3900, Loss2: 0.1488, Loss3: 0.6984
+Loss1: 0.3867, Loss2: 0.1446, Loss3: 0.6695
+Loss1: 0.3825, Loss2: 0.1466, Loss3: 0.6794
+Loss1: 0.3809, Loss2: 0.1505, Loss3: 0.6725
+Loss1: 0.3705, Loss2: 0.1639, Loss3: 0.6901
+Loss1: 0.3604, Loss2: 0.1672, Loss3: 0.6800
+Loss1: 0.3467, Loss2: 0.1665, Loss3: 0.6619
+Loss1: 0.3417, Loss2: 0.1677, Loss3: 0.6933
+Loss1: 0.3555, Loss2: 0.1724, Loss3: 0.6879
+Loss1: 0.3347, Loss2: 0.1777, Loss3: 0.7031
+Loss1: 0.3468, Loss2: 0.1788, Loss3: 0.7033
+Loss1: 0.3375, Loss2: 0.1747, Loss3: 0.6986
+Loss1: 0.3325, Loss2: 0.1870, Loss3: 0.7169
+Loss1: 0.3570, Loss2: 0.1945, Loss3: 0.7459
+Loss1: 0.3552, Loss2: 0.1952, Loss3: 0.7521
+Loss1: 0.3716, Loss2: 0.1936, Loss3: 0.7387
+Loss1: 0.3703, Loss2: 0.1939, Loss3: 0.7866
+Loss1: 0.3754, Loss2: 0.1865, Loss3: 0.7558
+Loss1: 0.3618, Loss2: 0.1858, Loss3: 0.7399
+Loss1: 0.3597, Loss2: 0.1801, Loss3: 0.7326
+Loss1: 0.3524, Loss2: 0.1832, Loss3: 0.7235
+Loss1: 0.3513, Loss2: 0.1764, Loss3: 0.7401
+Loss1: 0.3470, Loss2: 0.1789, Loss3: 0.7165
+Loss1: 0.3381, Loss2: 0.1727, Loss3: 0.7137
+Loss1: 0.3356, Loss2: 0.1982, Loss3: 0.8114
+Loss1: 0.3436, Loss2: 0.1879, Loss3: 0.7911
+Loss1: 0.3423, Loss2: 0.1939, Loss3: 0.8567
+Loss1: 0.3456, Loss2: 0.2017, Loss3: 0.8729
+Loss1: 0.3456, Loss2: 0.1985, Loss3: 0.8748
+Loss1: 0.3399, Loss2: 0.1997, Loss3: 0.8492
+Loss1: 0.3385, Loss2: 0.1920, Loss3: 0.8361
+Loss1: 0.3252, Loss2: 0.1874, Loss3: 0.8231
+Loss1: 0.3310, Loss2: 0.1874, Loss3: 0.8342
+Loss1: 0.3295, Loss2: 0.1815, Loss3: 0.8109
+Loss1: 0.3245, Loss2: 0.1873, Loss3: 0.8058
+Loss1: 0.3345, Loss2: 0.1818, Loss3: 0.8214
+Loss1: 0.3393, Loss2: 0.1846, Loss3: 0.8302
+Loss1: 0.3315, Loss2: 0.1768, Loss3: 0.8009
+Loss1: 0.3343, Loss2: 0.1803, Loss3: 0.8016
+Loss1: 0.3198, Loss2: 0.1797, Loss3: 0.7956
+Loss1: 0.3410, Loss2: 0.1742, Loss3: 0.7936
+Loss1: 0.3391, Loss2: 0.1758, Loss3: 0.7960
+Loss1: 0.3304, Loss2: 0.1694, Loss3: 0.7870
+Loss1: 0.3315, Loss2: 0.1685, Loss3: 0.7602
+Loss1: 0.3258, Loss2: 0.1666, Loss3: 0.7529
+Loss1: 0.3261, Loss2: 0.1676, Loss3: 0.7460
+Loss1: 0.3192, Loss2: 0.1651, Loss3: 0.7567
+Loss1: 0.3233, Loss2: 0.1624, Loss3: 0.7252
+Loss1: 0.3182, Loss2: 0.1593, Loss3: 0.7294
+Loss1: 0.3121, Loss2: 0.1600, Loss3: 0.7268
+Loss1: 0.3164, Loss2: 0.1585, Loss3: 0.7082
+Loss1: 0.3046, Loss2: 0.1537, Loss3: 0.7061
+Loss1: 0.3085, Loss2: 0.1505, Loss3: 0.6878
+Loss1: 0.3132, Loss2: 0.1531, Loss3: 0.6798
+Loss1: 0.3133, Loss2: 0.1499, Loss3: 0.6933
+Loss1: 0.3658, Loss2: 0.2219, Loss3: 0.9214
+Loss1: 0.3513, Loss2: 0.2153, Loss3: 0.9101
+Loss1: 0.3578, Loss2: 0.2119, Loss3: 0.8958
+Loss1: 0.3500, Loss2: 0.2052, Loss3: 0.8809
+Loss1: 0.3368, Loss2: 0.2001, Loss3: 0.8766
+Loss1: 0.3319, Loss2: 0.1973, Loss3: 0.8602
+Loss1: 0.3367, Loss2: 0.1904, Loss3: 0.8440
+Loss1: 0.3307, Loss2: 0.1911, Loss3: 0.8550
+Loss1: 0.3528, Loss2: 0.1960, Loss3: 0.8384
+Loss1: 0.3420, Loss2: 0.1923, Loss3: 0.8092
+Loss1: 0.3422, Loss2: 0.1894, Loss3: 0.8200
+Loss1: 0.3350, Loss2: 0.1863, Loss3: 0.8104
+Loss1: 0.3362, Loss2: 0.1845, Loss3: 0.8067
+Loss1: 0.3384, Loss2: 0.1799, Loss3: 0.7978
+Loss1: 0.3301, Loss2: 0.1827, Loss3: 0.8080
+Loss1: 0.3248, Loss2: 0.1793, Loss3: 0.7899
+Loss1: 0.3246, Loss2: 0.1751, Loss3: 0.7942
+Loss1: 0.3205, Loss2: 0.1729, Loss3: 0.7875
+Loss1: 0.3193, Loss2: 0.1732, Loss3: 0.7710
+Loss1: 0.3199, Loss2: 0.1724, Loss3: 0.7591
+Loss1: 0.3192, Loss2: 0.1666, Loss3: 0.7553
+Loss1: 0.3147, Loss2: 0.1692, Loss3: 0.7489
+Loss1: 0.3213, Loss2: 0.1643, Loss3: 0.7530
+Loss1: 0.3167, Loss2: 0.1626, Loss3: 0.7281
+Loss1: 0.3108, Loss2: 0.1624, Loss3: 0.7313
+Loss1: 0.3162, Loss2: 0.1601, Loss3: 0.7028
+Loss1: 0.3157, Loss2: 0.1615, Loss3: 0.7241
+Loss1: 0.3016, Loss2: 0.1587, Loss3: 0.6663
+Loss1: 0.3016, Loss2: 0.1533, Loss3: 0.6735
+Loss1: 0.2965, Loss2: 0.1546, Loss3: 0.6589
+Loss1: 0.2990, Loss2: 0.1517, Loss3: 0.6560
+Loss1: 0.2925, Loss2: 0.1534, Loss3: 0.6553
+Loss1: 0.2940, Loss2: 0.1502, Loss3: 0.6504
+Loss1: 0.2998, Loss2: 0.1502, Loss3: 0.6527
+Loss1: 0.3232, Loss2: 0.1725, Loss3: 0.6681
+Loss1: 0.3249, Loss2: 0.1706, Loss3: 0.6715
+Loss1: 0.3323, Loss2: 0.1734, Loss3: 0.6744
+Loss1: 0.3287, Loss2: 0.1697, Loss3: 0.6718
+Loss1: 0.4381, Loss2: 0.1726, Loss3: 0.8259
+Loss1: 0.4278, Loss2: 0.1657, Loss3: 0.7603
+Loss1: 0.4197, Loss2: 0.1616, Loss3: 0.7601
+Loss1: 0.4205, Loss2: 0.1606, Loss3: 0.7573
+Loss1: 0.4113, Loss2: 0.1599, Loss3: 0.7571
+Loss1: 0.4138, Loss2: 0.1621, Loss3: 0.7457
+Loss1: 0.4007, Loss2: 0.1561, Loss3: 0.7395
+Loss1: 0.4018, Loss2: 0.1480, Loss3: 0.7225
+Loss1: 0.3920, Loss2: 0.1472, Loss3: 0.7194
+Loss1: 0.3896, Loss2: 0.1450, Loss3: 0.7194
+Loss1: 0.3883, Loss2: 0.1460, Loss3: 0.6957
+Loss1: 0.3771, Loss2: 0.1456, Loss3: 0.7068
+Loss1: 0.3804, Loss2: 0.1423, Loss3: 0.6943
+Loss1: 0.3767, Loss2: 0.1421, Loss3: 0.6907
+Loss1: 0.3697, Loss2: 0.1396, Loss3: 0.7019
+Loss1: 0.3718, Loss2: 0.1411, Loss3: 0.7029
+Loss1: 0.3544, Loss2: 0.1426, Loss3: 0.6822
+Loss1: 0.3546, Loss2: 0.1401, Loss3: 0.6898
+Loss1: 0.4804, Loss2: 0.2192, Loss3: 1.9105
+Loss1: 0.4778, Loss2: 0.2072, Loss3: 1.6670
+Loss1: 0.5310, Loss2: 0.2450, Loss3: 1.7443
+Loss1: 0.5345, Loss2: 0.2159, Loss3: 1.3916
+Loss1: 0.5387, Loss2: 0.2086, Loss3: 1.2957
+Loss1: 0.5473, Loss2: 0.2067, Loss3: 1.2541
+Loss1: 0.5347, Loss2: 0.1981, Loss3: 1.1807
+Loss1: 0.5551, Loss2: 0.2001, Loss3: 1.0922
+Loss1: 0.5698, Loss2: 0.2051, Loss3: 1.0589
+Loss1: 0.5518, Loss2: 0.2001, Loss3: 1.0579
+Loss1: 0.5541, Loss2: 0.1964, Loss3: 1.0203
+Loss1: 0.5517, Loss2: 0.2029, Loss3: 1.1617
+Loss1: 0.5357, Loss2: 0.1913, Loss3: 0.9387
+Loss1: 0.5435, Loss2: 0.1884, Loss3: 0.9048
+Loss1: 0.5323, Loss2: 0.1924, Loss3: 1.0720
+Loss1: 0.5229, Loss2: 0.1884, Loss3: 0.8875
+Loss1: 0.5406, Loss2: 0.1896, Loss3: 1.0292
+Loss1: 0.5225, Loss2: 0.1870, Loss3: 0.8777
+Loss1: 0.5094, Loss2: 0.1868, Loss3: 1.0149
+Loss1: 0.5038, Loss2: 0.1831, Loss3: 0.8387
+Loss1: 0.5093, Loss2: 0.1836, Loss3: 0.8624
+Loss1: 0.4791, Loss2: 0.1836, Loss3: 0.8474
+Loss1: 0.4913, Loss2: 0.1852, Loss3: 0.9541
+Loss1: 0.4738, Loss2: 0.1859, Loss3: 0.8255
+Loss1: 0.4889, Loss2: 0.1862, Loss3: 0.8148
+Loss1: 0.4660, Loss2: 0.1969, Loss3: 0.8456
+Loss1: 0.4871, Loss2: 0.1950, Loss3: 0.9390
+Loss1: 0.4687, Loss2: 0.1901, Loss3: 0.8071
+Loss1: 0.4761, Loss2: 0.1926, Loss3: 0.8144
+Loss1: 0.4643, Loss2: 0.1884, Loss3: 0.9037
+Loss1: 0.4664, Loss2: 0.1860, Loss3: 0.8899
+Loss1: 0.4788, Loss2: 0.1829, Loss3: 0.8514
+Loss1: 0.4673, Loss2: 0.1840, Loss3: 0.8595
+Loss1: 0.4626, Loss2: 0.1822, Loss3: 0.8650
+Loss1: 0.4654, Loss2: 0.1890, Loss3: 0.7856
+Loss1: 0.4548, Loss2: 0.1835, Loss3: 0.7815
+Loss1: 0.4530, Loss2: 0.1865, Loss3: 1.0545
+Loss1: 0.4511, Loss2: 0.1912, Loss3: 1.0192
+Loss1: 0.4516, Loss2: 0.1893, Loss3: 0.9965
+Loss1: 0.4323, Loss2: 0.1930, Loss3: 0.9847
+Loss1: 0.4158, Loss2: 0.1827, Loss3: 0.9776
+Loss1: 0.4305, Loss2: 0.1832, Loss3: 0.9441
+Loss1: 0.4353, Loss2: 0.1823, Loss3: 0.9839
+Loss1: 0.4297, Loss2: 0.1800, Loss3: 1.0137
+Loss1: 0.4303, Loss2: 0.1808, Loss3: 0.9683
+Loss1: 0.4392, Loss2: 0.1767, Loss3: 0.9657
+Loss1: 0.4333, Loss2: 0.1767, Loss3: 0.9989
+Loss1: 0.4290, Loss2: 0.1723, Loss3: 0.9988
+Loss1: 0.4229, Loss2: 0.1668, Loss3: 0.9148
+Loss1: 0.4159, Loss2: 0.1642, Loss3: 0.9647
+Loss1: 0.4003, Loss2: 0.1625, Loss3: 0.9658
+Loss1: 0.4124, Loss2: 0.1656, Loss3: 0.8980
+Loss1: 0.4163, Loss2: 0.1752, Loss3: 0.9684
+Loss1: 0.3926, Loss2: 0.1787, Loss3: 0.9349
+Loss1: 0.4085, Loss2: 0.1837, Loss3: 0.9598
+Loss1: 0.4084, Loss2: 0.1772, Loss3: 0.9822
+Loss1: 0.3920, Loss2: 0.1783, Loss3: 0.9447
+Loss1: 0.4423, Loss2: 0.1852, Loss3: 0.9946
+Loss1: 0.4312, Loss2: 0.1890, Loss3: 0.9563
+Loss1: 0.4246, Loss2: 0.1833, Loss3: 0.9842
+Loss1: 0.4217, Loss2: 0.1818, Loss3: 0.9364
+Loss1: 0.4365, Loss2: 0.1826, Loss3: 0.9797
+Loss1: 0.4240, Loss2: 0.1786, Loss3: 0.9650
+Loss1: 0.4212, Loss2: 0.1842, Loss3: 0.9329
+Loss1: 0.4244, Loss2: 0.1780, Loss3: 0.9544
+Loss1: 0.4146, Loss2: 0.1794, Loss3: 0.9322
+Loss1: 0.4142, Loss2: 0.1772, Loss3: 0.9407
+Loss1: 0.4120, Loss2: 0.1749, Loss3: 0.8996
+Loss1: 0.3968, Loss2: 0.1785, Loss3: 0.8967
+Loss1: 0.3979, Loss2: 0.1741, Loss3: 0.8866
+Loss1: 0.4013, Loss2: 0.1756, Loss3: 0.8972
+Loss1: 0.3946, Loss2: 0.1699, Loss3: 0.9065
+Loss1: 0.3989, Loss2: 0.1712, Loss3: 0.8895
+Loss1: 0.3874, Loss2: 0.1711, Loss3: 0.8787
+Loss1: 0.3740, Loss2: 0.1671, Loss3: 0.8517
+Loss1: 0.3650, Loss2: 0.1637, Loss3: 0.8489
+Loss1: 0.3742, Loss2: 0.1585, Loss3: 0.8567
+Loss1: 0.3718, Loss2: 0.1572, Loss3: 0.8590
+Loss1: 0.3406, Loss2: 0.1600, Loss3: 0.7237
+Loss1: 0.3439, Loss2: 0.1579, Loss3: 0.7161
+Loss1: 0.3278, Loss2: 0.1517, Loss3: 0.6953
+Loss1: 0.3367, Loss2: 0.1539, Loss3: 0.7032
+Loss1: 0.3362, Loss2: 0.1513, Loss3: 0.7132
+Loss1: 0.3251, Loss2: 0.1524, Loss3: 0.7201
+Loss1: 0.3313, Loss2: 0.1533, Loss3: 0.7193
+Loss1: 0.3275, Loss2: 0.1543, Loss3: 0.7032
+Loss1: 0.3369, Loss2: 0.1511, Loss3: 0.7396
+Loss1: 0.3336, Loss2: 0.1509, Loss3: 0.7412
+Loss1: 0.3490, Loss2: 0.1572, Loss3: 0.7441
+Loss1: 0.3440, Loss2: 0.1517, Loss3: 0.7561
+Loss1: 0.3404, Loss2: 0.1545, Loss3: 0.7557
+Loss1: 0.3510, Loss2: 0.1505, Loss3: 0.7531
+Loss1: 0.3426, Loss2: 0.1525, Loss3: 0.7422
+Loss1: 0.3368, Loss2: 0.1543, Loss3: 0.7403
+Loss1: 0.3376, Loss2: 0.1542, Loss3: 0.7283
+Loss1: 0.3355, Loss2: 0.1559, Loss3: 0.7397
+Loss1: 0.3147, Loss2: 0.1433, Loss3: 0.6972
+Loss1: 0.3170, Loss2: 0.1412, Loss3: 0.6942
+Loss1: 0.3122, Loss2: 0.1612, Loss3: 0.7533
+Loss1: 0.3118, Loss2: 0.1588, Loss3: 0.7468
+Loss1: 0.3015, Loss2: 0.1487, Loss3: 0.7231
+Loss1: 0.3217, Loss2: 0.1590, Loss3: 0.7610
+Loss1: 0.3299, Loss2: 0.1607, Loss3: 0.7946
+Loss1: 0.3050, Loss2: 0.1575, Loss3: 0.7838
+Loss1: 0.3013, Loss2: 0.1540, Loss3: 0.7844
+Loss1: 0.2979, Loss2: 0.1512, Loss3: 0.7805
+Loss1: 0.2944, Loss2: 0.1504, Loss3: 0.7639
+Loss1: 0.2894, Loss2: 0.1503, Loss3: 0.7597
+Loss1: 0.3075, Loss2: 0.1468, Loss3: 0.7832
+Loss1: 0.2979, Loss2: 0.1479, Loss3: 0.7742
+Loss1: 0.3034, Loss2: 0.1443, Loss3: 0.7795
+Loss1: 0.3047, Loss2: 0.1489, Loss3: 0.7822
+Loss1: 0.2986, Loss2: 0.1653, Loss3: 0.8088
+Loss1: 0.3186, Loss2: 0.1680, Loss3: 0.8444
+Loss1: 0.3195, Loss2: 0.1681, Loss3: 0.8374
+Loss1: 0.3062, Loss2: 0.1657, Loss3: 0.8076
+Loss1: 0.3082, Loss2: 0.1648, Loss3: 0.8163
+Loss1: 0.3127, Loss2: 0.1654, Loss3: 0.8163
+Loss1: 0.3155, Loss2: 0.1668, Loss3: 0.8075
+Loss1: 0.3132, Loss2: 0.1693, Loss3: 0.8461
+Loss1: 0.3210, Loss2: 0.1614, Loss3: 0.8311
+Loss1: 0.3087, Loss2: 0.1643, Loss3: 0.8132
+Loss1: 0.3102, Loss2: 0.1589, Loss3: 0.8177
+Loss1: 0.3005, Loss2: 0.1651, Loss3: 0.8303
+Loss1: 0.3056, Loss2: 0.1522, Loss3: 0.8125
+Loss1: 0.3082, Loss2: 0.1594, Loss3: 0.8093
+Loss1: 0.3114, Loss2: 0.1564, Loss3: 0.8302
+Loss1: 0.3125, Loss2: 0.1803, Loss3: 0.8881
+Loss1: 0.3153, Loss2: 0.1810, Loss3: 0.8965
+Loss1: 0.3113, Loss2: 0.1727, Loss3: 0.8879
+Loss1: 0.3027, Loss2: 0.1737, Loss3: 0.8670
+Loss1: 0.3071, Loss2: 0.1839, Loss3: 0.8880
+Loss1: 0.3013, Loss2: 0.1824, Loss3: 0.7838
+Loss1: 0.2936, Loss2: 0.1832, Loss3: 0.7756
+Loss1: 0.2884, Loss2: 0.1782, Loss3: 0.7721
+Loss1: 0.2971, Loss2: 0.1773, Loss3: 0.7309
+Loss1: 0.3002, Loss2: 0.1738, Loss3: 0.7385
+Loss1: 0.2988, Loss2: 0.1787, Loss3: 0.7479
+Loss1: 0.3034, Loss2: 0.1702, Loss3: 0.7390
+Loss1: 0.3030, Loss2: 0.1765, Loss3: 0.7185
+Loss1: 0.2972, Loss2: 0.1734, Loss3: 0.7205
+Loss1: 0.2947, Loss2: 0.1677, Loss3: 0.7250
+Loss1: 0.2957, Loss2: 0.1697, Loss3: 0.7058
+Loss1: 0.3008, Loss2: 0.1738, Loss3: 0.7239
+Loss1: 0.3001, Loss2: 0.1784, Loss3: 0.7336
+Loss1: 0.2989, Loss2: 0.1690, Loss3: 0.7300
+Loss1: 0.3043, Loss2: 0.1772, Loss3: 0.6977
+Loss1: 0.3021, Loss2: 0.1747, Loss3: 0.7291
+Loss1: 0.2941, Loss2: 0.1712, Loss3: 0.7172
+Loss1: 0.2970, Loss2: 0.1629, Loss3: 0.7096
+Loss1: 0.2861, Loss2: 0.1618, Loss3: 0.6630
+Loss1: 0.2880, Loss2: 0.1620, Loss3: 0.6878
+Loss1: 0.2898, Loss2: 0.1602, Loss3: 0.6717
+Loss1: 0.2735, Loss2: 0.1494, Loss3: 0.6689
+Loss1: 0.2737, Loss2: 0.1519, Loss3: 0.6449
+Loss1: 0.2770, Loss2: 0.1525, Loss3: 0.6566
+Loss1: 0.2667, Loss2: 0.1482, Loss3: 0.6513
+Loss1: 0.2689, Loss2: 0.1426, Loss3: 0.6516
+Loss1: 0.2667, Loss2: 0.1470, Loss3: 0.6575
+Loss1: 0.2683, Loss2: 0.1417, Loss3: 0.6272
+Loss1: 0.2646, Loss2: 0.1438, Loss3: 0.6407
+Loss1: 0.2730, Loss2: 0.1493, Loss3: 0.6282
+Loss1: 0.2654, Loss2: 0.1481, Loss3: 0.6280
+Loss1: 0.2654, Loss2: 0.1428, Loss3: 0.6461
+Loss1: 0.2681, Loss2: 0.1462, Loss3: 0.6237
+Loss1: 0.2622, Loss2: 0.1460, Loss3: 0.6183
+Loss1: 0.2714, Loss2: 0.1475, Loss3: 0.6251
+Loss1: 0.2658, Loss2: 0.1480, Loss3: 0.6382
+Loss1: 0.2656, Loss2: 0.1460, Loss3: 0.6154
+Loss1: 0.2647, Loss2: 0.1462, Loss3: 0.6166
+Loss1: 0.2609, Loss2: 0.1386, Loss3: 0.6245
+Loss1: 0.2616, Loss2: 0.1440, Loss3: 0.5852
+Loss1: 0.2570, Loss2: 0.1451, Loss3: 0.6050
+Loss1: 0.2782, Loss2: 0.1399, Loss3: 0.7004
+Loss1: 0.2781, Loss2: 0.1382, Loss3: 0.6995
+Loss1: 0.2759, Loss2: 0.1424, Loss3: 0.6630
+Loss1: 0.2742, Loss2: 0.1391, Loss3: 0.6916
+Loss1: 0.2715, Loss2: 0.1383, Loss3: 0.6894
+Loss1: 0.2721, Loss2: 0.1455, Loss3: 0.6895
+Loss1: 0.2719, Loss2: 0.1361, Loss3: 0.6925
+Loss1: 0.2748, Loss2: 0.1421, Loss3: 0.6714
+Loss1: 0.2704, Loss2: 0.1441, Loss3: 0.6692
+Loss1: 0.2647, Loss2: 0.1378, Loss3: 0.6703
+Loss1: 0.2646, Loss2: 0.1426, Loss3: 0.6597
+Loss1: 0.2482, Loss2: 0.1338, Loss3: 0.6687
+Loss1: 0.2489, Loss2: 0.1385, Loss3: 0.6410
+Loss1: 0.2549, Loss2: 0.1334, Loss3: 0.6486
+Loss1: 0.2653, Loss2: 0.1501, Loss3: 0.6458
+Loss1: 0.2584, Loss2: 0.1447, Loss3: 0.6674
+Loss1: 0.2632, Loss2: 0.1419, Loss3: 0.6671
+Loss1: 0.2629, Loss2: 0.1482, Loss3: 0.6642
+Loss1: 0.2617, Loss2: 0.1439, Loss3: 0.6588
+Loss1: 0.2628, Loss2: 0.1469, Loss3: 0.6520
+Loss1: 0.2626, Loss2: 0.1406, Loss3: 0.6569
+Loss1: 0.2600, Loss2: 0.1399, Loss3: 0.6352
+Loss1: 0.2551, Loss2: 0.1430, Loss3: 0.6277
+Loss1: 0.2564, Loss2: 0.1409, Loss3: 0.6434
+Loss1: 0.2496, Loss2: 0.1387, Loss3: 0.6401
+Loss1: 0.2451, Loss2: 0.1302, Loss3: 0.6240
+Loss1: 0.2513, Loss2: 0.1377, Loss3: 0.6059
+Loss1: 0.2447, Loss2: 0.1371, Loss3: 0.6155
+Loss1: 0.2467, Loss2: 0.1358, Loss3: 0.6097
+Loss1: 0.2534, Loss2: 0.1601, Loss3: 0.6441
+Loss1: 0.2521, Loss2: 0.1502, Loss3: 0.6562
+Loss1: 0.2429, Loss2: 0.1500, Loss3: 0.6318
+Loss1: 0.2558, Loss2: 0.1541, Loss3: 0.6557
+Loss1: 0.2465, Loss2: 0.1546, Loss3: 0.6510
+Loss1: 0.2430, Loss2: 0.1486, Loss3: 0.6321
+Loss1: 0.2354, Loss2: 0.1399, Loss3: 0.6238
+Loss1: 0.2388, Loss2: 0.1321, Loss3: 0.6408
+Loss1: 0.2352, Loss2: 0.1357, Loss3: 0.6304
+Loss1: 0.2361, Loss2: 0.1349, Loss3: 0.6554
+Loss1: 0.2347, Loss2: 0.1413, Loss3: 0.6282
+Loss1: 0.2315, Loss2: 0.1364, Loss3: 0.6489
+Loss1: 0.3555, Loss2: 0.1520, Loss3: 0.7248
+Loss1: 0.3441, Loss2: 0.1505, Loss3: 0.7067
+Loss1: 0.3865, Loss2: 0.1827, Loss3: 0.7705
+Loss1: 0.3742, Loss2: 0.1895, Loss3: 0.7483
+Loss1: 0.3754, Loss2: 0.1828, Loss3: 0.7700
+Loss1: 0.3717, Loss2: 0.1891, Loss3: 0.7506
+Loss1: 0.3733, Loss2: 0.1891, Loss3: 0.7544
+Loss1: 0.3671, Loss2: 0.1865, Loss3: 0.7384
+Loss1: 0.3645, Loss2: 0.1891, Loss3: 0.7350
+Loss1: 0.3562, Loss2: 0.1638, Loss3: 0.7065
+Loss1: 0.3560, Loss2: 0.1651, Loss3: 0.6944
+Loss1: 0.3764, Loss2: 0.1597, Loss3: 0.7145
+Loss1: 0.3568, Loss2: 0.1617, Loss3: 0.7136
+Loss1: 0.3638, Loss2: 0.1593, Loss3: 0.7168
+Loss1: 0.3799, Loss2: 0.1563, Loss3: 0.7333
+Loss1: 0.3699, Loss2: 0.1603, Loss3: 0.7218
+Loss1: 0.3948, Loss2: 0.1594, Loss3: 0.7614
+Loss1: 0.3733, Loss2: 0.1701, Loss3: 0.7454
+Loss1: 0.3815, Loss2: 0.1634, Loss3: 0.7463
+Loss1: 0.3565, Loss2: 0.1633, Loss3: 0.7314
+Loss1: 0.3504, Loss2: 0.1626, Loss3: 0.7182
+Loss1: 0.3463, Loss2: 0.1644, Loss3: 0.7231
+Loss1: 0.3526, Loss2: 0.1568, Loss3: 0.7387
+Loss1: 0.3479, Loss2: 0.1668, Loss3: 0.7317
+Loss1: 0.3472, Loss2: 0.1646, Loss3: 0.7285
+Loss1: 0.3388, Loss2: 0.1610, Loss3: 0.7203
+Loss1: 0.3462, Loss2: 0.1584, Loss3: 0.7302
+Loss1: 0.3310, Loss2: 0.1615, Loss3: 0.7167
+Loss1: 0.3361, Loss2: 0.1565, Loss3: 0.7039
+Loss1: 0.3297, Loss2: 0.1562, Loss3: 0.7164
+Loss1: 0.3348, Loss2: 0.1539, Loss3: 0.7151
+Loss1: 0.3291, Loss2: 0.1491, Loss3: 0.7050
+Loss1: 0.3301, Loss2: 0.1453, Loss3: 0.6972
+Loss1: 0.3269, Loss2: 0.1490, Loss3: 0.7065
+Loss1: 0.3147, Loss2: 0.1505, Loss3: 0.6822
+Loss1: 0.3171, Loss2: 0.1494, Loss3: 0.6812
+Loss1: 0.3209, Loss2: 0.1487, Loss3: 0.6973
+Loss1: 0.3068, Loss2: 0.1520, Loss3: 0.6994
+Loss1: 0.3284, Loss2: 0.1736, Loss3: 0.7394
+Loss1: 0.3272, Loss2: 0.1696, Loss3: 0.7380
+Loss1: 0.3253, Loss2: 0.1768, Loss3: 0.7321
+Loss1: 0.3274, Loss2: 0.1741, Loss3: 0.7315
+Loss1: 0.4338, Loss2: 0.1775, Loss3: 0.7970
+Loss1: 0.4354, Loss2: 0.1719, Loss3: 0.8057
+Loss1: 0.4171, Loss2: 0.1733, Loss3: 0.7883
+Loss1: 0.4211, Loss2: 0.1719, Loss3: 0.7902
+Loss1: 0.4815, Loss2: 0.1921, Loss3: 0.8844
+Loss1: 0.4806, Loss2: 0.1910, Loss3: 0.8862
+Loss1: 0.4704, Loss2: 0.1964, Loss3: 0.8613
+Loss1: 0.5029, Loss2: 0.1922, Loss3: 0.9042
+Loss1: 0.5085, Loss2: 0.1946, Loss3: 0.9126
+Loss1: 0.5286, Loss2: 0.2054, Loss3: 0.9268
+Loss1: 0.5302, Loss2: 0.2016, Loss3: 0.9444
+Loss1: 0.5140, Loss2: 0.2026, Loss3: 0.9009
+Loss1: 0.5133, Loss2: 0.2048, Loss3: 0.9213
+Loss1: 0.5100, Loss2: 0.1965, Loss3: 0.8523
+Loss1: 0.4940, Loss2: 0.2005, Loss3: 0.8250
+Loss1: 0.4968, Loss2: 0.1917, Loss3: 0.8453
+Loss1: 0.4842, Loss2: 0.1997, Loss3: 0.8120
+Loss1: 0.4889, Loss2: 0.1904, Loss3: 0.8374
+Loss1: 0.4746, Loss2: 0.1964, Loss3: 0.7965
+Loss1: 0.4869, Loss2: 0.1884, Loss3: 0.8358
+Loss1: 0.4762, Loss2: 0.1846, Loss3: 0.8082
+Loss1: 0.4735, Loss2: 0.1885, Loss3: 0.7866
+Loss1: 0.4738, Loss2: 0.1844, Loss3: 0.7975
+Loss1: 0.4658, Loss2: 0.1877, Loss3: 0.7664
+Loss1: 0.4679, Loss2: 0.1812, Loss3: 0.7983
+Loss1: 0.4598, Loss2: 0.1853, Loss3: 0.7756
+Loss1: 0.4529, Loss2: 0.1863, Loss3: 0.7755
+Loss1: 0.4521, Loss2: 0.1763, Loss3: 0.7614
+Loss1: 0.4390, Loss2: 0.1792, Loss3: 0.7549
+Loss1: 0.4460, Loss2: 0.1710, Loss3: 0.7597
+Loss1: 0.4256, Loss2: 0.1703, Loss3: 0.7478
+Loss1: 0.4246, Loss2: 0.1682, Loss3: 0.7370
+Loss1: 0.4169, Loss2: 0.1734, Loss3: 0.7406
+Loss1: 0.4168, Loss2: 0.1721, Loss3: 0.7429
+Loss1: 0.4214, Loss2: 0.1698, Loss3: 0.7793
+Loss1: 0.4206, Loss2: 0.1673, Loss3: 0.7810
+Loss1: 0.4152, Loss2: 0.1696, Loss3: 0.7549
+Loss1: 0.4166, Loss2: 0.1720, Loss3: 0.7682
+Loss1: 0.4204, Loss2: 0.1748, Loss3: 0.7511
+Loss1: 0.4124, Loss2: 0.1737, Loss3: 0.7464
+Loss1: 0.4223, Loss2: 0.1698, Loss3: 0.7809
+Loss1: 0.4182, Loss2: 0.1687, Loss3: 0.7814
+Loss1: 0.4097, Loss2: 0.1665, Loss3: 0.7847
+Loss1: 0.4045, Loss2: 0.1708, Loss3: 0.7470
+Loss1: 0.4005, Loss2: 0.1649, Loss3: 0.7743
+Loss1: 0.3975, Loss2: 0.1649, Loss3: 0.7729
+Loss1: 0.3945, Loss2: 0.1615, Loss3: 0.7538
+Loss1: 0.3898, Loss2: 0.1617, Loss3: 0.7584
+Loss1: 0.3795, Loss2: 0.1648, Loss3: 0.7345
+Loss1: 0.3839, Loss2: 0.1617, Loss3: 0.7472
+Loss1: 0.3824, Loss2: 0.1644, Loss3: 0.7440
+Loss1: 0.3712, Loss2: 0.1599, Loss3: 0.7153
+Loss1: 0.3779, Loss2: 0.1585, Loss3: 0.7135
+Loss1: 0.3651, Loss2: 0.1616, Loss3: 0.7089
+Loss1: 0.3438, Loss2: 0.1533, Loss3: 0.6909
+Loss1: 0.3361, Loss2: 0.1525, Loss3: 0.6740
+Loss1: 0.3289, Loss2: 0.1436, Loss3: 0.6632
+Loss1: 0.3257, Loss2: 0.1447, Loss3: 0.6591
+Loss1: 0.3218, Loss2: 0.1407, Loss3: 0.6573
+Loss1: 0.3209, Loss2: 0.1400, Loss3: 0.6564
+Loss1: 0.3188, Loss2: 0.1465, Loss3: 0.6839
+Loss1: 0.3248, Loss2: 0.1405, Loss3: 0.6615
+Loss1: 0.3186, Loss2: 0.1438, Loss3: 0.6640
+Loss1: 0.3160, Loss2: 0.1419, Loss3: 0.6575
+Loss1: 0.3221, Loss2: 0.1393, Loss3: 0.6549
+Loss1: 0.3106, Loss2: 0.1463, Loss3: 0.6680
+Loss1: 0.3179, Loss2: 0.1426, Loss3: 0.6615
+Loss1: 0.3036, Loss2: 0.1453, Loss3: 0.6675
+Loss1: 0.3067, Loss2: 0.1389, Loss3: 0.6372
+Loss1: 0.2947, Loss2: 0.1415, Loss3: 0.6522
+Loss1: 0.2917, Loss2: 0.1337, Loss3: 0.6312
+Loss1: 0.2896, Loss2: 0.1297, Loss3: 0.6360
+Loss1: 0.2867, Loss2: 0.1333, Loss3: 0.6322
+Loss1: 0.2858, Loss2: 0.1286, Loss3: 0.6147
+Loss1: 0.2828, Loss2: 0.1332, Loss3: 0.6538
+Loss1: 0.2871, Loss2: 0.1325, Loss3: 0.6442
+Loss1: 0.2871, Loss2: 0.1347, Loss3: 0.6566
+Loss1: 0.2829, Loss2: 0.1363, Loss3: 0.6612
+Loss1: 0.2823, Loss2: 0.1360, Loss3: 0.6561
+Loss1: 0.2867, Loss2: 0.1385, Loss3: 0.6654
+Loss1: 0.2866, Loss2: 0.1347, Loss3: 0.6594
+Loss1: 0.2844, Loss2: 0.1339, Loss3: 0.6632
+Loss1: 0.2885, Loss2: 0.1360, Loss3: 0.6484
+Loss1: 0.2891, Loss2: 0.1367, Loss3: 0.6454
+Loss1: 0.2856, Loss2: 0.1365, Loss3: 0.6314
+Loss1: 0.2840, Loss2: 0.1353, Loss3: 0.6521
+Loss1: 0.2842, Loss2: 0.1351, Loss3: 0.6350
+Loss1: 0.2834, Loss2: 0.1398, Loss3: 0.6198
+Loss1: 0.2835, Loss2: 0.1373, Loss3: 0.6258
+Loss1: 0.2949, Loss2: 0.1560, Loss3: 0.6325
+Loss1: 0.2890, Loss2: 0.1541, Loss3: 0.6369
+Loss1: 0.2947, Loss2: 0.1471, Loss3: 0.6191
+Loss1: 0.2836, Loss2: 0.1342, Loss3: 0.5925
+Loss1: 0.2860, Loss2: 0.1331, Loss3: 0.5868
+Loss1: 0.2872, Loss2: 0.1355, Loss3: 0.5890
+Loss1: 0.2945, Loss2: 0.1344, Loss3: 0.6009
+Loss1: 0.2560, Loss2: 0.1341, Loss3: 0.5864
+Loss1: 0.2572, Loss2: 0.1327, Loss3: 0.5616
+Loss1: 0.2597, Loss2: 0.1327, Loss3: 0.5586
+Loss1: 0.2536, Loss2: 0.1339, Loss3: 0.5692
+Loss1: 0.2372, Loss2: 0.1190, Loss3: 0.5174
+Loss1: 0.2265, Loss2: 0.1231, Loss3: 0.5041
+Loss1: 0.2257, Loss2: 0.1210, Loss3: 0.4973
+Loss1: 0.2229, Loss2: 0.1174, Loss3: 0.4928
+Loss1: 0.2189, Loss2: 0.1225, Loss3: 0.4884
+Loss1: 0.2115, Loss2: 0.1154, Loss3: 0.4711
+Loss1: 0.2133, Loss2: 0.1149, Loss3: 0.4643
+Loss1: 0.2090, Loss2: 0.1096, Loss3: 0.4589
+Loss1: 0.2088, Loss2: 0.1133, Loss3: 0.4487
+Loss1: 0.2118, Loss2: 0.1116, Loss3: 0.4311
+Loss1: 0.2117, Loss2: 0.1128, Loss3: 0.4554
+Loss1: 0.2103, Loss2: 0.1093, Loss3: 0.4445
+Loss1: 0.2149, Loss2: 0.1105, Loss3: 0.4419
+Loss1: 0.2146, Loss2: 0.1121, Loss3: 0.4374
+Loss1: 0.2154, Loss2: 0.1181, Loss3: 0.4547
+Loss1: 0.2049, Loss2: 0.1096, Loss3: 0.4524
+Loss1: 0.2076, Loss2: 0.1155, Loss3: 0.4449
+Loss1: 0.2111, Loss2: 0.1154, Loss3: 0.4483
+Loss1: 0.2037, Loss2: 0.1103, Loss3: 0.4381
+Loss1: 0.2042, Loss2: 0.1089, Loss3: 0.4298
+Loss1: 0.2017, Loss2: 0.1090, Loss3: 0.4416
+Loss1: 0.2048, Loss2: 0.1091, Loss3: 0.4284
+Loss1: 0.1994, Loss2: 0.1069, Loss3: 0.4268
+Loss1: 0.1986, Loss2: 0.1092, Loss3: 0.4145
+Loss1: 0.2032, Loss2: 0.1117, Loss3: 0.4160
+Loss1: 0.1997, Loss2: 0.1103, Loss3: 0.4141
+Loss1: 0.2019, Loss2: 0.1117, Loss3: 0.4181
+Loss1: 0.2049, Loss2: 0.1131, Loss3: 0.4072
+Loss1: 0.2086, Loss2: 0.1134, Loss3: 0.4017
+Loss1: 0.2002, Loss2: 0.1105, Loss3: 0.4107
+Loss1: 0.1969, Loss2: 0.1111, Loss3: 0.3981
+Loss1: 0.2004, Loss2: 0.1101, Loss3: 0.3977
+Loss1: 0.1971, Loss2: 0.1076, Loss3: 0.3988
+Loss1: 0.1931, Loss2: 0.1079, Loss3: 0.4008
+Loss1: 0.1982, Loss2: 0.1091, Loss3: 0.3949
+Loss1: 0.2038, Loss2: 0.1136, Loss3: 0.4487
+Loss1: 0.2255, Loss2: 0.1189, Loss3: 0.4466
+Loss1: 0.2239, Loss2: 0.1206, Loss3: 0.4492
+Loss1: 0.2339, Loss2: 0.1190, Loss3: 0.4489
+Loss1: 0.2277, Loss2: 0.1204, Loss3: 0.4873
+Loss1: 0.2278, Loss2: 0.1232, Loss3: 0.5033
+Loss1: 0.2311, Loss2: 0.1204, Loss3: 0.4852
+Loss1: 0.2350, Loss2: 0.1252, Loss3: 0.4830
+Loss1: 0.2288, Loss2: 0.1220, Loss3: 0.4816
+Loss1: 0.2307, Loss2: 0.1208, Loss3: 0.4821
+Loss1: 0.2287, Loss2: 0.1207, Loss3: 0.4677
+Loss1: 0.2217, Loss2: 0.1159, Loss3: 0.4666
+Loss1: 0.2283, Loss2: 0.1186, Loss3: 0.4830
+Loss1: 0.2292, Loss2: 0.1206, Loss3: 0.4839
+Loss1: 0.2249, Loss2: 0.1215, Loss3: 0.4897
+Loss1: 0.2263, Loss2: 0.1170, Loss3: 0.4777
+Loss1: 0.2340, Loss2: 0.1181, Loss3: 0.4996
+Loss1: 0.2377, Loss2: 0.1211, Loss3: 0.4910
+Loss1: 0.2324, Loss2: 0.1171, Loss3: 0.4859
+Loss1: 0.2375, Loss2: 0.1189, Loss3: 0.4761
+Loss1: 0.2286, Loss2: 0.1182, Loss3: 0.4914
+Loss1: 0.2304, Loss2: 0.1186, Loss3: 0.4883
+Loss1: 0.2298, Loss2: 0.1206, Loss3: 0.4744
+Loss1: 0.2294, Loss2: 0.1156, Loss3: 0.4672
+Loss1: 0.2310, Loss2: 0.1241, Loss3: 0.4964
+Loss1: 0.2315, Loss2: 0.1265, Loss3: 0.5326
+Loss1: 0.2322, Loss2: 0.1255, Loss3: 0.5193
+Loss1: 0.2391, Loss2: 0.1239, Loss3: 0.5110
+Loss1: 0.2289, Loss2: 0.1226, Loss3: 0.5020
+Loss1: 0.2302, Loss2: 0.1241, Loss3: 0.4967
+Loss1: 0.2317, Loss2: 0.1195, Loss3: 0.5007
+Loss1: 0.2353, Loss2: 0.1213, Loss3: 0.4882
+Loss1: 0.2365, Loss2: 0.1226, Loss3: 0.4890
+Loss1: 0.2334, Loss2: 0.1223, Loss3: 0.4927
+Loss1: 0.2365, Loss2: 0.1242, Loss3: 0.4914
+Loss1: 0.2278, Loss2: 0.1210, Loss3: 0.4952
+Loss1: 0.2299, Loss2: 0.1209, Loss3: 0.4850
+Loss1: 0.2303, Loss2: 0.1203, Loss3: 0.4833
+Loss1: 0.2249, Loss2: 0.1186, Loss3: 0.4743
+Loss1: 0.2312, Loss2: 0.1264, Loss3: 0.5095
+Loss1: 0.2224, Loss2: 0.1218, Loss3: 0.5002
+Loss1: 0.2247, Loss2: 0.1218, Loss3: 0.5075
+Loss1: 0.2267, Loss2: 0.1212, Loss3: 0.4994
+Loss1: 0.2326, Loss2: 0.1226, Loss3: 0.5003
+Loss1: 0.2312, Loss2: 0.1237, Loss3: 0.4968
+Loss1: 0.2239, Loss2: 0.1208, Loss3: 0.5079
+Loss1: 0.2383, Loss2: 0.1242, Loss3: 0.5116
+Loss1: 0.2400, Loss2: 0.1238, Loss3: 0.5055
+Loss1: 0.2331, Loss2: 0.1287, Loss3: 0.5165
+Loss1: 0.2381, Loss2: 0.1305, Loss3: 0.5169
+Loss1: 0.2255, Loss2: 0.1257, Loss3: 0.5134
+Loss1: 0.2293, Loss2: 0.1246, Loss3: 0.5086
+Loss1: 0.2215, Loss2: 0.1253, Loss3: 0.5093
+Loss1: 0.2215, Loss2: 0.1271, Loss3: 0.5145
+Loss1: 0.2215, Loss2: 0.1277, Loss3: 0.5053
+Loss1: 0.2137, Loss2: 0.1253, Loss3: 0.5041
+Loss1: 0.2135, Loss2: 0.1238, Loss3: 0.4794
+Loss1: 0.2077, Loss2: 0.1183, Loss3: 0.4811
+Loss1: 0.2112, Loss2: 0.1187, Loss3: 0.4733
+Loss1: 0.2072, Loss2: 0.1194, Loss3: 0.4682
+Loss1: 0.2042, Loss2: 0.1172, Loss3: 0.4628
+Loss1: 0.2034, Loss2: 0.1139, Loss3: 0.4611
+Loss1: 0.2122, Loss2: 0.1164, Loss3: 0.4616
+Loss1: 0.2137, Loss2: 0.1142, Loss3: 0.4513
+Loss1: 0.2104, Loss2: 0.1149, Loss3: 0.4560
+Loss1: 0.2076, Loss2: 0.1122, Loss3: 0.4596
+Loss1: 0.2030, Loss2: 0.1123, Loss3: 0.4537
+Loss1: 0.2043, Loss2: 0.1115, Loss3: 0.4544
+Loss1: 0.2050, Loss2: 0.1123, Loss3: 0.4494
+Loss1: 0.2005, Loss2: 0.1117, Loss3: 0.4509
+Loss1: 0.2012, Loss2: 0.1106, Loss3: 0.4435
+Loss1: 0.2021, Loss2: 0.1081, Loss3: 0.4436
+Loss1: 0.2002, Loss2: 0.1096, Loss3: 0.4391
+Loss1: 0.2390, Loss2: 0.1113, Loss3: 0.4368
+Loss1: 0.2392, Loss2: 0.1123, Loss3: 0.4439
+Loss1: 0.2447, Loss2: 0.1097, Loss3: 0.4287
+Loss1: 0.2328, Loss2: 0.1086, Loss3: 0.4303
+Loss1: 0.2312, Loss2: 0.1088, Loss3: 0.4303
+Loss1: 0.2335, Loss2: 0.1096, Loss3: 0.4291
+Loss1: 0.2262, Loss2: 0.1096, Loss3: 0.4310
+Loss1: 0.2296, Loss2: 0.1098, Loss3: 0.4335
+Loss1: 0.2254, Loss2: 0.1095, Loss3: 0.4469
+Loss1: 0.2239, Loss2: 0.1108, Loss3: 0.4453
+Loss1: 0.2215, Loss2: 0.1074, Loss3: 0.4472
+Loss1: 0.2715, Loss2: 0.1939, Loss3: 0.5784
+Loss1: 0.2651, Loss2: 0.1903, Loss3: 0.5840
+Loss1: 0.2585, Loss2: 0.1923, Loss3: 0.5817
+Loss1: 0.2726, Loss2: 0.1904, Loss3: 0.6374
+Loss1: 0.2669, Loss2: 0.1933, Loss3: 0.6268
+Loss1: 0.2653, Loss2: 0.1905, Loss3: 0.6263
+Loss1: 0.2587, Loss2: 0.1908, Loss3: 0.6098
+Loss1: 0.2661, Loss2: 0.1893, Loss3: 0.6057
+Loss1: 0.2605, Loss2: 0.1903, Loss3: 0.6035
+Loss1: 0.2555, Loss2: 0.1880, Loss3: 0.5993
+Loss1: 0.2549, Loss2: 0.1887, Loss3: 0.5932
+Loss1: 0.2549, Loss2: 0.1834, Loss3: 0.5975
+Loss1: 0.2596, Loss2: 0.1837, Loss3: 0.5776
+Loss1: 0.2444, Loss2: 0.1780, Loss3: 0.5626
+Loss1: 0.2637, Loss2: 0.1825, Loss3: 0.5889
+Loss1: 0.2642, Loss2: 0.1827, Loss3: 0.5849
+Loss1: 0.2528, Loss2: 0.1964, Loss3: 0.6146
+Loss1: 0.2622, Loss2: 0.1953, Loss3: 0.6200
+Loss1: 0.2934, Loss2: 0.1968, Loss3: 0.6573
+Loss1: 0.2944, Loss2: 0.2027, Loss3: 0.6352
+Loss1: 0.2976, Loss2: 0.2022, Loss3: 0.6328
+Loss1: 0.3000, Loss2: 0.2005, Loss3: 0.6344
+Loss1: 0.2980, Loss2: 0.2021, Loss3: 0.6352
+Loss1: 0.3056, Loss2: 0.2004, Loss3: 0.6453
+Loss1: 0.2980, Loss2: 0.2014, Loss3: 0.6390
+Loss1: 0.3020, Loss2: 0.2032, Loss3: 0.6302
+Loss1: 0.2965, Loss2: 0.1986, Loss3: 0.6405
+Loss1: 0.3014, Loss2: 0.1924, Loss3: 0.6372
+Loss1: 0.2847, Loss2: 0.1976, Loss3: 0.6157
+Loss1: 0.2818, Loss2: 0.1960, Loss3: 0.6174
+Loss1: 0.2809, Loss2: 0.1940, Loss3: 0.6356
+Loss1: 0.2800, Loss2: 0.1999, Loss3: 0.6232
+Loss1: 0.2771, Loss2: 0.1938, Loss3: 0.6258
+Loss1: 0.2815, Loss2: 0.2001, Loss3: 0.6128
+Loss1: 0.2888, Loss2: 0.1966, Loss3: 0.6270
+Loss1: 0.2858, Loss2: 0.2018, Loss3: 0.6115
+Loss1: 0.2881, Loss2: 0.1943, Loss3: 0.5801
+Loss1: 0.2965, Loss2: 0.1944, Loss3: 0.5794
+Loss1: 0.3092, Loss2: 0.1921, Loss3: 0.6062
+Loss1: 0.3019, Loss2: 0.1930, Loss3: 0.5910
+Loss1: 0.2913, Loss2: 0.1929, Loss3: 0.5831
+Loss1: 0.3046, Loss2: 0.1928, Loss3: 0.5922
+Loss1: 0.3041, Loss2: 0.1877, Loss3: 0.5925
+Loss1: 0.2920, Loss2: 0.1894, Loss3: 0.5769
+Loss1: 0.2939, Loss2: 0.1897, Loss3: 0.5737
+Loss1: 0.3144, Loss2: 0.1911, Loss3: 0.5868
+Loss1: 0.3069, Loss2: 0.1888, Loss3: 0.5856
+Loss1: 0.3032, Loss2: 0.1876, Loss3: 0.5704
+Loss1: 0.3149, Loss2: 0.1884, Loss3: 0.5888
+Loss1: 0.3188, Loss2: 0.1928, Loss3: 0.5870
+Loss1: 0.3453, Loss2: 0.2040, Loss3: 0.6053
+Loss1: 0.3420, Loss2: 0.1983, Loss3: 0.5679
+Loss1: 0.3435, Loss2: 0.1951, Loss3: 0.5900
+Loss1: 0.3485, Loss2: 0.1998, Loss3: 0.5641
+Loss1: 0.3424, Loss2: 0.1977, Loss3: 0.5672
+Loss1: 0.3397, Loss2: 0.1971, Loss3: 0.5627
+Loss1: 0.3355, Loss2: 0.1963, Loss3: 0.5515
+Loss1: 0.3284, Loss2: 0.1945, Loss3: 0.5513
+Loss1: 0.3318, Loss2: 0.1913, Loss3: 0.5433
+Loss1: 0.3282, Loss2: 0.1882, Loss3: 0.5582
+Loss1: 0.3276, Loss2: 0.1886, Loss3: 0.5322
+Loss1: 0.3183, Loss2: 0.1841, Loss3: 0.5413
+Loss1: 0.3236, Loss2: 0.1812, Loss3: 0.5434
