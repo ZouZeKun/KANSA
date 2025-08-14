@@ -29,3 +29,19 @@
 - **Numpy**： `1.26.4`
 - **Pandas**： `2.2.2` 
 ###  If you have any questions, please contact us at: [*zekunzou@zju.edu.cn*]
+
+### If you find this repository useful in your research, please consider citing our paper:
+
+```bibtex
+@article{Zou2025Learning,
+  title={Learning physics and temporal dependencies: real-time modeling of water distribution systems via Kolmogorov–Arnold attention networks},
+  author={Zekun Zou and Zhihong Long and Gang Xu and Raziyeh Farmani and Tingchao Yu and Shipeng Chu},
+  journal={npj Clean Water},
+  volume={8},
+  issue={1},
+  pages={75},
+  year={2025},
+  publisher={Nature Publishing Group},
+  doi={10.1038/s41545-025-00505-y},
+  url={https://www.nature.com/articles/s41545-025-00505-y}
+}
